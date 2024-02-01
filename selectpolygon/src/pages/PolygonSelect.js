@@ -2,6 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 /**
  * `<NaN>` ('도형 선택 페이지')
+ * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=43:58)
+ * - [Open in Grida](https://code.grida.co/files/NlD9D8mc0GTNdluwALGs8v?node=43:58)
  *
  *
  * ---
@@ -22,7 +24,7 @@ import styled from "@emotion/styled";
  * @params {any} props - this widget does not requires props. you can pass custom dynamic props to the widget as you want (on typescript, it will raise type check issues).
  * ---
  * @preview
- * ![](grida://assets-reservation/images/43:58)
+ * ![](https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/1860122a-cc47-4421-83b3-af288740dce7)
  * ---
  * @remarks
  * @see {@link https://grida.co/docs} for more information.
@@ -32,7 +34,7 @@ import styled from "@emotion/styled";
  *
  * ![Made with Grida](https://bridged-service-static.s3.us-west-1.amazonaws.com/branding/logo/32.png)
  * <!-- Info: Please do not remove this comment unless intended. removing this section will break grida integrations. -->
- * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://undefined/43:58 -->
+ * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/43:58 -->
  */
 export function PolygonSelect() {
   return (
@@ -235,7 +237,7 @@ const NaN_0002 = styled.span`
   text-overflow: ellipsis;
   font-size: 14px;
   font-family: Inter, sans-serif;
-  font-weight: initial;
+  font-weight: 400;
   text-align: center;
   width: 43px;
   position: absolute;
@@ -270,7 +272,7 @@ const NaN_0003 = styled.span`
   text-overflow: ellipsis;
   font-size: 14px;
   font-family: Inter, sans-serif;
-  font-weight: initial;
+  font-weight: 400;
   text-align: center;
   width: 43px;
   position: absolute;
@@ -347,7 +349,7 @@ const Typography_0002 = styled.span`
   text-overflow: ellipsis;
   font-size: 18px;
   font-family: Poppins, sans-serif;
-  font-weight: initial;
+  font-weight: 800;
   text-align: center;
 `;
 

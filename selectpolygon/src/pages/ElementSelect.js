@@ -62,18 +62,25 @@ export function ElementSelect() {
         <Rectangle25 />
         <NaN_0002>여가</NaN_0002>
       </Group23>
-      <Rectangle23_0001 />
       <Frame24>
         <NaN_0007>저장</NaN_0007>
       </Frame24>
-      <Rectangle36 />
-      <Typography_0003>
-        <Typography_0001>
-          <Typography_0005>꼭짓점 요소를 추천해드려요!</Typography_0005>
-        </Typography_0001>
-      </Typography_0003>
+      <Group56>
+        <Rectangle36 />
+        <Typography_0003>
+          <Typography_0001>
+            <Typography_0005>꼭짓점 요소를 추천해 드려요!</Typography_0005>
+          </Typography_0001>
+        </Typography_0003>
+      </Group56>
       <Line14 />
       <Line15 />
+      <Vector xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill="rgba(0, 0, 0, 0.64)"
+          d="M0 7.50001C0 7.74737 0.118471 7.97494 0.333872 8.16294L7.4852 14.723C7.7006 14.911 7.92677 15 8.18525 15C8.71299 15 9.13302 14.6439 9.13302 14.1491C9.13302 13.9117 9.03609 13.6742 8.86377 13.5257L6.45127 11.2698L2.18633 7.6979L1.96015 8.18273L5.42811 8.38062L19.0523 8.38062C19.6123 8.38062 20 8.01452 20 7.50001C20 6.9855 19.6123 6.6194 19.0523 6.6194L5.42811 6.6194L1.96015 6.81729L2.18633 7.31202L6.45127 3.73022L8.86377 1.47427C9.03609 1.31596 9.13302 1.08839 9.13302 0.850923C9.13302 0.356201 8.71299 0 8.18525 0C7.92677 0 7.7006 0.0791558 7.46365 0.296834L0.333872 6.83708C0.118471 7.02507 0 7.25265 0 7.50001Z"
+        />
+      </Vector>
     </RootWrapperNaN>
   );
 }
@@ -113,14 +120,14 @@ const Typography_0002 = styled.span`
   font-family: Poppins, sans-serif;
   font-weight: initial;
   text-align: center;
-  width: 116px;
+  width: 120px;
 `;
 
 const Group19 = styled.div`
   width: 80px;
   height: 34px;
   position: absolute;
-  left: 141px;
+  left: 140px;
   top: 269px;
 `;
 
@@ -158,7 +165,7 @@ const Group20 = styled.div`
   width: 80px;
   height: 34px;
   position: absolute;
-  left: 141px;
+  left: 140px;
   top: 330px;
 `;
 
@@ -166,7 +173,7 @@ const Group21 = styled.div`
   width: 80px;
   height: 34px;
   position: absolute;
-  left: 141px;
+  left: 140px;
   top: 391px;
 `;
 
@@ -187,15 +194,15 @@ const Rectangle25 = styled.div`
 `;
 
 const Group22 = styled.div`
-  width: 97px;
+  width: 106px;
   height: 34px;
   position: absolute;
-  left: 132px;
+  left: 127px;
   top: 452px;
 `;
 
 const Rectangle26 = styled.div`
-  width: 97px;
+  width: 106px;
   height: 34px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: rgb(231, 245, 244);
@@ -216,32 +223,18 @@ const NaN_0005 = styled.span`
   font-family: Poppins, sans-serif;
   font-weight: initial;
   text-align: center;
-  width: 68px;
-  min-height: 27px;
+  width: 90px;
   position: absolute;
-  left: 15px;
+  left: 8px;
   top: 3px;
-  height: 27px;
 `;
 
 const Group23 = styled.div`
   width: 80px;
   height: 34px;
   position: absolute;
-  left: 141px;
+  left: 140px;
   top: 513px;
-`;
-
-const Rectangle23_0001 = styled.div`
-  width: 1px;
-  height: 3px;
-  background: rgb(217, 217, 217);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  position: absolute;
-  left: 385px;
-  top: 0px;
 `;
 
 const Frame24 = styled.div`
@@ -273,6 +266,14 @@ const NaN_0007 = styled.span`
   text-align: center;
 `;
 
+const Group56 = styled.div`
+  width: 401px;
+  height: 90px;
+  position: absolute;
+  left: -21px;
+  top: 114px;
+`;
+
 const Rectangle36 = styled.div`
   width: 401px;
   height: 90px;
@@ -283,8 +284,8 @@ const Rectangle36 = styled.div`
   border: solid 0px black;
   border-radius: 20px;
   position: absolute;
-  left: -21px;
-  top: 114px;
+  left: 0px;
+  top: 0px;
   filter: blur(4px);
 `;
 
@@ -294,8 +295,8 @@ const Typography_0003 = styled.div`
   flex-direction: row;
   align-items: center;
   position: absolute;
-  left: 81px;
-  top: 145px;
+  left: 93px;
+  top: 31px;
 `;
 
 const Typography_0005 = styled.span`
@@ -323,4 +324,14 @@ const Line15 = styled.div`
   position: absolute;
   left: 0px;
   top: 255px;
+`;
+
+const Vector = styled.svg`
+  width: 20px;
+  height: 15px;
+  position: absolute;
+  left: 16px;
+  top: 22px;
+  right: 324px;
+  bottom: 763px;
 `;
