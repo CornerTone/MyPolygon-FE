@@ -6,7 +6,7 @@ import { ExaminationProgress2 } from "./pages/ExaminationProgress2";
 import { InspectionResults } from "./pages/InspectionResults";
 import { FirstPage } from "./pages/FirstPage/FirstPage";
 import { LoginPage } from "./pages/Login/LoginPage";
-import { SigininPage } from "./pages/Signin/SiginPage";
+import { SiginPage } from "./pages/Signin/SiginPage";
 import { Record } from "./pages/Record/Record";
 import { Main } from "./pages/Main/Main";
 
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<FirstPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signin" element={<SigininPage />} />
+        <Route path="/signin" element={<SiginPage />} />
         <Route path="/main" element={<Main />} />
         <Route path="/PolygonSelect" element={<PolygonSelect />} />
         <Route path="/ElementSelect" element={<ElementSelect />} />

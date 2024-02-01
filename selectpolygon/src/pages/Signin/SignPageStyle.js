@@ -69,13 +69,6 @@ export const Typography_0002 = styled.div`
 	top: 169px;
 `;
 
-export const Group13 = styled.div`
-	width: 76px;
-	height: 28px;
-	position: absolute;
-	left: 46px;
-	top: 359px;
-`;
 
 export const Rectangle23 = styled.div`
 	width: 76px;
@@ -104,13 +97,6 @@ export const NaN_0002 = styled.span`
 	top: 3px;
 `;
 
-export const Group14 = styled.div`
-	width: 83px;
-	height: 28px;
-	position: absolute;
-	left: 43px;
-	top: 418px;
-`;
 
 export const Rectangle22 = styled.div`
 	width: 76px;
@@ -139,13 +125,7 @@ export const NaN_0003 = styled.span`
 	top: 3px;
 `;
 
-export const Group15 = styled.div`
-	width: 79px;
-	height: 28px;
-	position: absolute;
-	left: 45px;
-	top: 474px;
-`;
+
 
 export const Rectangle22_0001 = styled.div`
 	width: 76px;
@@ -209,28 +189,64 @@ export const NaN_0005 = styled.span`
 	top: 3px;
 `;
 
-export const Rectangle49 = styled.svg`
-	width: 175px;
+export const Group13 = styled.div`
+	width: 76px;
 	height: 28px;
 	position: absolute;
-	left: 144px;
+	left: 46px;
 	top: 359px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
 `;
 
-export const Rectangle50 = styled.svg`
-	width: 175px;
+export const Group14 = styled.div`
+	width: 83px;
 	height: 28px;
 	position: absolute;
-	left: 144px;
+	left: 43px;
 	top: 418px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
 `;
 
-export const Rectangle51 = styled.svg`
-	width: 175px;
+export const Group15 = styled.div`
+	width: 79px;
 	height: 28px;
 	position: absolute;
-	left: 144px;
-	top: 474px;
+	left: 45px;
+	top: 474px;    
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+`;
+
+export const InputBox = styled.input`
+    width: 180px;
+    height: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-top: 5px;
+`;
+
+export const IdInputBox = styled(InputBox)`
+    position: absolute;
+	left: 150px;
+	top: 356px;
+`;
+
+export const PasswordInputBox = styled(InputBox)`
+    position: absolute;
+	left: 150px;
+	top: 415px;
+`;
+
+export const PhoneNumInputBox = styled(InputBox)`
+    position: absolute;
+	left: 150px;
+	top: 471px; 
 `;
 
 export const Vector = styled.svg`
@@ -241,4 +257,6 @@ export const Vector = styled.svg`
 	top: 22px;
 	right: 324px;
 	bottom: 763px;
+	cursor: pointer;
+
 `;

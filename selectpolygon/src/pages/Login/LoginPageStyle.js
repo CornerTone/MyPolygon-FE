@@ -54,17 +54,10 @@ export const NaN_0002 = styled.span`
 	min-height: 21px;
 	position: absolute;
 	left: 9px;
-	top: 5px;
+	top: 3px;
 	height: 21px;
 `;
 
-export const Group12_0001 = styled.div`
-	width: 77px;
-	height: 31px;
-	position: absolute;
-	left: 47px;
-	top: 363px;
-`;
 
 export const Rectangle23 = styled.div`
 	width: 77px;
@@ -90,18 +83,11 @@ export const NaN_0004 = styled.span`
 	width: 60px;
 	min-height: 21px;
 	position: absolute;
-	left: 10px;
+	left: 8px;
 	top: 5px;
 	height: 21px;
 `;
 
-export const Group12_0002 = styled.div`
-	width: 89px;
-	height: 31px;
-	position: absolute;
-	left: 42px;
-	top: 429px;
-`;
 
 export const Rectangle22 = styled.div`
 	width: 77px;
@@ -113,21 +99,21 @@ export const Rectangle22 = styled.div`
 	background-position: center;
 	border-radius: 10px;
 	position: absolute;
-	left: 5px;
+
 	top: 0px;
 `;
 
 export const NaN_0005 = styled.span`
 	color: black;
 	text-overflow: ellipsis;
-	font-size: 18px;
+	font-size: 17px;
 	font-family: Inter, sans-serif;
 	font-weight: bold;
-	text-align: center;
+	text-align: left;
 	width: 89px;
 	min-height: 21px;
 	position: absolute;
-	left: 0px;
+	left: 4px;
 	top: 5px;
 	height: 21px;
 `;
@@ -168,20 +154,45 @@ export const Typography_0001 = styled.span`
 	text-align: center;
 `;
 
-export const Rectangle47 = styled.svg`
-	width: 175px;
-	height: 31px;
-	position: absolute;
-	left: 140px;
-	top: 363px;
+export const Group12_0001 = styled.div`
+    width: 200px; 
+    position: absolute;
+    left: 50px; 
+    top: 363px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
 `;
 
-export const Rectangle48 = styled.svg`
-	width: 175px;
-	height: 31px;
-	position: absolute;
-	left: 140px;
-	top: 429px;
+export const Group12_0002 = styled.div`
+    width: 200px; 
+    position: absolute;
+    left: 50px; 
+    top: 429px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`;
+
+export const InputBox = styled.input`
+    width: 180px;
+    height: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-top: 5px;
+`;
+
+export const IdInputBox = styled(InputBox)`
+    position: absolute;
+    left: 150px; 
+    top: 363px;
+`;
+
+export const PasswordInputBox = styled(InputBox)`
+    position: absolute;
+    left: 150px; 
+    top: 429px;
 `;
 
 export const Vector = styled.svg`
@@ -192,4 +203,5 @@ export const Vector = styled.svg`
 	top: 22px;
 	right: 324px;
 	bottom: 763px;
+    cursor: pointer;
 `;
