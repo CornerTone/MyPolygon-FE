@@ -93,7 +93,7 @@ export const Group12 = styled.div`
 `;
 
 export const Rectangle23 = styled.div`
-	width: 79px;
+	width: 83px;
 	height: 32px;
 	box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);
 	background: rgb(243, 228, 208);
@@ -109,15 +109,14 @@ export const Rectangle23 = styled.div`
 export const NaN_0002 = styled.span`
 	color: black;
 	text-overflow: ellipsis;
-	font-size: 16px;
+	font-size: 15px;
 	font-family: Inter, sans-serif;
-	font-weight: initial;
+	font-weight: bold;
 	text-align: center;
 	width: 76px;
 	min-height: 18px;
 	position: absolute;
-	left: 2px;
-	top: 7px;
+	top: 6px;
 	height: 18px;
 
 `;
@@ -131,7 +130,7 @@ export const Group12_0001 = styled.div`
 `;
 
 export const Rectangle25 = styled.div`
-	width: 75px;
+	width: 77px;
 	height: 32px;
 	box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);
 	background: rgb(133, 187, 226);
@@ -147,14 +146,14 @@ export const Rectangle25 = styled.div`
 export const NaN_0003 = styled.span`
 	color: black;
 	text-overflow: ellipsis;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: Inter, sans-serif;
-	font-weight: initial;
+	font-weight: bold;
 	text-align: center;
 	width: 58px;
 	min-height: 18px;
 	position: absolute;
-	left: 9px;
+    left: 11px;
 	top: 7px;
 	height: 18px;
 `;
