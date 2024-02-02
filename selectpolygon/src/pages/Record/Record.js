@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { goBack } from "../../components/backNavigation";
 import { Footer } from "../../components/Footer";
+import WeekCalendar from "../../components/Calendar";
 
 export function Record() {
+	const [date, setDate] = useState(new Date());
+
     return (
         <RootWrapperNaN>
         <Frame48>
@@ -24,25 +27,12 @@ export function Record() {
             집중 기록
             </NaN_0002>
         </Frame48>
+
         <NaN_0003>
             <Line3/>
-            <Ellipse10/>
-            <_28>
-            28
-            </_28>
-            <_27>
-            27
-            </_27>
-            <_30>
-            30
-            </_30>
-            <_26>
-            26
-            </_26>
-            <_29>
-            29
-            </_29>
+			<WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
         </NaN_0003>
+
         <NaN_0004>
             <Rectangle34/>
             <Ellipse11/>
@@ -119,7 +109,8 @@ export function Record() {
             00 h  00 m
             </_00H00M>
         </NaN_0012>
-		<Footer />
+
+			<Footer />
         </RootWrapperNaN>
     )
 }
@@ -202,96 +193,9 @@ const Line3 = styled.div`
 	border-top: solid 1px rgb(225, 225, 225);
 	position: absolute;
 	left: 0px;
-	top: 69px;
+	top: 75px;
 `;
 
-const Ellipse10 = styled.div`
-	width: 60px;
-	height: 60px;
-	background: rgb(79, 112, 156);
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-	border-radius: 60px / 60px;
-	position: absolute;
-	left: 150px;
-	top: 0px;
-`;
-
-const _28 = styled.span`
-	color: white;
-	text-overflow: ellipsis;
-	font-size: 32px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: center;
-	width: 50px;
-	min-height: 39px;
-	position: absolute;
-	left: 155px;
-	top: 11px;
-	height: 39px;
-`;
-
-const _27 = styled.span`
-	color: black;
-	text-overflow: ellipsis;
-	font-size: 32px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: center;
-	width: 50px;
-	min-height: 39px;
-	position: absolute;
-	left: 85px;
-	top: 11px;
-	height: 39px;
-`;
-
-const _30 = styled.span`
-	color: rgb(185, 185, 185);
-	text-overflow: ellipsis;
-	font-size: 32px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: center;
-	width: 50px;
-	min-height: 39px;
-	position: absolute;
-	left: 290px;
-	top: 11px;
-	height: 39px;
-`;
-
-const _26 = styled.span`
-	color: black;
-	text-overflow: ellipsis;
-	font-size: 32px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: center;
-	width: 50px;
-	min-height: 39px;
-	position: absolute;
-	left: 20px;
-	top: 11px;
-	height: 39px;
-`;
-
-const _29 = styled.span`
-	color: rgb(185, 185, 185);
-	text-overflow: ellipsis;
-	font-size: 32px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: center;
-	width: 50px;
-	min-height: 39px;
-	position: absolute;
-	left: 225px;
-	top: 11px;
-	height: 39px;
-`;
 
 const NaN_0004 = styled.div`
 	width: 336px;
