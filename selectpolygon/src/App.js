@@ -1,17 +1,19 @@
 import React from "react";
-import { PolygonSelect } from "./pages/PolygonSelect";
-import { ElementSelect } from "./pages/ElementSelect";
-import { ExaminationProgress } from "./pages/ExaminationProgress";
-import { ExaminationProgress2 } from "./pages/ExaminationProgress2";
-import { InspectionResults } from "./pages/InspectionResults";
+import { PolygonSelect } from "./pages/Select/PolygonSelect";
+import { ElementSelect } from "./pages/Select/ElementSelect";
+import { ExaminationProgress } from "./pages/Examination/ExaminationProgress";
+import { ExaminationProgress2 } from "./pages/Examination/ExaminationProgress2";
+import { InspectionResults } from "./pages/Examination/InspectionResults";
 import { FirstPage } from "./pages/FirstPage/FirstPage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SiginPage } from "./pages/Signin/SiginPage";
 import { Record } from "./pages/Record/Record";
 import { Main } from "./pages/Main/Main";
+import { ComplimentMain } from "./pages/Compliment/ComplimentMain";
+import { ComplimentWrite } from "./pages/Compliment/ComplimentWrite";
+import { ComplimentDetail } from "./pages/Compliment/ComplimentDetail";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 
 function App() {
   return (
@@ -27,6 +29,14 @@ function App() {
         <Route path="/1" element={<ExaminationProgress2 />} />
         <Route path="/2" element={<InspectionResults />} />
         <Route path="/record" element={<Record />} />
+        <Route path="/ComplimentMain" element={<ComplimentMain />} />
+        <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
+        <Route path="/ComplimentWrite" element={<ComplimentWrite />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/new" element={<New />} />
+        <Route path="/diary/:id" element={<Diary />} />
+        <Route path="/edit" element={<Edit />} />
+        <Route path="/DiaryEditor" element={<DiaryEditor />} />
       </Routes>
     </BrowserRouter>
   );
