@@ -14,6 +14,7 @@ import { ComplimentWrite } from "./pages/Compliment/ComplimentWrite";
 import { ComplimentDetail } from "./pages/Compliment/ComplimentDetail";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RecordModal } from "./pages/Record/RecordModal";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path="/ComplimentMain" element={<ComplimentMain />} />
         <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
         <Route path="/ComplimentWrite" element={<ComplimentWrite />} />
+        
+        <Route path="/recordmodal" element={<RecordModal />} /> {/* 임시 라우터 */}
       </Routes>
     </BrowserRouter>
   );
