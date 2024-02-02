@@ -36,6 +36,16 @@ export const IconsBasicProject = styled.div`
 	top: 0px;
 	right: 10px;
 	bottom: 11px;
+
+    svg path {
+        fill: black;
+    }
+
+    &:hover {
+        svg path {
+            fill: #EBBA71; 
+        }
+    }
 `;
 
 export const Project = styled.svg`
@@ -59,6 +69,10 @@ export const NaN_0014 = styled.span`
 	position: absolute;
 	left: 0px;
 	top: 20px;
+
+    &:hover {
+        color: #EBBA71; 
+    }
 `;
 
 export const Group53 = styled.div`
@@ -75,6 +89,16 @@ export const IconsBasicChat = styled.div`
 	position: absolute;
 	left: 8px;
 	top: 0px;
+
+    svg path {
+        fill: black;
+    }
+
+    &:hover {
+        svg path {
+            fill: #EBBA71; 
+        }
+    }
 `;
 
 export const Chat = styled.svg`
@@ -98,6 +122,10 @@ export const NaN_0015 = styled.span`
 	position: absolute;
 	left: 0px;
 	top: 22px;
+
+    &:hover {
+        color: #EBBA71; 
+    }
 `;
 
 export const Group52 = styled.div`
@@ -114,6 +142,16 @@ export const IconlyRegularTwoToneHome = styled.div`
 	top: 0px;
 	right: 0px;
 	bottom: 11px;
+
+    svg path {
+        fill: black;
+    }
+
+    &:hover {
+        svg path {
+            fill: #EBBA71; 
+        }
+    }
 `;
 
 export const Home = styled.div`
@@ -144,6 +182,10 @@ export const NaN_0016 = styled.span`
 	position: absolute;
 	left: 3px;
 	top: 18px;
+
+    &:hover {
+        color: #EBBA71; 
+    }
 `;
 
 export const Group51 = styled.div`
@@ -160,6 +202,16 @@ export const IconsBasicStar = styled.div`
 	position: absolute;
 	left: 8px;
 	top: 0px;
+
+    svg path {
+        fill: black;
+    }
+
+    &:hover {
+        svg path {
+            fill: #EBBA71; 
+        }
+    }
 `;
 
 export const Star = styled.svg`
@@ -170,6 +222,7 @@ export const Star = styled.svg`
 	top: 2px;
 	right: 2px;
 	bottom: 2px;
+
 `;
 
 export const NaN_0017 = styled.span`
@@ -183,6 +236,10 @@ export const NaN_0017 = styled.span`
 	position: absolute;
 	left: 0px;
 	top: 20px;
+
+    &:hover {
+        color: #EBBA71; 
+    }
 `;
 
 export const Group50 = styled.div`
@@ -204,6 +261,10 @@ export const NaN_0018 = styled.span`
 	position: absolute;
 	left: 0px;
 	top: 20px;
+
+    &:hover {
+        color: #EBBA71; 
+    }
 `;
 
 export const IconsBasicTime = styled.div`
@@ -212,6 +273,16 @@ export const IconsBasicTime = styled.div`
 	position: absolute;
 	left: 9px;
 	top: 0px;
+
+    svg path {
+        fill: black; /* 아이콘 기본 색상 설정 */
+    }
+
+    &:hover {
+        svg path {
+            fill: #EBBA71; 
+        }
+    }
 `;
 
 export const Time = styled.svg`

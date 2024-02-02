@@ -1,5 +1,6 @@
 import React from "react";
 import * as H from "./FooterStyle";
+import { Link } from "react-router-dom";
 
 export function Footer(){
 
@@ -27,14 +28,14 @@ export function Footer(){
                 </H.NaN_0015>
             </H.Group53>
             <H.Group52>
-                <H.IconlyRegularTwoToneHome>
-                <H.Home>
-                    <H.Home_0001 src="grida://assets-reservation/images/I232:774;29221:3579" alt="image of Home"/>
-                </H.Home>
-                </H.IconlyRegularTwoToneHome>
-                <H.NaN_0016>
-                홈
-                </H.NaN_0016>
+                <Link to="/main" style={{ textDecoration: "none"}}>
+                    <H.IconlyRegularTwoToneHome>
+                    <H.Home>
+                        <H.Home_0001 src="grida://assets-reservation/images/I232:774;29221:3579" alt="image of Home"/>
+                    </H.Home>
+                    </H.IconlyRegularTwoToneHome>
+                    <H.NaN_0016>홈</H.NaN_0016>
+                </Link>
             </H.Group52>
             <H.Group51>
                 <H.IconsBasicStar>
@@ -47,14 +48,14 @@ export function Footer(){
                 </H.NaN_0017>
             </H.Group51>
             <H.Group50>
-                <H.NaN_0018>
-                집중 기록
-                </H.NaN_0018>
-                <H.IconsBasicTime>
-                <H.Time xmlns="http://www.w3.org/2000/svg">
-                    <path fill="rgb(63, 67, 74)" d="M1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8ZM8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM8.75 3.65012C8.75 3.2359 8.41421 2.90012 8 2.90012C7.58579 2.90012 7.25 3.2359 7.25 3.65012L7.25 8.00012C7.25 8.28419 7.4105 8.54389 7.66459 8.67094L10.5646 10.1209C10.9351 10.3062 11.3856 10.156 11.5708 9.78553C11.7561 9.41504 11.6059 8.96454 11.2354 8.77929L8.75 7.53659L8.75 3.65012Z"/>
-                </H.Time>
-                </H.IconsBasicTime>
+                <Link to="/record" style={{ textDecoration: "none"}}>
+                    <H.NaN_0018>집중 기록</H.NaN_0018>
+                    <H.IconsBasicTime>
+                        <H.Time xmlns="http://www.w3.org/2000/svg">
+                            <path fill="rgb(63, 67, 74)" d="M1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8ZM8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM8.75 3.65012C8.75 3.2359 8.41421 2.90012 8 2.90012C7.58579 2.90012 7.25 3.2359 7.25 3.65012L7.25 8.00012C7.25 8.28419 7.4105 8.54389 7.66459 8.67094L10.5646 10.1209C10.9351 10.3062 11.3856 10.156 11.5708 9.78553C11.7561 9.41504 11.6059 8.96454 11.2354 8.77929L8.75 7.53659L8.75 3.65012Z"/>
+                        </H.Time>
+                    </H.IconsBasicTime>
+                </Link>
             </H.Group50>
             </H.Frame1>
         </H.Frame50>
