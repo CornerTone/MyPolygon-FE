@@ -126,6 +126,7 @@ function App() {
               <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
               <Route path="/ComplimentWrite" element={<ComplimentWrite />} />
               <Route path="/recordmodal" element={<RecordModal />} />{" "}
+              
               <Route path="/diaryhome" element={<DiaryHome />} />
               <Route path="/diarynew" element={<DiaryNew />} />
               <Route path="/diaryedit/:id" element={<DiaryEdit />} />
