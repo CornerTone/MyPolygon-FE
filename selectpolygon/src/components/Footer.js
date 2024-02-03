@@ -1,6 +1,8 @@
 import React from "react";
 import * as H from "./FooterStyle";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
 export function Footer(){
 
@@ -31,7 +33,15 @@ export function Footer(){
                 <Link to="/main" style={{ textDecoration: "none"}}>
                     <H.IconlyRegularTwoToneHome>
                     <H.Home>
-                        <H.Home_0001 src="grida://assets-reservation/images/I232:774;29221:3579" alt="image of Home"/>
+                        <FontAwesomeIcon 
+                            icon={faHouse} 
+                            style={{ 
+                                color: 'white',
+                                fontSize: '17px',  
+                                marginLeft: '-1.5px', 
+                                marginTop: '-20px'   
+                            }} 
+                        />
                     </H.Home>
                     </H.IconlyRegularTwoToneHome>
                     <H.NaN_0016>홈</H.NaN_0016>
