@@ -23,6 +23,8 @@ import DiaryHome from "./pages/Diary/Home";
 import DiaryNew from "./pages/Diary/New";
 
 import { Community } from "./pages/Community/Community";
+import { NewCommunity } from "./pages/Community/NewCommunity";
+import { CommunityDetail } from "./pages/Community/CommunityDetail";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -132,6 +134,8 @@ function App() {
               <Route path="/diarydetail/:id" element={<DiaryDetail />} />
 
               <Route path="/community" element={<Community />} />
+              <Route path="/communitynew" element={<NewCommunity />} />
+              <Route path="/communitydetail/:id" element={<CommunityDetail />} />
             </Routes>
           </div>
         </BrowserRouter>
