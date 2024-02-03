@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { useEffect, useReducer, useRef } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { RecordModal } from "./pages/Record/RecordModal";
 
 import { PolygonSelect } from "./pages/Select/PolygonSelect";
 import { ElementSelect } from "./pages/Select/ElementSelect";
@@ -22,6 +21,10 @@ import DiaryDetail from "./pages/Diary/Detail";
 import DiaryEdit from "./pages/Diary/Edit";
 import DiaryHome from "./pages/Diary/Home";
 import DiaryNew from "./pages/Diary/New";
+
+import { Community } from "./pages/Community/Community";
+import { NewCommunity } from "./pages/Community/NewCommunity";
+import { CommunityDetail } from "./pages/Community/CommunityDetail";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -125,13 +128,14 @@ function App() {
               <Route path="/ComplimentMain" element={<ComplimentMain />} />
               <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
               <Route path="/ComplimentWrite" element={<ComplimentWrite />} />
-              <Route path="/recordmodal" element={<RecordModal />} />{" "}
-              
               <Route path="/diaryhome" element={<DiaryHome />} />
               <Route path="/diarynew" element={<DiaryNew />} />
               <Route path="/diaryedit/:id" element={<DiaryEdit />} />
               <Route path="/diarydetail/:id" element={<DiaryDetail />} />
-              {/* 임시 라우터 */}
+
+              <Route path="/community" element={<Community />} />
+              <Route path="/communitynew" element={<NewCommunity />} />
+              <Route path="/communitydetail/:id" element={<CommunityDetail />} />
             </Routes>
           </div>
         </BrowserRouter>

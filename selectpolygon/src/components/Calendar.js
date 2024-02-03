@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { addDays, format, getDate, isSameDay, startOfWeek } from "date-fns";
 import "./CalendarStyle.css";
 
-const WeekCalendar = ({ date, onChange }) => {
+const WeekCalendar = ({ date, onChange, onSelectDate  }) => {
   const [week, setWeek] = useState([]);
 
   useEffect(() => {
@@ -10,31 +10,46 @@ const WeekCalendar = ({ date, onChange }) => {
     setWeek(weekDays);
   }, [date]);
 
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    const weekDays = getWeekDays(date);
+    setWeek(weekDays);
+  }, [date]);
+
+  const handleDateClick = (selectedDate) => {
+    setSelectedDate(selectedDate);
+    onSelectDate(selectedDate);
+  };
+
   return (
-    <div className="container">
-      {week.map((weekDay, index) => {
-        const textStyles = ["label"];
-        const touchable = ["touchable"];
+    <div className="scrollableContainer">
+      <div className="container">
+        {week.map((weekDay, index) => {
+          const textStyles = ["label"];
+          const touchable = ["touchable"];
 
-        const sameDay = isSameDay(weekDay.date, date);
-        if (sameDay) {
-          textStyles.push("selectedLabel");
-          touchable.push("selectedTouchable");
-        }
+          const sameDay = isSameDay(weekDay.date, date);
+          if (sameDay) {
+            textStyles.push("selectedLabel");
+            touchable.push("selectedTouchable");
+          }
 
-        return (
-          <div className="weekDayItem" key={index}>
-            <div className="weekDayText">{weekDay.formatted}</div>
-            <button
-              onClick={() => onChange(weekDay.date)}
-              className={touchable.join(" ")}
-            >
-              <span className={textStyles.join(" ")}>{weekDay.day}</span>
-            </button>
-          </div>
-        );
-      })}
+          return (
+            <div className="weekDayItem" key={index}>
+              <div className="weekDayText">{weekDay.formatted}</div>
+              <button
+                onClick={() => handleDateClick(weekDay.date)}
+                className={touchable.join(" ")}
+              >
+                <span className={textStyles.join(" ")}>{weekDay.day}</span>
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
+    
   );
 };
 
