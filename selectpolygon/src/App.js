@@ -32,11 +32,6 @@ function App() {
         <Route path="/ComplimentMain" element={<ComplimentMain />} />
         <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
         <Route path="/ComplimentWrite" element={<ComplimentWrite />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/new" element={<New />} />
-        <Route path="/diary/:id" element={<Diary />} />
-        <Route path="/edit" element={<Edit />} />
-        <Route path="/DiaryEditor" element={<DiaryEditor />} />
       </Routes>
     </BrowserRouter>
   );
