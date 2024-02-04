@@ -94,11 +94,10 @@ const Group64 = styled.div`
 const Group67 = styled.div`
   width: 149px;
   height: 46px;
-  position: absolute;
-  left: 1px;
-  top: 58px;
+  position: relative; /* 상대 위치로 변경 */
   background-color: #213555;
   border-radius: 10px;
+  margin-bottom: 10px; /* 각 요소 사이의 간격을 조정할 수 있는 마진 추가 */
 `;
 
 const Rectangle7 = styled.div`
