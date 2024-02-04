@@ -8,46 +8,57 @@ export function PolygonChart({ data }) {
     const chartData = {
         labels: ['건강', '인간관계', '학업', '경제', '여가'],
         datasets: [
-        {
-            label: '팀 점수',
-            data: data,
-            backgroundColor: 'rgba(255, 108, 61, 0.2)',
-        },
+            {
+                label: '만족도',
+                data: data,
+                backgroundColor: 'rgba(255, 108, 61, 0.2)',
+            },
+            {
+                label: '1',
+                data: [1.5, 2.5, 2.5, 3, 1],
+                borderColor: '#F5EFE7',
+                backgroundColor: 'rgb(79, 112, 156)',
+                borderWidth: 3,
+                //pointBackgroundColor: 'transparent',
+                //pointBorderColor: 'transparent',
+            },
         ],
     };
 
     const chartOptions = {
         elements: {
         line: {
-            borderWidth: 2,
-            borderColor: 'orange',
+            //borderWidth: 0,
+            borderColor: '#F5EFE7',
         },
         point: {
-            pointBackgroundColor: 'orange',
+            radius: 0,
+            pointBackgroundColor: '#F5EFE7',
         },
         },
         scales: {
         r: {
             ticks: {
-            stepSize: 2.5,
+            stepSize: 1,
             display: false,
             },
             grid: {
-            color: 'gray',
+                lineWidth: 2,
+                borderColor: '#F5EFE7',
             },
             pointLabels: {
-            font: {
-                size: 12,
-                weight: '700',
-                family: 'Pretendard',
-            },
-            color: 'black',
+                font: {
+                    size: 12,
+                    weight: '700',
+                    family: 'Pretendard',
+                },
+                color: '#F5EFE7',
             },
             angleLines: {
             display: false,
             },
-            suggestedMin: 0,
-            suggestedMax: 10,
+            suggestedMin: 1,
+            suggestedMax: 3,
         },
         },
         plugins: {
@@ -56,7 +67,7 @@ export function PolygonChart({ data }) {
         },
         },
         animation: {
-        duration: 0,
+            duration: 0,
         },
     };
 
@@ -69,50 +80,30 @@ export function PolygonChart({ data }) {
 
 export default function MyFigureChart({ data }) {
     return (
-        <Frame7>
-        <Frame5 />
-        <Group_0001>
-            <PolygonChart data={data} />
-        </Group_0001>
-        </Frame7>
+        <>
+            <Group_0001>
+                <PolygonChart data={data} />
+            </Group_0001>
+        </>
     );
 }
 
 const StRadar = styled.div`
-  /* Radar 차트에 대한 스타일을 지정하세요 */
+    width: 300px;
+    height: 270px;
+    border: none;
+    background-color: rgb(79, 112, 156);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
-
-const Frame7 = styled.div`
-	width: 330px;
-	height: 330px;
-	overflow: hidden;
-	position: absolute;
-	box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);
-	left: 15px;
-	top: 201px;
-`;
-
-const Frame5 = styled.div`
-	width: 310px;
-	height: 308px;
-	overflow: hidden;
-	background: rgb(79, 112, 156);
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-	border-radius: 10px;
-	position: absolute;
-	box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);
-	left: 8px;
-	top: 12px;
-`;
 
 const Group_0001 = styled.div`
-	width: 266px;
-	height: 231px;
 	position: absolute;
 	box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);
-	left: 30px;
-	top: 38px;
+    border-radius: 10px;
+	left: 20px;
+	top: 205px;
 `;

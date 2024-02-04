@@ -14,34 +14,39 @@ export function Main() {
 		<Group64>
 			<Group67>
 			<Rectangle7/>
-			<_10>
-				인간관계 10%
-			</_10>
+			<_15>
+				여가 10%
+			</_15>
 			</Group67>
+
 			<Group66>
 			<Rectangle7/>
 			<_15>
 				건강 15%
 			</_15>
 			</Group66>
+
 			<Group65>
 			<Rectangle7/>
 			<_15>
-				여가 20%
+				학업 20%
 			</_15>
 			</Group65>
+
 			<Group63>
 			<Rectangle7/>
 			<_15>
-				학업 30%
+				경제 30%
 			</_15>
 			</Group63>
+
 			<Group62>
 			<Rectangle7/>
 			<_15>
-				학업 30%
+				인간관계 30%
 			</_15>
 			</Group62>
+
 		</Group64>
 		<Rectangle3/>
 		
@@ -74,10 +79,10 @@ const RootWrapperNaN = styled.div`
 
 const Group64 = styled.div`
 	width: 311px;
-	height: 162px;
+	height: 160px;
 	position: absolute;
 	left: 24px;
-	top: 554px;
+	top: 534px;
 `;
 
 const Group67 = styled.div`
@@ -86,6 +91,9 @@ const Group67 = styled.div`
 	position: absolute;
 	left: 1px;
 	top: 58px;
+	background-color: #213555;
+	border-radius: 10px;
+
 `;
 
 const Rectangle7 = styled.div`
@@ -102,36 +110,24 @@ const Rectangle7 = styled.div`
 	top: 0px;
 `;
 
-const _10 = styled.span`
-	color: white;
-	text-overflow: ellipsis;
-	font-size: 18px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: left;
-	width: 139px;
-	min-height: 23px;
-	position: absolute;
-	left: 4px;
-	top: 11px;
-	height: 23px;
-`;
 
 const Group66 = styled.div`
 	width: 149px;
 	height: 46px;
 	position: absolute;
-	left: 1px;
+	left: 77px;
 	top: 0px;
+	background-color: #213555;
+	border-radius: 10px;
 `;
 
 const _15 = styled.span`
 	color: white;
 	text-overflow: ellipsis;
-	font-size: 18px;
+	font-size: 15px;
 	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: left;
+	font-weight: bold;
+	text-align: center;
 	width: 137px;
 	min-height: 23px;
 	position: absolute;
@@ -145,7 +141,9 @@ const Group65 = styled.div`
 	height: 46px;
 	position: absolute;
 	left: 162px;
-	top: 0px;
+	top: 116px;
+	background-color: #213555;
+	border-radius: 10px;
 `;
 
 const Group63 = styled.div`
@@ -154,6 +152,8 @@ const Group63 = styled.div`
 	position: absolute;
 	left: 0px;
 	top: 116px;
+	background-color: #213555;
+	border-radius: 10px;
 `;
 
 const Group62 = styled.div`
@@ -162,6 +162,8 @@ const Group62 = styled.div`
 	position: absolute;
 	left: 162px;
 	top: 58px;
+	background-color: #213555;
+	border-radius: 10px;
 `;
 
 const Rectangle3 = styled.div`
@@ -195,7 +197,7 @@ const NaN_0003 = styled.span`
 	text-overflow: ellipsis;
 	font-size: 20px;
 	font-family: Inter, sans-serif;
-	font-weight: initial;
+	font-weight: bold;
 	text-align: center;
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	width: 149px;
@@ -211,19 +213,19 @@ const MyFigure = styled.span`
 	text-overflow: ellipsis;
 	font-size: 15px;
 	font-family: Inter, sans-serif;
-	font-weight: initial;
+	font-weight: bold;
 	text-align: left;
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	width: 97px;
 	min-height: 17px;
 	position: absolute;
-	left: 32px;
-	top: 187px;
+	left: 20px;
+	top: 170px;
 	height: 17px;
 `;
 
 
-export const NaN_0004 = styled.div`
+const NaN_0004 = styled.div`
 	width: 360px;
 	height: 69px;
 	position: absolute;
@@ -231,7 +233,7 @@ export const NaN_0004 = styled.div`
 	top: 63px;
 `;
 
-export const Line3 = styled.div`
+const Line3 = styled.div`
 	width: 360px;
 	height: 0px;
 	border-top: solid 1px rgb(225, 225, 225);
