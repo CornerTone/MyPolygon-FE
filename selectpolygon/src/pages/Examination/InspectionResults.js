@@ -1,5 +1,11 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
+import { goBack } from "../../components/backNavigation";
+
 /**
  * `<NaN>` ('검사 결과 페이지')
  * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=78:510)
@@ -37,6 +43,34 @@ import styled from "@emotion/styled";
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/78:510 -->
  */
 export function InspectionResults() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Axios를 사용한 API 호출
+    const fetchData = async () => {
+      try {
+        const polygonId = Cookies.get("polygon_id");
+        const response = await axios.get(
+          `http://localhost:3001/api/polygon/read/${polygonId}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // 데이터 로딩 중에는 로딩 스피너 또는 다른 로딩 상태를 표시할 수 있습니다.
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <RootWrapperNaN>
       <Frame51>
