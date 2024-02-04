@@ -1,67 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import { Footer } from "../../components/Footer";
 import MyFigureChart from "./PolygonChart";
 import WeekCalendar from "../../components/Calendar";
+import axios from "axios";
 
 export function Main() {
 
 	const [date, setDate] = useState(new Date());
+	const [polygonData, setPolygonData] = useState(null);
+
+	useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/api/polygon/read/{id}");
+                const { success, polygon } = response.data;
+                if (success) {
+                    setPolygonData(polygon.elements);
+                } else {
+                    console.error('Failed to fetch polygon data');
+                }
+            } catch (error) {
+                console.error('Error fetching polygon data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
 
 	return (
 		<RootWrapperNaN>
-		<Group64>
-			<Group67>
-			<Rectangle7/>
-			<_15>
-				여가 10%
-			</_15>
-			</Group67>
 
-			<Group66>
-			<Rectangle7/>
-			<_15>
-				건강 15%
-			</_15>
-			</Group66>
+			<Frame48>
+				<NaN_0003>나만의 다각형</NaN_0003>
+				<HeaderLogout />
+			</Frame48>
 
-			<Group65>
-			<Rectangle7/>
-			<_15>
-				학업 20%
-			</_15>
-			</Group65>
+			<NaN_0004>
+				<Line3/>
+				<WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
+			</NaN_0004>
 
-			<Group63>
-			<Rectangle7/>
-			<_15>
-				경제 30%
-			</_15>
-			</Group63>
+			<MyFigure>My figure</MyFigure>
+			<MyFigureChart data={polygonData} />
 
-			<Group62>
-			<Rectangle7/>
-			<_15>
-				인간관계 30%
-			</_15>
-			</Group62>
-
-		</Group64>
-		<Rectangle3/>
-		
-		<Frame48>
-			<NaN_0003>나만의 다각형</NaN_0003>
-			<HeaderLogout />
-		</Frame48>
-
-		<NaN_0004>
-            <Line3/>
-			<WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
-        </NaN_0004>
-
-		<MyFigure>My figure</MyFigure>
-		<MyFigureChart />
+			<Group64>
+				{(polygonData && polygonData.length > 0) ? (
+					polygonData.map((item, index) => (
+						<Group67>
+							<div key={index}>
+								<Rectangle7 />
+								<_15>{`${item.name}  ${item.score}%`}</_15>
+							</div>
+						</Group67>
+					))
+				) : (
+					<>
+						<_16> 검사를 진행해 주세요!</_16>
+					</>
+				)}
+			</Group64>
 		
 		<Footer />
 		</RootWrapperNaN>
@@ -136,6 +136,20 @@ const _15 = styled.span`
 	height: 23px;
 `;
 
+const _16 = styled.span`
+	color: black;
+	text-overflow: ellipsis;
+	font-size: 18px;
+	font-family: Inter, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	min-height: 23px;
+	position: absolute;
+	left: 55px;
+	top: 11px;
+	height: 23px;
+`;
+
 const Group65 = styled.div`
 	width: 149px;
 	height: 46px;
@@ -165,19 +179,6 @@ const Group62 = styled.div`
 	background-color: #213555;
 	border-radius: 10px;
 `;
-
-const Rectangle3 = styled.div`
-	width: 1px;
-	height: 3px;
-	background: rgb(217, 217, 217);
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-	position: absolute;
-	left: 360px;
-	top: 37px;
-`;
-
 
 const Frame48 = styled.div`
 	width: 360px;
