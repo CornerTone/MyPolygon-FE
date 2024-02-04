@@ -10,6 +10,7 @@ import { HeaderLogout } from "../../components/HeaderLogout";
 import axios from "axios";
 import { HeaderMypage } from "../../components/HeaderMypage";
 
+
 const categoryIcons = {
     학업: faBookOpen,
     여가: faFootball,
@@ -29,8 +30,6 @@ const categoryNames = {
 
 export function Record({ selectedDate }) {
 
-	const [date, setDate] = useState(new Date());
-
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = (category) => {
@@ -45,19 +44,30 @@ export function Record({ selectedDate }) {
 		document.body.style.overflow = "unset";
 	};
 
+	const [date, setDate] = useState(new Date());
+
+	const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+	const formattedDate = formatDate(selectedDate);
+
 	const [selectedCategory, setSelectedCategory] = useState(null);
     const [recordedTimes, setRecordedTimes] = useState({});
 
 	const categories = ["학업", "여가", "건강", "인간관계", "경제"];
 
     useEffect(() => {
-        fetchRecordedTimes(selectedDate);
-    }, [selectedDate]);
+        fetchRecordedTimes();
+    }, [formattedDate]);
 
 	const fetchRecordedTimes = async () => {
         try {
 			console.log("Selected Date:", selectedDate);
-            const response = await axios.get(`http://localhost:3001/api/dailyInvestment/daily?date=${selectedDate}`,{
+            const response = await axios.get("http://localhost:3001/api/dailyInvestment/daily",{
 				withCredentials: true,
 			});
             setRecordedTimes(response.data);
@@ -68,10 +78,11 @@ export function Record({ selectedDate }) {
 
     const handleConfirm = async (timeRecorded) => {
         try {
+			
             const response = await axios.post("http://localhost:3001/api/dailyInvestment/save_daily", {
                 category: selectedCategory,
                 timeInvested: timeRecorded,
-                activityDate: selectedDate,
+                activityDate: formattedDate,
 				withCredentials: true,
             });
             fetchRecordedTimes(selectedDate); // 저장 후 다시 투자 정보를 조회하여 업데이트
@@ -94,10 +105,7 @@ export function Record({ selectedDate }) {
 
 			<R.NaN_0003>
 				<R.Line3/>
-				<WeekCalendar date={date} onChange={(newDate) => {
-                    setDate(newDate);
-                    fetchRecordedTimes(newDate); 
-                }} />
+				<WeekCalendar date={selectedDate} />
 			</R.NaN_0003>
 
 			<R.ContentContainer>
