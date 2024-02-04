@@ -51,10 +51,14 @@ export function Mypage() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/auth/user-info", {
-          withCredentials: true
-        });        setUserInfo(response.data.user);
-        console.log(response.data.elements)
+        const response = await axios.get(
+          "http://localhost:3001/api/auth/user-info",
+          {
+            withCredentials: true,
+          }
+        );
+        setUserInfo(response.data.user);
+        console.log(response.data.elements);
       } catch (error) {
         console.error("사용자 정보를 불러오는 중 오류 발생:", error);
       }
@@ -87,7 +91,7 @@ export function Mypage() {
           src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/5d845334-edba-4189-a042-6f5dfba35719"
           alt="icon"
         />
-        <NaN_0002>나의 도형</NaN_0002>
+        <NaN_0002>나의 정보</NaN_0002>
       </Frame48>
       <Frame50>
         <Frame1>

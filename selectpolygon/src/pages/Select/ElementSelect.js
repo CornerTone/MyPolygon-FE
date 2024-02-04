@@ -49,9 +49,7 @@ export function ElementSelect() {
 
     // 요소가 이미 선택되어 있으면 선택 취소, 아니면 선택 추가
     if (isSelected) {
-      const updatedElements = selectedElements.filter(
-        (id) => id !== elementId
-      );
+      const updatedElements = selectedElements.filter((id) => id !== elementId);
       setSelectedElements(updatedElements);
     } else {
       setSelectedElements([...selectedElements, elementId]);
@@ -70,7 +68,16 @@ export function ElementSelect() {
           withCredentials: true,
         }
       );
+
       console.log("백엔드 응답:", response.data);
+
+      // 데이터 저장이 성공하면 리다이렉션 수행
+      if (response.data.success) {
+        // 리다이렉션 코드 추가 (예: React Router를 사용하는 경우)
+        // 아래 코드는 React Router v5를 기준으로 작성되었습니다.
+        // 최신 버전의 React Router를 사용하는 경우에는 useHistory 등을 이용해야 할 수 있습니다.
+        window.location.href = "/examinationprogress";
+      }
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
     }
@@ -82,29 +89,47 @@ export function ElementSelect() {
       <Group19>
         <Rectangle23 />
         <NaN_0002
-  data-selected={selectedElements.includes(1)}
-  onClick={() => handleElementSelect(1)}
->건강</NaN_0002>
+          data-selected={selectedElements.includes(1)}
+          onClick={() => handleElementSelect(1)}
+        >
+          건강
+        </NaN_0002>
       </Group19>
       <Group20>
         <Rectangle23 />
-        <NaN_0002 data-selected={selectedElements.includes(2)}
-  onClick={() => handleElementSelect(2)}>경제</NaN_0002>
+        <NaN_0002
+          data-selected={selectedElements.includes(2)}
+          onClick={() => handleElementSelect(2)}
+        >
+          경제
+        </NaN_0002>
       </Group20>
       <Group21>
         <Rectangle25 />
-        <NaN_0002 data-selected={selectedElements.includes(3)}
-  onClick={() => handleElementSelect(3)}>학업</NaN_0002>
+        <NaN_0002
+          data-selected={selectedElements.includes(3)}
+          onClick={() => handleElementSelect(3)}
+        >
+          학업
+        </NaN_0002>
       </Group21>
       <Group22>
         <Rectangle26 />
-        <NaN_0005 data-selected={selectedElements.includes(4)}
-  onClick={() => handleElementSelect(4)}>인간관계</NaN_0005>
+        <NaN_0005
+          data-selected={selectedElements.includes(4)}
+          onClick={() => handleElementSelect(4)}
+        >
+          인간관계
+        </NaN_0005>
       </Group22>
       <Group23>
         <Rectangle25 />
-        <NaN_0002 data-selected={selectedElements.includes(5)}
-  onClick={() => handleElementSelect(5)}>여가</NaN_0002>
+        <NaN_0002
+          data-selected={selectedElements.includes(5)}
+          onClick={() => handleElementSelect(5)}
+        >
+          여가
+        </NaN_0002>
       </Group23>
       {/* 저장 버튼 */}
       <Frame24 onClick={handleSaveElements}>
@@ -269,25 +294,25 @@ const Rectangle26 = styled.div`
 `;
 
 const NaN_0005 = styled.span`
-color: black;
-text-overflow: ellipsis;
-font-size: 18px;
-font-family: Poppins, sans-serif;
-font-weight: initial;
-text-align: center;
-width: 80px;
-min-height: 27px;
-position: absolute;
-left: 12px;
-top: 3px;
-height: 27px;
+  color: black;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  font-weight: initial;
+  text-align: center;
+  width: 80px;
+  min-height: 27px;
+  position: absolute;
+  left: 12px;
+  top: 3px;
+  height: 27px;
 
-/* hover 시와 선택된 상태의 스타일 변경 */
-&:hover,
-&[data-selected="true"] {
-  color: deeppink;
-  cursor: pointer;
-}
+  /* hover 시와 선택된 상태의 스타일 변경 */
+  &:hover,
+  &[data-selected="true"] {
+    color: deeppink;
+    cursor: pointer;
+  }
 `;
 
 const Group23 = styled.div`

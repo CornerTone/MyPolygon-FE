@@ -28,7 +28,7 @@ export function SiginPage() {
         "http://localhost:3001/api/auth/join",
         formData
       );
-      navigate("/login");
+      navigate("/");
       console.log(response.data); // 서버의 응답 데이터를 콘솔에 출력
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
