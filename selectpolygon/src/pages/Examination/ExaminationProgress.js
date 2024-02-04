@@ -40,6 +40,18 @@ import axios from "axios";
 export function ExaminationProgress() {
 
   const [questionsData, setQuestionsData] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+
+  const yesButtonClick = () => {
+    // 버튼이 클릭되었을 때 실행되는 함수
+    console.log("예 버튼");
+    // 여기에 추가적인 로직을 작성할 수 있습니다.
+  };
+
+  const noButtonClick = () => {
+    console.log("아니오 버튼");
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,8 +59,9 @@ export function ExaminationProgress() {
         const response = await axios.get("http://localhost:3001/api/polygon/questions", {
           withCredentials: true
         });
-        setQuestionsData(response.data.elements);
-        console.log(response.data.elements); // 데이터를 설정한 후에 콘솔 로그를 출력합니다.
+        const questionElements = response.data.elements;
+            setQuestionsData(questionElements);
+            console.log(questionElements); // 업데이트된 데이터를 출력합니다.
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -56,6 +69,23 @@ export function ExaminationProgress() {
   
     fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
   }, []);
+
+  const handleYesButtonClick = () => {
+    if (currentQuestionIndex < questionsData.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      // Handle end of questions
+    }
+  };
+
+  const handleNoButtonClick = () => {
+    if (currentQuestionIndex < questionsData.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      // Handle end of questions
+    }
+  };
+
 
   return (
     <RootWrapperNaN>
@@ -123,32 +153,20 @@ export function ExaminationProgress() {
         </Typography_0003>
       </Typography_0002>
       <Group33>
-        <Rectangle40 />
-        <NaN_0008>오늘 경제생활에 얼마나 만족하는가?</NaN_0008>
-        <Group26>
-          <Rectangle29 />
-          <NaN_0009>
-            오늘 경제생활에 대해 <br />
-            만족하지 않는다.
-          </NaN_0009>
-        </Group26>
-        <Group34>
-          <Rectangle41 />
-          <NaN_0010>어느정도 만족한다!</NaN_0010>
-        </Group34>
-        <Group57>
-          <Group25>
-            <IconsBasicArrowLeft
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/cadff458-5fd8-4a8f-ad45-7200e2c9dbd9"
-              alt="icon"
-            />
-            <IconsBasicArrowRight4
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/444ecec5-36f5-4191-9b39-22bad72fccbd"
-              alt="icon"
-            />
-            <_112>1/12</_112>
-          </Group25>
-        </Group57>
+        {questionsData.length > 0 && currentQuestionIndex < questionsData.length && (
+          <QuestionWrapper>
+            <h3>{questionsData[currentQuestionIndex].element_name}</h3>
+<ul>
+  {questionsData[currentQuestionIndex].question_strings.map((question, qIndex) => (
+    <li key={qIndex}>{`${qIndex + 1}번째 질문: ${question}`}</li>
+  ))}
+</ul>
+            <ButtonWrapper>
+              <Button onClick={handleYesButtonClick}>예</Button>
+              <Button onClick={handleNoButtonClick}>아니오</Button>
+            </ButtonWrapper>
+          </QuestionWrapper>
+        )}
       </Group33>
       <Vector xmlns="http://www.w3.org/2000/svg">
         <path
@@ -159,6 +177,44 @@ export function ExaminationProgress() {
     </RootWrapperNaN>
   );
 }
+
+const ButtonWrapper = styled.div`
+  margin-top: 20px;
+`;
+
+const Button = styled.button`
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const QuestionWrapper = styled.div`
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+`;
 
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
