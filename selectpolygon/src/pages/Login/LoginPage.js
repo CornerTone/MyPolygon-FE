@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Cookies from 'js-cookie';
 import axios from "axios";
 import * as L from "./LoginPageStyle";
 import * as S from "../Signin/SignPageStyle";
@@ -28,6 +29,11 @@ export function LoginPage() {
         formData
       );
       console.log(response.data); // 서버의 응답 데이터를 콘솔에 출력
+
+      const token = response.data.userId;
+      Cookies.set('mypolygon_auth', token); // 'mypolygon_auth'라는 이름의 쿠키에 토큰을 저장
+
+
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
     }
