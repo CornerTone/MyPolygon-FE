@@ -1,66 +1,66 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { Footer } from "../../components/Footer";
 import { HeaderLogout } from "../../components/HeaderLogout";
+import { Footer } from "../../components/Footer";
+import MyFigureChart from "./PolygonChart";
 import WeekCalendar from "../../components/Calendar";
-import MyFigureChart, { PolygonChart } from "./PolygonChart";
 
 export function Main() {
 
-  const [date, setDate] = useState(new Date());
+	const [date, setDate] = useState(new Date());
 
-  return (
-    <RootWrapperNaN>
-      <Frame48>
-            <NaN_0003>나만의 다각형</NaN_0003>
-            <HeaderLogout />
-      </Frame48>
+	return (
+		<RootWrapperNaN>
+		<Group64>
+			<Group67>
+			<Rectangle7/>
+			<_10>
+				인간관계 10%
+			</_10>
+			</Group67>
+			<Group66>
+			<Rectangle7/>
+			<_15>
+				건강 15%
+			</_15>
+			</Group66>
+			<Group65>
+			<Rectangle7/>
+			<_15>
+				여가 20%
+			</_15>
+			</Group65>
+			<Group63>
+			<Rectangle7/>
+			<_15>
+				학업 30%
+			</_15>
+			</Group63>
+			<Group62>
+			<Rectangle7/>
+			<_15>
+				학업 30%
+			</_15>
+			</Group62>
+		</Group64>
+		<Rectangle3/>
+		
+		<Frame48>
+			<NaN_0003>나만의 다각형</NaN_0003>
+			<HeaderLogout />
+		</Frame48>
 
-      <NaN_0004>
+		<NaN_0004>
             <Line3/>
-            <WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
-      </NaN_0004>
+			<WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
+        </NaN_0004>
 
-      <Group64>
-        <Group67>
-          <Rectangle7/>
-          <_10>
-            인간관계 10%
-          </_10>
-        </Group67>
-        <Group66>
-          <Rectangle7/>
-          <_15>
-            건강 15%
-          </_15>
-        </Group66>
-        <Group65>
-          <Rectangle7/>
-          <_15>
-            여가 20%
-          </_15>
-        </Group65>
-        <Group63>
-          <Rectangle7/>
-          <_30>
-            학업 30%
-          </_30>
-        </Group63>
-        <Group62>
-          <Rectangle7/>
-          <_30>
-            경제 30%
-          </_30>
-        </Group62>
-      </Group64>
-      <Rectangle3/>
-      
-      <MyFigure>My figure</MyFigure>
-      <MyFigureChart  />
-
-      <Footer />
-    </RootWrapperNaN>
-  )
+		<MyFigure>My figure</MyFigure>
+		<MyFigureChart />
+		
+		<Footer />
+		</RootWrapperNaN>
+	)
 }
 
 const RootWrapperNaN = styled.div`
@@ -73,10 +73,10 @@ const RootWrapperNaN = styled.div`
 `;
 
 const Group64 = styled.div`
-	width: 310px;
+	width: 311px;
 	height: 162px;
 	position: absolute;
-	left: 25px;
+	left: 24px;
 	top: 554px;
 `;
 
@@ -84,7 +84,7 @@ const Group67 = styled.div`
 	width: 149px;
 	height: 46px;
 	position: absolute;
-	left: 0px;
+	left: 1px;
 	top: 58px;
 `;
 
@@ -109,7 +109,7 @@ const _10 = styled.span`
 	font-family: Inter, sans-serif;
 	font-weight: initial;
 	text-align: left;
-	width: 185px;
+	width: 139px;
 	min-height: 23px;
 	position: absolute;
 	left: 4px;
@@ -121,7 +121,7 @@ const Group66 = styled.div`
 	width: 149px;
 	height: 46px;
 	position: absolute;
-	left: 81px;
+	left: 1px;
 	top: 0px;
 `;
 
@@ -132,7 +132,7 @@ const _15 = styled.span`
 	font-family: Inter, sans-serif;
 	font-weight: initial;
 	text-align: left;
-	width: 161px;
+	width: 137px;
 	min-height: 23px;
 	position: absolute;
 	left: 7px;
@@ -144,24 +144,8 @@ const Group65 = styled.div`
 	width: 149px;
 	height: 46px;
 	position: absolute;
-	left: 161px;
-	top: 116px;
-`;
-
-
-const _30 = styled.span`
-	color: white;
-	text-overflow: ellipsis;
-	font-size: 18px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: left;
-	width: 158px;
-	min-height: 23px;
-	position: absolute;
-	left: 7px;
-	top: 11px;
-	height: 23px;
+	left: 162px;
+	top: 0px;
 `;
 
 const Group63 = styled.div`
@@ -176,7 +160,7 @@ const Group62 = styled.div`
 	width: 149px;
 	height: 46px;
 	position: absolute;
-	left: 161px;
+	left: 162px;
 	top: 58px;
 `;
 
@@ -191,6 +175,7 @@ const Rectangle3 = styled.div`
 	left: 360px;
 	top: 37px;
 `;
+
 
 const Frame48 = styled.div`
 	width: 360px;
@@ -210,13 +195,13 @@ const NaN_0003 = styled.span`
 	text-overflow: ellipsis;
 	font-size: 20px;
 	font-family: Inter, sans-serif;
-	font-weight: bold;
+	font-weight: initial;
 	text-align: center;
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	width: 189px;
+	width: 149px;
 	min-height: 28px;
 	position: absolute;
-	left: 85px;
+	left: 108px;
 	top: 14px;
 	height: 28px;
 `;
@@ -229,14 +214,13 @@ const MyFigure = styled.span`
 	font-weight: initial;
 	text-align: left;
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	width: 135px;
+	width: 97px;
 	min-height: 17px;
 	position: absolute;
 	left: 32px;
 	top: 187px;
 	height: 17px;
 `;
-
 
 
 export const NaN_0004 = styled.div`
