@@ -39,10 +39,15 @@ export function LoginPage() {
       <form onSubmit={handleSubmit}>
         {" "}
         {/* 폼 제출 이벤트를 처리할 form 요소 추가 */}
-        <L.Group12>
-          <L.Rectangle25 />
-          <L.NaN_0002>로그인</L.NaN_0002>
-        </L.Group12>
+        <L.Rectangle39 />
+        <S.Group16>
+          <S.Rectangle22_0002 />
+          <button type="submit" onClick={handleSubmit}>
+            <Link to="/main">
+              <S.NaN_0005>로그인</S.NaN_0005>
+            </Link>
+          </button>
+        </S.Group16>
         <L.Group12_0001>
           <L.Rectangle23 />
           <L.NaN_0004>아이디</L.NaN_0004>
@@ -63,15 +68,6 @@ export function LoginPage() {
           value={formData.password}
           onChange={handleChange}
         />
-        <L.Rectangle39 />
-        <S.Group16>
-          <S.Rectangle22_0002 />
-          <button type="submit" onClick={handleSubmit}>
-            <Link to="/main">
-              <S.NaN_0005>로그인</S.NaN_0005>
-            </Link>
-          </button>
-        </S.Group16>
       </form>
     </L.RootWrapperNaN>
   );
