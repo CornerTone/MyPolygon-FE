@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import Cookies from "js-cookie";
 import axios from "axios";
 /**
  * `<NaN>` ('검사 진행 페이지')
@@ -37,9 +38,28 @@ import axios from "axios";
  * <!-- Info: Please do not remove this comment unless intended. removing this section will break grida integrations. -->
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/78:509 -->
  */
+
+// 백엔드로 결과를 전송하는 함수
+const sendResultsToBackend = async (results) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/api/polygon/create",
+      results,
+      {
+        withCredentials: true,
+      }
+    );
+    console.log("Results sent to backend:", response.data);
+    Cookies.set("polygon_id", response.data.polygon_id, { path: "/" });
+  } catch (error) {
+    console.error("Error sending results to backend:", error);
+  }
+};
+
 export function ExaminationProgress() {
   const [questionsData, setQuestionsData] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,29 +82,42 @@ export function ExaminationProgress() {
   }, []);
 
   const handleYesButtonClick = () => {
-    // 현재 질문의 ID 가져오기
+    // 현재 질문의 id 값을 가져옴
     const currentQuestionId = questionsData[currentQuestionIndex].id;
 
-    // 해당 ID에 해당하는 질문의 score 증가
-    const updatedQuestionsData = questionsData.map((question) => {
-      if (question.id === currentQuestionId) {
-        return {
-          ...question,
-          score: (question.score || 0) + 1,
-        };
+    // 현재 질문의 index를 찾음
+    const questionIndex = questionsData.findIndex(
+      (question) => question.id === currentQuestionId
+    );
+
+    // 현재 질문의 score를 1 증가시킴
+    if (questionIndex !== -1) {
+      const updatedQuestionsData = [...questionsData];
+      if (isNaN(updatedQuestionsData[questionIndex].score)) {
+        updatedQuestionsData[questionIndex].score = 0; // 초기화
       }
-      return question;
-    });
+      updatedQuestionsData[questionIndex].score += 1;
 
-    // 새로운 질문 데이터로 상태 업데이트
-    setQuestionsData(updatedQuestionsData);
+      // 콘솔에 id와 score의 변화를 출력
+      console.log(
+        `Question ID: ${currentQuestionId}, Score: ${updatedQuestionsData[questionIndex].score}`
+      );
 
-    // 다음 질문으로 이동 또는 다른 처리 로직 추가
-    if (currentQuestionIndex < questionsData.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      // 마지막 질문에 도달한 경우, 다른 처리를 추가할 수 있습니다.
-      // 예를 들어, 결과 페이지로 이동하는 등의 로직을 추가하세요.
+      // 여기에서 업데이트된 질문 데이터를 상태로 업데이트하는 함수가 필요합니다.
+      setQuestionsData(updatedQuestionsData);
+    }
+    // 현재 질문에 대한 결과를 결과 배열에 추가
+    if (questionIndex !== -1) {
+      const updatedResults = [...results];
+      const existingResultIndex = updatedResults.findIndex(
+        (result) => result.id === currentQuestionId
+      );
+      if (existingResultIndex !== -1) {
+        updatedResults[existingResultIndex].score += 1;
+      } else {
+        updatedResults.push({ id: currentQuestionId, score: 1 });
+      }
+      setResults(updatedResults);
     }
   };
 
@@ -93,14 +126,23 @@ export function ExaminationProgress() {
   const SubmitButton = styled.button`
     /* Add your styling for the submit button here */
   `;
-  const handleSubmitButtonClick = () => {
+  const handleSubmitButtonClick = async () => {
     if (currentQuestionIndex < questionsData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Handle end of questions
+      try {
+        console.log(results);
+        await sendResultsToBackend(results);
+
+        window.location.href = "/inspectionResults";
+      } catch (error) {
+        console.error("Error while sending results:", error);
+        // 에러 메시지를 사용자에게 표시할 수도 있습니다.
+        // 예를 들어, 사용자에게 알림을 보여줄 수 있습니다.
+        alert("결과를 전송하는 중에 오류가 발생했습니다. 다시 시도해주세요.");
+      }
     }
   };
-
   return (
     <RootWrapperNaN>
       <Frame50>

@@ -66,9 +66,8 @@ export function PolygonSelect() {
           <Rectangle40 />
         </Frame5_0002>
         <Group10>
-          <Rectangle23 />{" "}
           <Link to="/ElementSelect">
-            <NaN_0002>사각형</NaN_0002>
+            <Rectangle23 /> <NaN_0002>사각형</NaN_0002>
           </Link>
         </Group10>
         <Group10_0001>
