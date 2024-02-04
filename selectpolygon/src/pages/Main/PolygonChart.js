@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Radar } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+import { RadarController, RadialLinearScale, Chart } from 'chart.js/auto';
+import VectorImage from './Vector.png';
 
+Chart.register(RadarController, RadialLinearScale);
 
-export function PolygonChart({ data }) {
+const EmptyChartImage = () => (
+    <Vector src={VectorImage} />
+);
+
+export function PolygonChart({ elements }) {
+    if (!elements || elements.length === 0) {
+        return <EmptyChartImage />;
+    }
+
     const chartData = {
-        labels: ['건강', '인간관계', '학업', '경제', '여가'],
+        labels: elements ? elements.map(item => item.name) : [],
         datasets: [
             {
                 label: '만족도',
-                data: data,
+                data: elements ? elements.map(item => item.score) : [], 
                 backgroundColor: 'rgba(255, 108, 61, 0.2)',
             },
             {
                 label: '1',
-                data: [1.5, 2.5, 2.5, 3, 1],
+                data: elements ? elements.map(item => item.score) : [],
                 borderColor: '#F5EFE7',
                 backgroundColor: 'rgb(79, 112, 156)',
                 borderWidth: 3,
-                //pointBackgroundColor: 'transparent',
-                //pointBorderColor: 'transparent',
             },
         ],
     };
+
 
     const chartOptions = {
         elements: {
@@ -71,6 +80,7 @@ export function PolygonChart({ data }) {
         },
     };
 
+
     return (
         <StRadar>
             <Radar data={chartData} options={chartOptions} />
@@ -82,7 +92,7 @@ export default function MyFigureChart({ data }) {
     return (
         <>
             <Group_0001>
-                <PolygonChart data={data} />
+                <PolygonChart elements={data} />
             </Group_0001>
         </>
     );
@@ -106,4 +116,9 @@ const Group_0001 = styled.div`
     border-radius: 10px;
 	left: 20px;
 	top: 205px;
+`;
+
+const Vector = styled.img`
+    width: 300px;
+    height: 270px;
 `;
