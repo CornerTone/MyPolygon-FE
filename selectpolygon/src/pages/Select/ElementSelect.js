@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
+// styled-components에서 styled 가져오기
+import styled, { css } from "styled-components";
+// @emotion/styled에서 styled 가져오기
+import { styled as emotionStyled } from "@emotion/styled";
+
 import axios from "axios";
-import Cookies from 'js-cookie';
 /**
  * `<NaN>` ('도형 꼭짓점 요소 추천 페이지 & 요소 설정 페이지')
  *
@@ -37,25 +40,22 @@ import Cookies from 'js-cookie';
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://undefined/78:508 -->
  */
 export function ElementSelect() {
-
+  // 선택한 요소를 저장할 상태
   const [selectedElements, setSelectedElements] = useState([]);
 
+  // 요소를 선택할 때 호출되는 함수
   const handleElementSelect = (elementId) => {
     setSelectedElements([...selectedElements, elementId]);
   };
 
-  const handleSaveElements = async (e) => {
-    console.log("in");
-    e.preventDefault();
-    const token = Cookies.get('mypolygon_auth');
-    console.log(token);
-
+  // 선택한 요소를 백엔드로 전송하는 함수
+  const handleSaveElements = async () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/polygon/set-element",
         { elements: selectedElements },
         {
-          withCredentials: true
+          withCredentials: true, // 쿠키를 요청에 포함시키기 위한 옵션
         }
       );
       console.log("백엔드 응답:", response.data);
@@ -63,30 +63,29 @@ export function ElementSelect() {
       console.error("데이터 전송 중 오류 발생:", error);
     }
   };
-  
 
   return (
     <RootWrapperNaN>
       {/* 요소 선택 UI */}
-      <Group19 onClick={() => handleElementSelect(1)}>
+      <Group19>
         <Rectangle23 />
-        <NaN_0002>건강</NaN_0002>
+        <NaN_0002 onClick={() => handleElementSelect(1)}>건강</NaN_0002>
       </Group19>
-      <Group20 onClick={() => handleElementSelect(2)}>
+      <Group20>
         <Rectangle23 />
-        <NaN_0002>경제</NaN_0002>
+        <NaN_0002 onClick={() => handleElementSelect(2)}>경제</NaN_0002>
       </Group20>
-      <Group21 onClick={() => handleElementSelect(3)}>
+      <Group21>
         <Rectangle25 />
-        <NaN_0002>학업</NaN_0002>
+        <NaN_0002 onClick={() => handleElementSelect(3)}>학업</NaN_0002>
       </Group21>
-      <Group22 onClick={() => handleElementSelect(4)}>
+      <Group22>
         <Rectangle26 />
-        <NaN_0005>인간관계</NaN_0005>
+        <NaN_0005 onClick={() => handleElementSelect(4)}>인간관계</NaN_0005>
       </Group22>
-      <Group23 onClick={() => handleElementSelect(5)}>
+      <Group23>
         <Rectangle25 />
-        <NaN_0002>여가</NaN_0002>
+        <NaN_0002 onClick={() => handleElementSelect(5)}>여가</NaN_0002>
       </Group23>
       {/* 저장 버튼 */}
       <Frame24 onClick={handleSaveElements}>
@@ -186,6 +185,12 @@ const NaN_0002 = styled.span`
   left: 20px;
   top: 3px;
   height: 27px;
+
+  /* 추가된 부분: hover 시의 스타일 변경 */
+  &:hover {
+    color: deeppink;
+    cursor: pointer;
+  }
 `;
 
 const Group20 = styled.div`
