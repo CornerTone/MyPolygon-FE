@@ -24,7 +24,7 @@ import styled from "@emotion/styled";
  * @params {any} props - this widget does not requires props. you can pass custom dynamic props to the widget as you want (on typescript, it will raise type check issues).
  * ---
  * @preview
- * ![](https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/abec7c51-18cc-47f5-979f-94ccd9ff3628)
+ * ![](https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/ec4a61df-502f-46f6-9a76-59a6b70d7b2f)
  * ---
  * @remarks
  * @see {@link https://grida.co/docs} for more information.
@@ -41,7 +41,7 @@ export function ExaminationProgress2() {
     <RootWrapper2>
       <Frame50>
         <IconsBasicUser
-          src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/5b83729c-36a7-45c4-a140-23a9c969e2b5"
+          src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/9e88e8a2-8113-4a7a-91ee-06c7e36538df"
           alt="icon"
         />
         <NaN_0001>검사 진행</NaN_0001>
@@ -67,22 +67,22 @@ export function ExaminationProgress2() {
         <NaN_0006>어느정도 만족한다!</NaN_0006>
         <Group30>
           <IconsBasicArrowLeft
-            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/9c1cc81d-9e9f-4230-b7f3-4d26b3322562"
+            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/df877cdf-b17e-4928-8df4-6a2682275797"
             alt="icon"
           />
           <IconsBasicArrowRight4
-            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a6302aa2-92eb-4fc7-a22b-0fea179496f1"
+            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/6613bbaf-342a-428b-8439-3d3e7278f794"
             alt="icon"
           />
           <_112>1/12</_112>
         </Group30>
         <Group30>
           <IconsBasicArrowLeft
-            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/344e67db-3666-4dbf-8339-2397511cf8be"
+            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/46097864-de2e-468c-8d11-3be5fb04fc54"
             alt="icon"
           />
           <IconsBasicArrowRight4
-            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/8331bbe7-c7d9-4c81-81fb-2a3bc6c88753"
+            src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a522ba6d-0295-4e8d-86fb-de3305dfef03"
             alt="icon"
           />
           <_112>1/12</_112>
@@ -92,14 +92,14 @@ export function ExaminationProgress2() {
         <Frame1>
           <Group54>
             <IconsBasicProject
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/ce5c2076-be64-4001-9ca4-091dabb0406a"
+              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/260d5e2d-4afc-476d-9c4a-f4f83941f548"
               alt="icon"
             />
             <NaN_0007>나의 도형</NaN_0007>
           </Group54>
           <Group53>
             <IconsBasicChat
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/896c3423-b7c9-4b0c-a62b-e00d9a6aadee"
+              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/1bb0381a-760a-4a2d-8cb4-90736cd771b8"
               alt="icon"
             />
             <NaN_0008>고민 나눔</NaN_0008>
@@ -108,7 +108,7 @@ export function ExaminationProgress2() {
             <IconlyRegularTwoToneHome>
               <Home>
                 <Home_0001
-                  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/b95479c6-889b-4fbf-95bd-1ee576783070"
+                  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/1aa3fb2e-4883-4b8a-aed6-9b80e420218e"
                   alt="image of Home"
                 />
               </Home>
@@ -117,7 +117,7 @@ export function ExaminationProgress2() {
           </Group52>
           <Group51>
             <IconsBasicStar
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/35cac0a6-d484-460c-85e2-1c7df8d6a7bb"
+              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/6e54c5ff-7782-43c8-b252-75d1d4447c79"
               alt="icon"
             />
             <NaN_0010>칭찬 일기</NaN_0010>
@@ -125,7 +125,7 @@ export function ExaminationProgress2() {
           <Group50>
             <NaN_0011>집중 기록</NaN_0011>
             <IconsBasicTime
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/c71999c8-a859-41c7-b3f4-c2c714da1ff1"
+              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/ccfa6d39-4a7f-45c1-a779-b84451067f21"
               alt="icon"
             />
           </Group50>
@@ -179,9 +179,9 @@ const NaN_0001 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 88px;
+  width: 96px;
   position: absolute;
-  left: 143px;
+  left: 133px;
   top: 16px;
 `;
 
@@ -192,10 +192,10 @@ const NaN_0002 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 600;
   text-align: center;
-  width: 94px;
+  width: 114px;
   min-height: 12px;
   position: absolute;
-  left: 140px;
+  left: 124px;
   top: 196px;
   height: 12px;
 `;
@@ -242,7 +242,7 @@ const NaN_0003 = styled.span`
   font-family: Poppins, sans-serif;
   font-weight: 500;
   text-align: center;
-  width: 211px;
+  width: 189px;
   min-height: 78px;
   position: absolute;
   left: 113px;
@@ -295,7 +295,7 @@ const NaN_0004 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 264px;
+  width: 242px;
   position: absolute;
   left: 29px;
   top: 34px;
@@ -308,7 +308,7 @@ const NaN_0006 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 253px;
+  width: 231px;
   position: absolute;
   left: 92px;
   top: 113px;
@@ -401,7 +401,7 @@ const NaN_0007 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 55px;
+  width: 44px;
   position: absolute;
   left: 0px;
   top: 20px;
@@ -431,7 +431,7 @@ const NaN_0008 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 50px;
+  width: 39px;
   position: absolute;
   left: 0px;
   top: 22px;
@@ -507,7 +507,7 @@ const NaN_0010 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 50px;
+  width: 39px;
   position: absolute;
   left: 0px;
   top: 20px;
@@ -528,7 +528,7 @@ const NaN_0011 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 51px;
+  width: 40px;
   position: absolute;
   left: 0px;
   top: 20px;
