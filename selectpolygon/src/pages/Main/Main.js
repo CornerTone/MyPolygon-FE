@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Footer } from "../../components/Footer";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import WeekCalendar from "../../components/Calendar";
-import MyFigureChart, { PolygonChart } from "./PolygonChart";
+import MyFigureChart from "./PolygonChart";
 
 export function Main() {
 
