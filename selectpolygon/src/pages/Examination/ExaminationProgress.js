@@ -38,54 +38,68 @@ import axios from "axios";
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/78:509 -->
  */
 export function ExaminationProgress() {
-
   const [questionsData, setQuestionsData] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-
-  const yesButtonClick = () => {
-    // 버튼이 클릭되었을 때 실행되는 함수
-    console.log("예 버튼");
-    // 여기에 추가적인 로직을 작성할 수 있습니다.
-  };
-
-  const noButtonClick = () => {
-    console.log("아니오 버튼");
-  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/polygon/questions", {
-          withCredentials: true
-        });
+        const response = await axios.get(
+          "http://localhost:3001/api/polygon/questions",
+          {
+            withCredentials: true,
+          }
+        );
         const questionElements = response.data.elements;
-            setQuestionsData(questionElements);
-            console.log(questionElements); // 업데이트된 데이터를 출력합니다.
+        setQuestionsData(questionElements);
+        console.log(questionElements); // 업데이트된 데이터를 출력합니다.
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
   }, []);
 
   const handleYesButtonClick = () => {
+    // 현재 질문의 ID 가져오기
+    const currentQuestionId = questionsData[currentQuestionIndex].id;
+
+    // 해당 ID에 해당하는 질문의 score 증가
+    const updatedQuestionsData = questionsData.map((question) => {
+      if (question.id === currentQuestionId) {
+        return {
+          ...question,
+          score: (question.score || 0) + 1,
+        };
+      }
+      return question;
+    });
+
+    // 새로운 질문 데이터로 상태 업데이트
+    setQuestionsData(updatedQuestionsData);
+
+    // 다음 질문으로 이동 또는 다른 처리 로직 추가
+    if (currentQuestionIndex < questionsData.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      // 마지막 질문에 도달한 경우, 다른 처리를 추가할 수 있습니다.
+      // 예를 들어, 결과 페이지로 이동하는 등의 로직을 추가하세요.
+    }
+  };
+
+  const handleNoButtonClick = () => {};
+
+  const SubmitButton = styled.button`
+    /* Add your styling for the submit button here */
+  `;
+  const handleSubmitButtonClick = () => {
     if (currentQuestionIndex < questionsData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       // Handle end of questions
     }
   };
-
-  const handleNoButtonClick = () => {
-    if (currentQuestionIndex < questionsData.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      // Handle end of questions
-    }
-  };
-
 
   return (
     <RootWrapperNaN>
@@ -153,20 +167,28 @@ export function ExaminationProgress() {
         </Typography_0003>
       </Typography_0002>
       <Group33>
-        {questionsData.length > 0 && currentQuestionIndex < questionsData.length && (
-          <QuestionWrapper>
-            <h3>{questionsData[currentQuestionIndex].element_name}</h3>
-<ul>
-  {questionsData[currentQuestionIndex].question_strings.map((question, qIndex) => (
-    <li key={qIndex}>{`${qIndex + 1}번째 질문: ${question}`}</li>
-  ))}
-</ul>
-            <ButtonWrapper>
-              <Button onClick={handleYesButtonClick}>예</Button>
-              <Button onClick={handleNoButtonClick}>아니오</Button>
-            </ButtonWrapper>
-          </QuestionWrapper>
-        )}
+        {questionsData.length > 0 &&
+          currentQuestionIndex < questionsData.length && (
+            <QuestionWrapper>
+              <h3>{questionsData[currentQuestionIndex].element_name}</h3>
+              <ul>
+                {questionsData[currentQuestionIndex].question_strings.map(
+                  (question, qIndex) => (
+                    <li key={qIndex}>
+                      {`${qIndex + 1}번째 질문: ${question}`}
+                      <ButtonWrapper>
+                        <Button onClick={handleYesButtonClick}>예</Button>
+                        <Button onClick={handleNoButtonClick}>아니오</Button>
+                      </ButtonWrapper>
+                    </li>
+                  )
+                )}
+              </ul>
+              <SubmitButton onClick={handleSubmitButtonClick}>
+                다음
+              </SubmitButton>
+            </QuestionWrapper>
+          )}
       </Group33>
       <Vector xmlns="http://www.w3.org/2000/svg">
         <path
