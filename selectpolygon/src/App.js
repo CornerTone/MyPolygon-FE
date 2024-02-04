@@ -16,6 +16,7 @@ import { Main } from "./pages/Main/Main";
 import { ComplimentMain } from "./pages/Compliment/ComplimentMain";
 import { ComplimentWrite } from "./pages/Compliment/ComplimentWrite";
 import { ComplimentDetail } from "./pages/Compliment/ComplimentDetail";
+import { Mypage } from "./pages/mypage/mypage";
 
 import DiaryDetail from "./pages/Diary/Detail";
 import DiaryEdit from "./pages/Diary/Edit";
@@ -116,6 +117,9 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signin" element={<SiginPage />} />
               <Route path="/main" element={<Main />} />
+
+              <Route path="/mypage" element={<Mypage />} />
+
               <Route path="/PolygonSelect" element={<PolygonSelect />} />
               <Route path="/ElementSelect" element={<ElementSelect />} />
               <Route
