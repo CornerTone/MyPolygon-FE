@@ -53,7 +53,9 @@ export function ElementSelect() {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/polygon/set-element",
-        { elements: selectedElements },
+        { 
+          "elements":[1,2,3,4, 5]
+      } ,
         {
           withCredentials: true, // 쿠키를 요청에 포함시키기 위한 옵션
         }

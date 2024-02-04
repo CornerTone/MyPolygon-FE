@@ -54,6 +54,7 @@ export function Mypage() {
         const response = await axios.get("http://localhost:3001/api/auth/user-info", {
           withCredentials: true
         });        setUserInfo(response.data.user);
+        console.log(response.data.elements)
       } catch (error) {
         console.error("사용자 정보를 불러오는 중 오류 발생:", error);
       }
