@@ -813,4 +813,3 @@ const Time = styled.svg`
 	right: 2px;
 	bottom: 2px;
 `;
-
