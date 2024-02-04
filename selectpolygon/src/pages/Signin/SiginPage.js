@@ -34,15 +34,10 @@ export function SiginPage() {
 
   return (
     <S.RootWrapperNaN>
-      <S.Rectangle3 />
-      <S.Rectangle37 />
       <S.Rectangle37 />
       <S.Typography>
         <S.Typography_0001>회원가입</S.Typography_0001>
       </S.Typography>
-      <S.Typography_0002>
-        <S.Typography_0001></S.Typography_0001>
-      </S.Typography_0002>
 
       <S.Group13>
         <S.Rectangle23 />

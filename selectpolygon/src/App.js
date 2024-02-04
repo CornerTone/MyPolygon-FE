@@ -122,8 +122,14 @@ function App() {
                 path="/ExaminationProgress"
                 element={<ExaminationProgress />}
               />
-              <Route path="/2" element={<ExaminationProgress2 />} />
-              <Route path="/3" element={<InspectionResults />} />
+              <Route
+                path="/ExaminationProgress2"
+                element={<ExaminationProgress2 />}
+              />
+              <Route
+                path="/InspectionResults"
+                element={<InspectionResults />}
+              />
               <Route path="/record" element={<Record />} />
               <Route path="/ComplimentMain" element={<ComplimentMain />} />
               <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
@@ -135,7 +141,10 @@ function App() {
 
               <Route path="/community" element={<Community />} />
               <Route path="/communitynew" element={<NewCommunity />} />
-              <Route path="/communitydetail/:id" element={<CommunityDetail />} />
+              <Route
+                path="/communitydetail/:id"
+                element={<CommunityDetail />}
+              />
             </Routes>
           </div>
         </BrowserRouter>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 /**
  * `<NaN>` ('도형 선택 페이지')
  * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=43:58)
@@ -65,16 +66,22 @@ export function PolygonSelect() {
           <Rectangle40 />
         </Frame5_0002>
         <Group10>
-          <Rectangle23 />
-          <NaN_0002>사각형</NaN_0002>
+          <Rectangle23 />{" "}
+          <Link to="/ElementSelect">
+            <NaN_0002>사각형</NaN_0002>
+          </Link>
         </Group10>
         <Group10_0001>
-          <Rectangle25 />
-          <NaN_0003>오각형</NaN_0003>
+          <Rectangle25 />{" "}
+          <Link to="/ElementSelect">
+            <NaN_0003>오각형</NaN_0003>
+          </Link>
         </Group10_0001>
         <Group11>
-          <Rectangle23_0001 />
-          <NaN_0003>삼각형</NaN_0003>
+          <Rectangle23_0001 />{" "}
+          <Link to="/ElementSelect">
+            <NaN_0003>삼각형</NaN_0003>
+          </Link>
         </Group11>
       </Group17>
       <Group55>
