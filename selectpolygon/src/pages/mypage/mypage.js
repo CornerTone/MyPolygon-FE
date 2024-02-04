@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import { HeaderLogout } from "../../components/HeaderLogout";
+import { Footer } from "../../components/Footer";
+import MyFigureChart from "../Main/PolygonChart";
+import WeekCalendar from "../../components/Calendar";
+import Cookies from "js-cookie";
 
 /**
  * `<NaN>` ('검사 기록 확인 페이지(마이페이지)')
- * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=361:546)
- * - [Open in Grida](https://code.grida.co/files/NlD9D8mc0GTNdluwALGs8v?node=361:546)
+ * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=431:545)
+ * - [Open in Grida](https://code.grida.co/files/NlD9D8mc0GTNdluwALGs8v?node=431:545)
  *
  *
  * ---
@@ -27,7 +31,7 @@ import styled from "@emotion/styled";
  * @params {any} props - this widget does not requires props. you can pass custom dynamic props to the widget as you want (on typescript, it will raise type check issues).
  * ---
  * @preview
- * ![](https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/4fd7ed7e-053b-4518-bfbf-495c41552c3a)
+ * ![](https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/d932ad38-6573-4c0f-8d3b-13e9720903e9)
  * ---
  * @remarks
  * @see {@link https://grida.co/docs} for more information.
@@ -37,7 +41,7 @@ import styled from "@emotion/styled";
  *
  * ![Made with Grida](https://bridged-service-static.s3.us-west-1.amazonaws.com/branding/logo/32.png)
  * <!-- Info: Please do not remove this comment unless intended. removing this section will break grida integrations. -->
- * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/361:546 -->
+ * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/431:545 -->
  */
 
 export function Mypage() {
@@ -45,7 +49,6 @@ export function Mypage() {
     id: null,
     nickname: "",
     phone_number: "",
-    password: "",
   });
 
   useEffect(() => {
@@ -69,74 +72,12 @@ export function Mypage() {
 
   return (
     <RootWrapperNaN>
-      <Frame48>
-        <Group>
-          <Vector xmlns="http://www.w3.org/2000/svg">
-            <path fill="black" d="M14 0L0 0L0 15L14 15L14 0Z" />
-          </Vector>
-          <Vector_0001 xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill="rgba(0, 0, 0, 0.85)"
-              d="M0 7.49689C0 10.943 3.17746 13.7963 7 13.7963C10.8294 13.7963 14 10.943 14 7.49689C14 4.45837 11.5363 1.88303 8.3245 1.31486L8.3245 0.437883C8.3245 -0.000603552 7.98824 -0.117945 7.61766 0.122914L5.42844 1.50013C5.11276 1.69776 5.10589 1.9942 5.42844 2.19801L7.6108 3.5814C7.98824 3.82843 8.3245 3.71109 8.3245 3.26643L8.3245 2.38946C10.9186 2.92058 12.8265 4.99567 12.8265 7.49689C12.8265 10.4119 10.2393 12.7464 7 12.7464C3.7608 12.7464 1.15981 10.4119 1.16667 7.49689C1.17353 5.74296 2.12059 4.19281 3.58236 3.25408C3.86374 3.06262 3.95295 2.77236 3.78138 2.51298C3.60981 2.25977 3.23236 2.19183 2.9304 2.40181C1.16667 3.55669 0 5.4218 0 7.49689Z"
-            />
-          </Vector_0001>
-        </Group>
-        <Vector_0002 xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill="rgba(0, 0, 0, 0.64)"
-            d="M0 7.50001C0 7.74737 0.118471 7.97494 0.333872 8.16294L7.4852 14.723C7.7006 14.911 7.92677 15 8.18525 15C8.71299 15 9.13302 14.6439 9.13302 14.1491C9.13302 13.9117 9.03609 13.6742 8.86377 13.5257L6.45127 11.2698L2.18633 7.6979L1.96015 8.18273L5.42811 8.38062L19.0523 8.38062C19.6123 8.38062 20 8.01452 20 7.50001C20 6.9855 19.6123 6.6194 19.0523 6.6194L5.42811 6.6194L1.96015 6.81729L2.18633 7.31202L6.45127 3.73022L8.86377 1.47427C9.03609 1.31596 9.13302 1.08839 9.13302 0.850923C9.13302 0.356201 8.71299 0 8.18525 0C7.92677 0 7.7006 0.0791558 7.46365 0.296834L0.333872 6.83708C0.118471 7.02507 0 7.25265 0 7.50001Z"
-          />
-        </Vector_0002>
-        <IconsBasicUser
-          src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/5d845334-edba-4189-a042-6f5dfba35719"
-          alt="icon"
-        />
-        <NaN_0002>나의 정보</NaN_0002>
-      </Frame48>
-      <Frame50>
-        <Frame1>
-          <Group54>
-            <IconsBasicProject
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/fe367943-9f0b-4c28-affe-332a107dbf6c"
-              alt="icon"
-            />
-            <NaN_0003>나의 도형</NaN_0003>
-          </Group54>
-          <Group53>
-            <IconsBasicChat
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/ea49e74c-4e64-4258-8e10-2ed20fc446b4"
-              alt="icon"
-            />
-            <NaN_0004>고민 나눔</NaN_0004>
-          </Group53>
-          <Group52>
-            <IconlyRegularTwoToneHome>
-              <Home>
-                <Home_0001
-                  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/f7d58106-7851-4cea-a2f4-293f35a6308e"
-                  alt="image of Home"
-                />
-              </Home>
-            </IconlyRegularTwoToneHome>
-            <NaN_0005>홈</NaN_0005>
-          </Group52>
-          <Group51>
-            <IconsBasicStar
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/0a5e67e2-4046-4e06-a3a6-3a919b1fb6f4"
-              alt="icon"
-            />
-            <NaN_0006>칭찬 일기</NaN_0006>
-          </Group51>
-          <Group50>
-            <NaN_0007>집중 기록</NaN_0007>
-            <IconsBasicTime
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a7431b93-354c-4c19-b977-55d5bf186bcd"
-              alt="icon"
-            />
-          </Group50>
-        </Frame1>
-      </Frame50>
       <Rectangle22 />
+      <Frame48>
+        <NaN_0002>나의 기록</NaN_0002>
+        <HeaderLogout />
+      </Frame48>
+
       <Group49>
         <Group48>
           <NaN_0008>
@@ -149,35 +90,33 @@ export function Mypage() {
         <Rectangle23 />
         <NaN_0009>아이디</NaN_0009>
       </Group13>
-      <Group14>
-        <Rectangle22_0001 />
-        <NaN_0010>비밀번호</NaN_0010>
-      </Group14>
       <Group15>
-        <Rectangle22_0002 />
-        <NaN_0011>전화번호</NaN_0011>
+        <Rectangle22_0001 />
+        <NaN_0010>전화번호</NaN_0010>
       </Group15>
-      <Rectangle49 xmlns="http://www.w3.org/2000/svg">
-        <path
-          fill="white"
-          d="M0 10C0 4.47715 4.47715 0 10 0L129 0C134.523 0 139 4.47715 139 10L139 11C139 16.5228 134.523 21 129 21L10 21C4.47715 21 0 16.5228 0 11L0 10Z"
-        />
-      </Rectangle49>
-      <Rectangle50 xmlns="http://www.w3.org/2000/svg">
-        <path
-          fill="white"
-          d="M0 10C0 4.47715 4.47715 0 10 0L129 0C134.523 0 139 4.47715 139 10L139 12C139 17.5228 134.523 22 129 22L10 22C4.47715 22 0 17.5228 0 12L0 10Z"
-        />
-      </Rectangle50>
-      <Rectangle51 xmlns="http://www.w3.org/2000/svg">
-        <path
-          fill="white"
-          d="M0 10C0 4.47715 4.47715 0 10 0L129 0C134.523 0 139 4.47715 139 10L139 11C139 16.5228 134.523 21 129 21L10 21C4.47715 21 0 16.5228 0 11L0 10Z"
-        />
-      </Rectangle51>
-      <NaN_0012>{userInfo?.nickname}</NaN_0012>
-      <_1111>{userInfo?.password}</_1111>
-      <_1111_0001>{userInfo?.phone_number}</_1111_0001>
+      <Group57>
+        <Group69>
+          <Rectangle23_0001 />
+          <NaN_0011>{userInfo?.nickname}</NaN_0011>
+        </Group69>
+      </Group57>
+      <Group59>
+        <Group69>
+          <Rectangle23_0001 />
+          <NaN_0011>{userInfo?.phone_number}</NaN_0011>
+        </Group69>
+      </Group59>
+
+      <MyHistory>My History</MyHistory>
+      <ArrowRightBoldOutline
+        src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e1a34c2a-d9be-4af0-94c3-ab0d0330e5d3"
+        alt="icon"
+      />
+      <ArrowRightBoldOutline_0001
+        src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/afeaba53-4030-4b02-804d-db8d554076e5"
+        alt="icon"
+      />
+      <Footer />
     </RootWrapperNaN>
   );
 }
@@ -189,6 +128,22 @@ const RootWrapperNaN = styled.div`
   background-size: contain;
   background-position: center;
   position: relative;
+`;
+
+const Rectangle22 = styled.div`
+  width: 287px;
+  height: 187px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: rgb(255, 255, 255);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: solid 0px black;
+  border-radius: 20px;
+  position: absolute;
+  left: 38px;
+  top: 96px;
+  backdrop-filter: blur(4px);
 `;
 
 const Frame48 = styled.div`
@@ -259,7 +214,7 @@ const NaN_0002 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 99px;
+  width: 110px;
   position: absolute;
   left: 132px;
   top: 16px;
@@ -311,7 +266,7 @@ const NaN_0003 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 44px;
+  width: 55px;
   position: absolute;
   left: 0px;
   top: 20px;
@@ -341,7 +296,7 @@ const NaN_0004 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 39px;
+  width: 50px;
   position: absolute;
   left: 0px;
   top: 22px;
@@ -417,7 +372,7 @@ const NaN_0006 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 39px;
+  width: 50px;
   position: absolute;
   left: 0px;
   top: 20px;
@@ -438,7 +393,7 @@ const NaN_0007 = styled.span`
   font-family: Inter, sans-serif;
   font-weight: 400;
   text-align: center;
-  width: 40px;
+  width: 51px;
   position: absolute;
   left: 0px;
   top: 20px;
@@ -453,28 +408,12 @@ const IconsBasicTime = styled.img`
   top: 0px;
 `;
 
-const Rectangle22 = styled.div`
-  width: 287px;
-  height: 241px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background: rgb(255, 255, 255);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border: solid 0px black;
-  border-radius: 20px;
-  position: absolute;
-  left: 44px;
-  top: 279px;
-  backdrop-filter: blur(4px);
-`;
-
 const Group49 = styled.div`
   width: 78px;
   height: 78px;
   position: absolute;
-  left: 142px;
-  top: 294px;
+  left: 139px;
+  top: 112px;
 `;
 
 const Group48 = styled.div`
@@ -522,8 +461,8 @@ const Group13 = styled.div`
   width: 61px;
   height: 21px;
   position: absolute;
-  left: 73px;
-  top: 391px;
+  left: 78px;
+  top: 206px;
 `;
 
 const Rectangle23 = styled.div`
@@ -555,52 +494,15 @@ const NaN_0009 = styled.span`
   height: 17px;
 `;
 
-const Group14 = styled.div`
-  width: 66px;
-  height: 21px;
-  position: absolute;
-  left: 71px;
-  top: 437px;
-`;
-
-const Rectangle22_0001 = styled.div`
-  width: 61px;
-  height: 21px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background: rgb(188, 220, 99);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border-radius: 10px;
-  position: absolute;
-  left: 2px;
-  top: 0px;
-`;
-
-const NaN_0010 = styled.span`
-  color: black;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  text-align: center;
-  width: 66px;
-  min-height: 17px;
-  position: absolute;
-  left: 0px;
-  top: 2px;
-  height: 17px;
-`;
-
 const Group15 = styled.div`
   width: 63px;
   height: 21px;
   position: absolute;
-  left: 73px;
-  top: 480px;
+  left: 76px;
+  top: 244px;
 `;
 
-const Rectangle22_0002 = styled.div`
+const Rectangle22_0001 = styled.div`
   width: 61px;
   height: 21px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -614,7 +516,7 @@ const Rectangle22_0002 = styled.div`
   top: 0px;
 `;
 
-const NaN_0011 = styled.span`
+const NaN_0010 = styled.span`
   color: black;
   text-overflow: ellipsis;
   font-size: 14px;
@@ -629,65 +531,142 @@ const NaN_0011 = styled.span`
   height: 17px;
 `;
 
-const Rectangle49 = styled.svg`
-  width: 139px;
-  height: 21px;
-  position: absolute;
-  left: 153px;
-  top: 391px;
-`;
-
-const Rectangle50 = styled.svg`
-  width: 139px;
+const Group57 = styled.div`
+  width: 151px;
   height: 22px;
   position: absolute;
-  left: 153px;
-  top: 436px;
+  left: 142px;
+  top: 206px;
 `;
 
-const Rectangle51 = styled.svg`
-  width: 139px;
-  height: 21px;
+const Group69 = styled.div`
+  width: 151px;
+  height: 22px;
   position: absolute;
-  left: 153px;
-  top: 480px;
+  left: 0px;
+  top: 0px;
 `;
 
-const NaN_0012 = styled.span`
+const Rectangle23_0001 = styled.div`
+  width: 140px;
+  height: 20px;
+  background: rgb(231, 245, 244);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: solid 0px black;
+  border-radius: 20px;
+  position: absolute;
+  left: 11px;
+  top: 1px;
+`;
+
+const NaN_0011 = styled.span`
   color: black;
   text-overflow: ellipsis;
-  font-size: 12px;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  text-align: left;
-  width: 120px;
+  font-size: 14px;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  text-align: center;
+  width: 89px;
+  min-height: 22px;
   position: absolute;
-  left: 162px;
-  top: 394px;
+  left: 0px;
+  top: 0px;
+  height: 22px;
 `;
 
-const _1111 = styled.span`
-  color: black;
-  text-overflow: ellipsis;
-  font-size: 12px;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  text-align: left;
-  width: 120px;
+const Group59 = styled.div`
+  width: 151px;
+  height: 22px;
   position: absolute;
-  left: 162px;
-  top: 439px;
+  left: 142px;
+  top: 244px;
 `;
 
-const _1111_0001 = styled.span`
+const Frame7 = styled.div`
+  width: 330px;
+  height: 330px;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  left: 15px;
+  top: 351px;
+`;
+
+const Frame5 = styled.div`
+  width: 310px;
+  height: 308px;
+  overflow: hidden;
+  background: rgb(79, 112, 156);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border-radius: 10px;
+  position: absolute;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  left: 8px;
+  top: 12px;
+`;
+
+const Group_0001 = styled.div`
+  width: 266px;
+  height: 231px;
+  position: absolute;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  left: 30px;
+  top: 38px;
+`;
+
+const Vector_0003 = styled.svg`
+  width: 266px;
+  height: 231px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  opacity: 0;
+`;
+
+const Vector_0004 = styled.svg`
+  width: 266px;
+  height: 228px;
+  position: absolute;
+  left: -0px;
+  top: 3px;
+  right: 0px;
+  bottom: 0px;
+`;
+
+const MyHistory = styled.span`
   color: black;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: 15px;
   font-family: Inter, sans-serif;
   font-weight: 400;
-  text-align: left;
-  width: 120px;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 121px;
   position: absolute;
-  left: 162px;
-  top: 483px;
+  left: 132px;
+  top: 323px;
+`;
+
+const ArrowRightBoldOutline = styled.img`
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  position: absolute;
+  left: 244px;
+  top: 320px;
+`;
+
+const ArrowRightBoldOutline_0001 = styled.img`
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  position: absolute;
+  top: 320px;
+  right: 420px;
 `;
