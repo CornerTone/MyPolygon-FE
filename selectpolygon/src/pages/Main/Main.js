@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import { HeaderMypage } from "../../components/HeaderMypage";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import { Footer } from "../../components/Footer";
 import MyFigureChart from "./PolygonChart";
@@ -39,6 +40,7 @@ export function Main() {
     <RootWrapperNaN>
       <Frame48>
         <NaN_0003>나만의 다각형</NaN_0003>
+        <HeaderMypage />
         <HeaderLogout />
       </Frame48>
 

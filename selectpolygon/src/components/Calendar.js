@@ -15,31 +15,30 @@ const WeekCalendar = ({ date, onChange }) => {
   };
 
   return (
-      <div className="container">
-        {week.map((weekDay, index) => {
-          const textStyles = ["label"];
-          const touchable = ["touchable"];
+    <div className="container">
+      {week.map((weekDay, index) => {
+        const textStyles = ["label"];
+        const touchable = ["touchable"];
 
-          const sameDay = isSameDay(weekDay.date, date);
-          if (sameDay) {
-            textStyles.push("selectedLabel");
-            touchable.push("selectedTouchable");
-          }
+        const sameDay = isSameDay(weekDay.date, date);
+        if (sameDay) {
+          textStyles.push("selectedLabel");
+          touchable.push("selectedTouchable");
+        }
 
-          return (
-            <div className="weekDayItem" key={index}>
-              <div className="weekDayText">{weekDay.formatted}</div>
-              <button
-                onClick={() => handleDateClick(weekDay.date)}
-                className={touchable.join(" ")}
-              >
-                <span className={textStyles.join(" ")}>{weekDay.day}</span>
-              </button>
-            </div>
-          );
-        })}
-      </div>
-    
+        return (
+          <div className="weekDayItem" key={index}>
+            <div className="weekDayText">{weekDay.formatted}</div>
+            <button
+              onClick={() => handleDateClick(weekDay.date)}
+              className={touchable.join(" ")}
+            >
+              <span className={textStyles.join(" ")}>{weekDay.day}</span>
+            </button>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
@@ -51,7 +50,7 @@ const getWeekDays = (date) => {
   for (let i = 0; i < 7; i++) {
     const currentDate = addDays(start, i);
     final.push({
-      formatted: format(currentDate, 'EEE'),
+      formatted: format(currentDate, "EEE"),
       date: currentDate,
       day: getDate(currentDate),
     });
