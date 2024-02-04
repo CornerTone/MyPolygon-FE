@@ -7,9 +7,6 @@ export function RecordModal({ selectedCategory, closeModal, handleConfirm}) {
 	const hours = Array.from({ length: 24 }, (_, i) => i);
 	const minutes = Array.from({ length: 60 }, (_, i) => i);
 
-	// const [selectedHour, setSelectedHour] = useState(0);
-	// const [selectedMinute, setSelectedMinute] = useState(0);
-
 	const [categoryTimes, setCategoryTimes] = useState({
 		학업: { hour: 0, minute: 0 },
 		여가: { hour: 0, minute: 0 },
