@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import * as S from "./SignPageStyle";
-import { Link } from "react-router-dom";
 import { goBack } from "../../components/backNavigation";
 
 export function SiginPage() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nickname: "",
     phone_number: "",
@@ -26,6 +28,7 @@ export function SiginPage() {
         "http://localhost:3001/api/auth/join",
         formData
       );
+      navigate("/login");
       console.log(response.data); // 서버의 응답 데이터를 콘솔에 출력
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
