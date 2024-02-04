@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { addDays, format, getDate, isSameDay, startOfWeek } from "date-fns";
 import "./CalendarStyle.css";
 
-const WeekCalendar = ({ date, onChange, onSelectDate  }) => {
+const WeekCalendar = ({ date, onChange }) => {
   const [week, setWeek] = useState([]);
 
   useEffect(() => {
@@ -10,20 +10,11 @@ const WeekCalendar = ({ date, onChange, onSelectDate  }) => {
     setWeek(weekDays);
   }, [date]);
 
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  useEffect(() => {
-    const weekDays = getWeekDays(date);
-    setWeek(weekDays);
-  }, [date]);
-
   const handleDateClick = (selectedDate) => {
-    setSelectedDate(selectedDate);
-    onSelectDate(selectedDate);
+    onChange(selectedDate);
   };
 
   return (
-    <div className="scrollableContainer">
       <div className="container">
         {week.map((weekDay, index) => {
           const textStyles = ["label"];
@@ -48,7 +39,6 @@ const WeekCalendar = ({ date, onChange, onSelectDate  }) => {
           );
         })}
       </div>
-    </div>
     
   );
 };
@@ -61,7 +51,7 @@ const getWeekDays = (date) => {
   for (let i = 0; i < 7; i++) {
     const currentDate = addDays(start, i);
     final.push({
-      formatted: format(currentDate, "EEE"),
+      formatted: format(currentDate, 'EEE'),
       date: currentDate,
       day: getDate(currentDate),
     });

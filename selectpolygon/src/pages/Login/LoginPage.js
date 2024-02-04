@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Cookies from 'js-cookie';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as L from "./LoginPageStyle";
@@ -46,6 +47,11 @@ export function LoginPage() {
         // 모달 창 표시
         setShowModal(true);
       }
+
+      const token = response.data.userId;
+      Cookies.set('mypolygon_auth', token); // 'mypolygon_auth'라는 이름의 쿠키에 토큰을 저장
+
+
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
       // 오류 시에 상태 업데이트
