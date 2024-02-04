@@ -134,7 +134,7 @@ export function ExaminationProgress() {
         console.log(results);
         await sendResultsToBackend(results);
 
-        window.location.href = "/inspectionResults";
+        window.location.href = "/main";
       } catch (error) {
         console.error("Error while sending results:", error);
         // 에러 메시지를 사용자에게 표시할 수도 있습니다.
