@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
 /**
  * `<NaN>` ('검사 진행 페이지')
  * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=78:509)
@@ -37,6 +38,25 @@ import styled from "@emotion/styled";
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/78:509 -->
  */
 export function ExaminationProgress() {
+
+  const [questionsData, setQuestionsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/polygon/questions", {
+          withCredentials: true
+        });
+        setQuestionsData(response.data.elements);
+        console.log(response.data.elements); // 데이터를 설정한 후에 콘솔 로그를 출력합니다.
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
+  }, []);
+
   return (
     <RootWrapperNaN>
       <Frame50>
