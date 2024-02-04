@@ -6,16 +6,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PolygonSelect } from "./pages/Select/PolygonSelect";
 import { ElementSelect } from "./pages/Select/ElementSelect";
 import { ExaminationProgress } from "./pages/Examination/ExaminationProgress";
-import { ExaminationProgress2 } from "./pages/Examination/ExaminationProgress2";
-import { InspectionResults } from "./pages/Examination/InspectionResults";
 import { FirstPage } from "./pages/FirstPage/FirstPage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SiginPage } from "./pages/Signin/SiginPage";
 import { Record } from "./pages/Record/Record";
 import { Main } from "./pages/Main/Main";
-import { ComplimentMain } from "./pages/Compliment/ComplimentMain";
-import { ComplimentWrite } from "./pages/Compliment/ComplimentWrite";
-import { ComplimentDetail } from "./pages/Compliment/ComplimentDetail";
+
+import { Mypage } from "./pages/mypage/mypage";
 
 import DiaryDetail from "./pages/Diary/Detail";
 import DiaryEdit from "./pages/Diary/Edit";
@@ -59,8 +56,6 @@ export const DiaryDispatchContext = React.createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
-
-  const selectedDate = new Date();
 
   useEffect(() => {
     const localData = localStorage.getItem("diary");
@@ -118,24 +113,17 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signin" element={<SiginPage />} />
               <Route path="/main" element={<Main />} />
+
+              <Route path="/mypage" element={<Mypage />} />
+
               <Route path="/PolygonSelect" element={<PolygonSelect />} />
               <Route path="/ElementSelect" element={<ElementSelect />} />
               <Route
                 path="/ExaminationProgress"
                 element={<ExaminationProgress />}
               />
-              <Route
-                path="/ExaminationProgress2"
-                element={<ExaminationProgress2 />}
-              />
-              <Route
-                path="/InspectionResults"
-                element={<InspectionResults />}
-              />
-              <Route path="/record" element={<Record selectedDate={selectedDate} />} />
-              <Route path="/ComplimentMain" element={<ComplimentMain />} />
-              <Route path="/ComplimentDetail" element={<ComplimentDetail />} />
-              <Route path="/ComplimentWrite" element={<ComplimentWrite />} />
+              <Route path="/record" element={<Record />} />
+
               <Route path="/diaryhome" element={<DiaryHome />} />
               <Route path="/diarynew" element={<DiaryNew />} />
               <Route path="/diaryedit/:id" element={<DiaryEdit />} />
