@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Footer } from "../../components/Footer";
 import { goBack } from "../../components/backNavigation";
+import arrowImage from './dropdown.png';
 
 export function NewCommunity() {
     const categories = ["학업", "여가", "건강", "인간관계", "경제"];
@@ -9,6 +10,11 @@ export function NewCommunity() {
     const [category, setCategory] = useState("");
     const handleCategoryChange = (e) => {
         setCategory(e.target.value); // 드롭다운 박스에서 카테고리 선택 시 state 업데이트
+    };
+
+	const [content, setContent] = useState("");
+	const handleContentChange = (e) => {
+        setContent(e.target.value); // 고민 내용 입력 시 state 업데이트
     };
 
     return (
@@ -38,16 +44,13 @@ export function NewCommunity() {
 
             <Rectangle38/>
             <NaN_0003>고민</NaN_0003>
-            <NaN_0004>
-                고민 내용을 자유롭게 작성해주세요<br/>
-        다른 분들이 정성스럽게 답글을 <br/>
-        남겨주실거에요:)
-            </NaN_0004>
+            <ContentInput
+                value={content}
+                onChange={handleContentChange}
+                placeholder={"고민 내용을 자유롭게 작성해주세요\n다른 분들이 정성스럽게 답글을\n남겨주실거에요 :)"}
+            />
 
-            <NaN_0005>
-                등록하신 고민이 해결되길<br/>
-        ‘나만의 다각형’이 응원할게요!
-            </NaN_0005>
+            <NaN_0005>등록하신 고민이 해결되길<br/>‘나만의 다각형’이 응원할게요!</NaN_0005>
 
             <SubmitButton>등록하기</SubmitButton>
 
@@ -107,13 +110,26 @@ const User = styled.svg`
 `;
 
 const CategoryDropdown = styled.select`
-    width: 260px;
-    height: 34px;
-    position: absolute;
+	width: 260px;
+	height: 34px;
+	position: absolute;
 	border: none;
-	border-radius: 20px;
-    left: 77px;
-    top: 145px;
+	border-radius: 10px;
+	left: 77px;
+	top: 145px;
+	padding-left: 10px;
+	font-weight: bold;
+	box-shadow: 0px 5px 3px  rgba(0, 0, 0, 0.25);
+
+	-webkit-appearance: none; /* 네이티브 스타일링 제거 */
+	-moz-appearance: none;
+	appearance: none;
+	background-color: white; /* 드롭다운 배경색 설정 */
+	background-image: url(${arrowImage});
+	background-repeat: no-repeat;
+	background-position: right 20px center; /* 화살표 이미지 위치 설정 */
+	background-size: 15px; /* 화살표 이미지 크기 설정 */
+    
 `;
 
 const Rectangle34 = styled.div`
@@ -139,9 +155,50 @@ const Rectangle38 = styled.div`
 	background-position: center;
 	border: solid 0px black;
 	border-radius: 20px;
-	position: absolute;
+	position: relative;
 	left: 0px;
 	top: 211px;
+`;
+
+const ContentInput = styled.textarea`
+	width: 230px;
+	height: 200px;
+	font-family: 'Pretendard', sans-serif; 
+	background-color: transparent;
+	color: black;
+	border: none;
+	font-size: 13px;
+	position: absolute;
+	left: 90px;
+	top: 240px;
+	resize: none; /* 사용자 크기 조정 비활성화 */
+	outline: none; /* 포커스 효과 제거 */
+
+
+	&::placeholder {
+		color: #A1A0A0;
+	}
+	&:focus {
+		outline: none; /* 포커스 효과 제거 */
+	}
+	@media screen and (max-width: 412px) {
+		font-size: 15px; /* 작은 화면에서 폰트 크기 조절 */
+	}
+	&::-webkit-scrollbar {
+		width: 10px; /* 스크롤바의 두께 지정 */
+		border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #595959;
+		border-radius: 5px;
+		backdrop-filter: blur(50px);
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: #acacac; /* 스크롤바 트랙 색상 지정 */
+		border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
+	}
 `;
 
 
@@ -171,18 +228,7 @@ const NaN_0003 = styled.span`
 	top: 328px;
 `;
 
-const NaN_0004 = styled.span`
-	color: rgb(197, 195, 195);
-	text-overflow: ellipsis;
-	font-size: 14px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: left;
-	width: 256px;
-	position: absolute;
-	left: 94px;
-	top: 244px;
-`;
+
 
 const NaN_0005 = styled.span`
 	color: rgb(151, 145, 145);

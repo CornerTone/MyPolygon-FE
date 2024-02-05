@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import * as M from "./RecordModalStyle";
 
+const categoryNames = {
+    학업: '학업',
+    여가: '여가',
+    건강: '건강',
+    인간관계: '인간관계',
+    경제: '경제'
+};
 
 export function RecordModal({ selectedCategory, closeModal, handleConfirm}) {
   	// 스크롤 목록
@@ -31,10 +38,10 @@ export function RecordModal({ selectedCategory, closeModal, handleConfirm}) {
 
 	const handleConfirmClick = () => {
 		const { hour, minute } = categoryTimes[selectedCategory];
-		const timeRecorded = `${hour} h ${minute} m`;
-		handleConfirm(timeRecorded); // Record(부모)로 전달
+		const timeInMinutes = hour * 60 + minute;
+		handleConfirm(timeInMinutes); // Record(부모)로 전달
 
-		console.log(`카테고리: ${selectedCategory}, 입력된 시간: ${timeRecorded}`);
+		console.log(`카테고리: ${selectedCategory}, 입력된 시간: ${timeInMinutes}`);
 		
 		closeModal(); 
 	};
