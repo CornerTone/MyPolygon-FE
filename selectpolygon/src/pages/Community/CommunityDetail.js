@@ -16,13 +16,18 @@ export const categoryNames = {
 };
 
 export function CommunityDetail() {
+	// url의 id 값
   const { id } = useParams();
-  const [comment, setComment] = useState(""); // 댓글 상태 변수
-  const handleCommentChange = (event) => {
-    setComment(event.target.value); // 댓글 내용 변경 시 상태 업데이트
-  };
+  // 댓글 저장 
+  const [comment, setComment] = useState(""); 
+	// 커뮤니티 정보 저장 
   const [communityDetail, setCommunityDetail] = useState({});
+  // 댓글 작성 시 상태 업데이트 
+  const handleCommentChange = (event) => {
+    setComment(event.target.value); 
+  };
 
+  // 서버로부터 커뮤니티 상세 정보 조회 
   useEffect(() => {
     const fetchCommunityDetail = async () => {
       try {
@@ -32,16 +37,16 @@ export function CommunityDetail() {
             withCredentials: true,
           }
         );
-        setCommunityDetail(response.data.community); // 응답 데이터 설정
-        console.log(response.data.community);
+        setCommunityDetail(response.data.community);
       } catch (error) {
         console.error("Error fetching community detail:", error);
       }
     };
 
-    fetchCommunityDetail(); // useEffect 내에서 직접 호출
+    fetchCommunityDetail(); 
   }, [id]); // id가 변경될 때마다 useEffect가 다시 실행됨
 
+  // 작성한 댓글을 서버로 보냄 
   const handleSubmitComment = async () => {
     try {
       const response = await axios.post(
@@ -54,18 +59,18 @@ export function CommunityDetail() {
         }
       );
       console.log("댓글 작성 성공:", response.data);
-      // 댓글 작성 후 댓글 상태를 업데이트하여 렌더링이 자동으로 발생하도록 함
-      setComment(""); // 댓글 입력 창을 비움
+      // 댓글 작성 후 댓글 상태를 업데이트해 렌더링 발생
+      setComment(""); 
+	  // 댓글 정보에 작성한 댓글 추가 
       setCommunityDetail((prevState) => ({
         ...prevState,
         community_comments: [
           ...prevState.community_comments,
           response.data.comment,
-        ], // 새로운 댓글 추가
+        ], 
       }));
     } catch (error) {
       console.error("댓글 작성 실패:", error);
-      // 댓글 작성 실패 시 필요한 작업 수행
     }
   };
 
@@ -81,6 +86,7 @@ export function CommunityDetail() {
           />
         </D.Vector>
         <D.NaN_0002>
+			{/* 커뮤니티 이름 출력 */}
           {communityDetail.categories &&
             communityDetail.categories.length > 0 &&
             categoryNames[communityDetail.categories[0].id]}
@@ -88,6 +94,7 @@ export function CommunityDetail() {
       </D.Frame47>
       <D.NaN_0003>{communityDetail.content}</D.NaN_0003>
       <D.Comments>
+		{/* 커뮤니티 댓글 출력 */}
         {communityDetail.community_comments &&
           communityDetail.community_comments.map((comment) => (
             <D.Comment key={comment.id}>{comment.content}</D.Comment>
@@ -95,12 +102,14 @@ export function CommunityDetail() {
       </D.Comments>
 
       <D.CommentContainer>
+		{/* 댓글 입력 */}
         <D.CommentInput
           type="text"
           placeholder="댓글을 입력하세요"
           value={comment}
           onChange={handleCommentChange}
         />
+		{/* 댓글 저장 */}
         <D.SubmitButton onClick={handleSubmitComment}>댓글 작성</D.SubmitButton>
       </D.CommentContainer>
       <D.Image3 />

@@ -45,14 +45,14 @@ export const CategoryDropdown = styled.select`
     font-weight: bold;
     box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.25);
 
-    -webkit-appearance: none; /* 네이티브 스타일링 제거 */
+    -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
-    background-color: white; /* 드롭다운 배경색 설정 */
+    background-color: white; 
     background-image: url(${arrowImage});
     background-repeat: no-repeat;
-    background-position: right 20px center; /* 화살표 이미지 위치 설정 */
-    background-size: 15px; /* 화살표 이미지 크기 설정 */
+    background-position: right 20px center; 
+    background-size: 15px; 
 `;
 
 export const Rectangle34 = styled.div`
@@ -94,21 +94,21 @@ export const ContentInput = styled.textarea`
     position: absolute;
     left: 90px;
     top: 240px;
-    resize: none; /* 사용자 크기 조정 비활성화 */
-    outline: none; /* 포커스 효과 제거 */
+    resize: none; 
+    outline: none;
 
     &::placeholder {
         color: #a1a0a0;
     }
     &:focus {
-      outline: none; /* 포커스 효과 제거 */
+      outline: none; 
     }
     @media screen and (max-width: 412px) {
-      font-size: 15px; /* 작은 화면에서 폰트 크기 조절 */
+      font-size: 15px; 
     }
     &::-webkit-scrollbar {
-      width: 10px; /* 스크롤바의 두께 지정 */
-      border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
+      width: 10px;
+      border-radius: 5px; 
     }
 
     &::-webkit-scrollbar-thumb {
@@ -118,8 +118,8 @@ export const ContentInput = styled.textarea`
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #acacac; /* 스크롤바 트랙 색상 지정 */
-      border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
+      background-color: #acacac;
+      border-radius: 5px;
     }
 `;
 
