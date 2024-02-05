@@ -1,16 +1,15 @@
 import styled from "@emotion/styled";
 
 export const RootWrapperNaN = styled.div`
-	position: relative;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	top: -190px;
-	left: -310px;
+	justify-content: center; 
+	align-items: center; 
+	height: 100vh; 
+
 `;
 
 export const ModalOverlay = styled.div`
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -20,6 +19,8 @@ export const ModalOverlay = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+	z-index: 2000;
+
 `;
 
 export const ModalContent = styled.div`
