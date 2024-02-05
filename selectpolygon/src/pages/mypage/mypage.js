@@ -39,7 +39,6 @@ export function Mypage() {
     fetchUserInfo();
   }, []);
 
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -110,7 +109,7 @@ export function Mypage() {
     }
   };
 
-  function getFormattedDate(chartDate){
+  function getFormattedDate(chartDate) {
     const dateObj = new Date(chartDate);
     const year = dateObj.getFullYear();
     const month = dateObj.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더합니다.
@@ -169,18 +168,18 @@ export function Mypage() {
       />
       <Top>
         <MyFigureChart data={polygonData} />
-        <DatePosition>{getFormattedDate(chartDate)}</DatePosition>
+        <DatePosition>{`📅 ${getFormattedDate(chartDate)} 📅`}</DatePosition>
       </Top>
       <Footer />
     </RootWrapperNaN>
   );
 }
-const DatePosition=styled.div`
+const DatePosition = styled.div`
   position: absolute;
-  top:500px;
+  top: 500px;
   width: 200px;
-  left:55px;
-`
+  left: 80px;
+`;
 const Top = styled.div`
   position: absolute; // position을 absolute로 설정
   top: 140px; // 기존에 설정된 위치
@@ -735,5 +734,5 @@ const ArrowRightBoldOutline_0001 = styled.img`
   object-fit: cover;
   position: absolute;
   top: 320px;
-  right: 500px;
+  right: 540px;
 `;
