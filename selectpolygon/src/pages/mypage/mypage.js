@@ -10,6 +10,10 @@ import Cookies from "js-cookie";
 import { goBack } from "../../components/backNavigation";
 
 export function Mypage() {
+  const [previousPolygon, setPreviousPolygon] = useState(null);
+  const [nextPolygon, setNextPolygon] = useState(null);
+
+
   const [userInfo, setUserInfo] = useState({
     id: null,
     nickname: "",
@@ -34,6 +38,77 @@ export function Mypage() {
 
     fetchUserInfo();
   }, []);
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Axios를 사용한 API 호출
+    const fetchData = async () => {
+      try {
+        const polygonId = Cookies.get("polygon_id");
+        const response = await axios.get(
+          `http://localhost:3001/api/polygon/read/${polygonId}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setData(response.data);
+        setPolygonData(response.data.polygon.elements);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [date, setDate] = useState(new Date());
+  const [polygonData, setPolygonData] = useState(null);
+
+  // ArrowRightBoldOutline 클릭 핸들러
+const handlePreviousClick = async () => {
+  try {
+    if (!data.previousPolygon){
+      alert("가장 마지막 기록입니다");
+    }
+    else{
+    const previousPolygonId = data.previousPolygon.id;
+    const response = await axios.get(
+      `http://localhost:3001/api/polygon/read/${previousPolygonId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    setData(response.data);
+    setPolygonData(response.data.polygon.elements);
+    }
+  } catch (error) {
+    console.error("Error fetching previous polygon data:", error);
+  }
+};
+
+// ArrowRightBoldOutline_0001 클릭 핸들러
+const handleNextClick = async () => {
+  try {
+    if (!data.nextPolygon){
+      alert("가장 최근 기록입니다");
+    }
+    else{
+    const nextPolygonId = data.nextPolygon.id;
+    const response = await axios.get(
+      `http://localhost:3001/api/polygon/read/${nextPolygonId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    setData(response.data);
+    setPolygonData(response.data.polygon.elements);
+    }
+  } catch (error) {
+    console.error("Error fetching next polygon data:", error);
+  }
+};
 
   return (
     <RootWrapperNaN>
@@ -75,18 +150,28 @@ export function Mypage() {
 
       <MyHistory>My History</MyHistory>
       <ArrowRightBoldOutline
-        src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e1a34c2a-d9be-4af0-94c3-ab0d0330e5d3"
-        alt="icon"
-      />
-      <ArrowRightBoldOutline_0001
-        src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/afeaba53-4030-4b02-804d-db8d554076e5"
-        alt="icon"
-      />
+  onClick={handleNextClick}
+  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e1a34c2a-d9be-4af0-94c3-ab0d0330e5d3"
+  alt="icon"
+/>
+<ArrowRightBoldOutline_0001
+  onClick={handlePreviousClick}
+  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/afeaba53-4030-4b02-804d-db8d554076e5"
+  alt="icon"
+/>
+      <Top>
+      <MyFigureChart data={polygonData} />
+      </Top>
       <Footer />
     </RootWrapperNaN>
   );
 }
 
+const Top = styled.div`
+  position: absolute; // position을 absolute로 설정
+  top: 140px;        // 기존에 설정된 위치
+  margin-top: 20px;   // top 속성 대신 margin-top 속성을 사용하여 추가적인 간격 조정
+`;
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
   background: rgb(255, 255, 255);
