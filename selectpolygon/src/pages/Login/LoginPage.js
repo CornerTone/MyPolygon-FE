@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as L from "./LoginPageStyle";
@@ -11,9 +11,6 @@ export function LoginPage() {
     nickname: "",
     password: "",
   });
-
-  const [loginError, setLoginError] = useState(false); // 로그인 실패 상태
-  const [showModal, setShowModal] = useState(false); // 모달 창 표시 여부
 
   const navigate = useNavigate();
 
@@ -42,30 +39,17 @@ export function LoginPage() {
         navigate("/main");
       } else {
         console.log("로그인 실패");
-        // 실패 시에 상태 업데이트
-        setLoginError(true);
-        // 모달 창 표시
-        setShowModal(true);
+        // 실패 시에 알림 창 띄우기
+        alert("로그인에 실패했습니다. 다시 시도하세요.");
       }
 
       const token = response.data.userId;
-      Cookies.set('mypolygon_auth', token); // 'mypolygon_auth'라는 이름의 쿠키에 토큰을 저장
-
-
+      Cookies.set("mypolygon_auth", token); // 'mypolygon_auth'라는 이름의 쿠키에 토큰을 저장
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
-      // 오류 시에 상태 업데이트
-      setLoginError(true);
-      // 모달 창 표시
-      setShowModal(true);
+      // 실패 시에 알림 창 띄우기
+      alert("로그인에 실패했습니다. 다시 시도하세요.");
     }
-  };
-
-  const closeModal = () => {
-    // 모달 창 닫기
-    setShowModal(false);
-    // 실패 상태 초기화
-    setLoginError(false);
   };
 
   return (
@@ -95,6 +79,7 @@ export function LoginPage() {
         <S.Typography>
           <S.Typography_0001>로그인</S.Typography_0001>
         </S.Typography>
+
         <S.Group16>
           <S.Rectangle22_0002 />
           <div onClick={handleSubmit}>
@@ -108,17 +93,6 @@ export function LoginPage() {
           />
         </S.Vector>
       </form>
-
-      {loginError && showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>
-              &times;
-            </span>
-            <p>로그인에 실패했습니다. 다시 시도하세요.</p>
-          </div>
-        </div>
-      )}
     </L.RootWrapperNaN>
   );
 }
