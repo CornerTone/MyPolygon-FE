@@ -108,7 +108,7 @@ export const NaN_0004 = styled.span`
   text-overflow: ellipsis;
   font-size: 16px;
   font-family: Inter, sans-serif;
-  font-weight: 400;
+  font-weight: bold;
   text-align: left;
   position: absolute;
   left: 100px;
@@ -193,13 +193,13 @@ export const Emotion5 = styled.div`
 export const NaN_0005 = styled.span`
   color: black;
   text-overflow: ellipsis;
-  font-size: 15px;
+  font-size: 14.7px;
   font-family: Inter, sans-serif;
-  font-weight: 400;
+  font-weight: bold;
   text-align: center;
   width: 391px;
   position: absolute;
-  left: -12px;
+  left: -18px;
   top: 333px;
 `;
 
@@ -237,6 +237,42 @@ export const NaN_0006 = styled.span`
   top: 23px;
   cursor: pointer;
   const [isClicked, setIsClicked] = useState(false);
+`;
+
+export const ContentInput = styled.textarea`
+    width: 285px;
+    height: 200px;
+    font-family: "Pretendard", sans-serif;
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 13px;
+    position: absolute;
+    resize: none; 
+    outline: none;
+
+    &::placeholder {
+        color: #a1a0a0;
+    }
+    &:focus {
+      outline: none; 
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      border-radius: 5px; 
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #595959;
+        border-radius: 5px;
+        backdrop-filter: blur(50px);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #acacac;
+      border-radius: 5px;
+    }
 `;
 
 export const Frame50 = styled.div`
