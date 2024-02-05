@@ -135,21 +135,20 @@ const Comment = styled.div`
 
 const CommentContainer = styled.div`
   position: relative;
-  margin-top: 0px; /* 댓글 작성 칸과 다른 컨텐츠 간의 간격 조절 */
-  right: 140px;
-  bottom: 5px;
+  top: 695px; /* 예시로 조절된 값, 필요에 따라 조절 가능 */
+  right: 140px; /* 예시로 조절된 값, 필요에 따라 조절 가능 */
+  z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index 설정 */
 `;
 
 const CommentInput = styled.input`
   width: 250px;
   height: 30px;
-  margin-top: 700px;
   padding: 5px;
   font-size: 16px;
 `;
 
 const SubmitButton = styled.button`
-  width: 100px;
+  width: 90px;
   height: 40px;
   background-color: #ebba71;
   color: white;
@@ -157,7 +156,6 @@ const SubmitButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-
   &:hover {
     background-color: #a47734;
   }
@@ -181,7 +179,7 @@ const Frame47 = styled.div`
   background-size: contain;
   background-position: center;
   position: absolute;
-  right: 300px;
+  right: px;
   top: 0px;
 `;
 
