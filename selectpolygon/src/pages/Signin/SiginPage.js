@@ -7,12 +7,14 @@ import { goBack } from "../../components/backNavigation";
 export function SiginPage() {
   const navigate = useNavigate();
 
+  // 로그인 formData 상태변수 
   const [formData, setFormData] = useState({
     nickname: "",
     phone_number: "",
     password: "",
   });
 
+  // 폼에서 변경이벤트 처리 
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,6 +22,7 @@ export function SiginPage() {
     });
   };
 
+  // 전송 버튼 클릭 시 회원가입 진행 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,8 +31,9 @@ export function SiginPage() {
         "http://localhost:3001/api/auth/join",
         formData
       );
+      // 페이지 이동 
       navigate("/");
-      console.log(response.data); // 서버의 응답 데이터를 콘솔에 출력
+      console.log(response.data); 
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
     }
