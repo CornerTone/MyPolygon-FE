@@ -60,7 +60,7 @@ export function Footer() {
         </H.Container>
         <H.Container>
           <H.Group51>
-            <Link to="/diaryhome" style={{ textDecoration: "none" }}>
+            <Link to="/compliment" style={{ textDecoration: "none" }}>
               <H.IconsBasicStar>
                 <H.Star xmlns="http://www.w3.org/2000/svg">
                   <path

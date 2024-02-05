@@ -1,54 +1,102 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { Footer } from "../../components/Footer";
+import { HeaderLogout } from "../../components/HeaderLogout";
+import { HeaderMypage } from "../../components/HeaderMypage";
 import { goBack } from "../../components/backNavigation";
 
+const getEmotionImageUrl = (emotion) => {
+  let imageUrl = "";
+  switch (emotion) {
+    case 5:
+      imageUrl = "/assets/emotion1.png";
+      break;
+    case 4:
+      imageUrl = "/assets/emotion2.png";
+      break;
+    case 3:
+      imageUrl = "/assets/emotion3.png";
+      break;
+    case 2:
+      imageUrl = "/assets/emotion4.png";
+      break;
+    case 1:
+      imageUrl = "/assets/emotion5.png";
+      break;
+  }
+  return imageUrl;
+};
+
+const formatDate = (date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  let month = "" + (d.getMonth() + 1);
+  let day = "" + d.getDate();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+};
+
 export function ComplimentMain() {
+  const [compliments, setCompliments] = useState([]);
+
+  // 컴포넌트가 마운트될 때 한 번만 실행되는 useEffect 사용
+  useEffect(() => {
+    // 서버로부터 데이터를 가져오는 비동기 함수 정의
+    const fetchData = async () => {
+      try {
+        // 서버로부터 데이터를 가져옴
+        const response = await axios.get(
+          "http://localhost:3001/api/compliment/read-all",
+          {
+            withCredentials: true,
+          }
+        );
+        // 가져온 데이터를 상태로 설정
+        setCompliments(response.data.message);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // fetchData 함수 호출
+    fetchData();
+  }, []);
+
   return (
     <RootWrapperNaN>
       <Frame48>
-        <Vector xmlns="http://www.w3.org/2000/svg">
+        <Vector xmlns="http://www.w3.org/2000/svg" onClick={goBack}>
           <path
             fill="rgba(0, 0, 0, 0.64)"
             d="M0 7.50001C0 7.74737 0.118471 7.97494 0.333872 8.16294L7.4852 14.723C7.7006 14.911 7.92677 15 8.18525 15C8.71299 15 9.13302 14.6439 9.13302 14.1491C9.13302 13.9117 9.03609 13.6742 8.86377 13.5257L6.45127 11.2698L2.18633 7.6979L1.96015 8.18273L5.42811 8.38062L19.0523 8.38062C19.6123 8.38062 20 8.01452 20 7.50001C20 6.9855 19.6123 6.6194 19.0523 6.6194L5.42811 6.6194L1.96015 6.81729L2.18633 7.31202L6.45127 3.73022L8.86377 1.47427C9.03609 1.31596 9.13302 1.08839 9.13302 0.850923C9.13302 0.356201 8.71299 0 8.18525 0C7.92677 0 7.7006 0.0791558 7.46365 0.296834L0.333872 6.83708C0.118471 7.02507 0 7.25265 0 7.50001Z"
           />
         </Vector>
-        <IconsBasicUser
-          src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/41ec4df7-2002-43fe-9bb9-8575d67a8d29"
-          alt="icon"
-        />
         <NaN_0002>칭찬 일기</NaN_0002>
+        <HeaderLogout />
+        <HeaderMypage />
       </Frame48>
-      <Rectangle34 />
-      <NaN_0003>2023/12</NaN_0003>
-      <Rectangle35 />
-      <_31>31</_31>
-      <Sun>SUN</Sun>
-      <_20231>
-        2023년도 꽤 열심히 보낸 것 같다. 1년을 달려오느라 수고했다!
-      </_20231>
-      <NaN_0004>2024/1</NaN_0004>
-      <Link to="/ComplimentDetail">
-        <Group38>
-          <Rectangle31 />
-          <_31_0001>31</_31_0001>
-          <Sun_0001>SUN</Sun_0001>
-          <_20231_0001>
-            2023년도 꽤 열심히 보낸 것 같다. 1년을 달려오느라 수고했다!
-          </_20231_0001>
-          <Emotion2 />
-        </Group38>
-      </Link>
-      <Group39>
-        <Rectangle31 />
-        <_28>28</_28>
-        <Sun_0001>SUN</Sun_0001>
-        <NaN_0005>
-          주말이라고 너무 누워만 있었다. 이미 지나간 시간 자책하지 말고 잘
-          쉬었다 생각하자. 내일부턴 다시 열심히
-        </NaN_0005>
-        <Emotion3 />
-      </Group39>
+
+      {compliments.map((compliment, index) => (
+        <Link key={compliment.id} to={`/compliment/${compliment.id}`}>
+          <CustomDiv key={compliment.id} index={index}>
+            <Rectangle34 />
+            <NaN_0003>{formatDate(compliment.date)}</NaN_0003>
+
+            <Group38>
+              <Rectangle31 />
+              <_31_0001>{compliment.emotion}</_31_0001>
+              <Sun_0001>점</Sun_0001>
+              <_20231_0001>{compliment.content}</_20231_0001>
+              <EmotionImage emotion={compliment.emotion} />{" "}
+            </Group38>
+          </CustomDiv>
+        </Link>
+      ))}
       <Ellipse9 />
       <Link to="/ComplimentWrite">
         <IconAdd>
@@ -64,52 +112,34 @@ export function ComplimentMain() {
           </Vector_0002>
         </IconAdd>
       </Link>
-      <Frame50>
-        <Frame1>
-          <Group54>
-            <IconsBasicProject
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/49603146-6776-43bc-abdf-5d115089fc2a"
-              alt="icon"
-            />
-            <NaN_0006>나의 도형</NaN_0006>
-          </Group54>
-          <Group53>
-            <IconsBasicChat
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/04307706-7a2b-4b98-9a4b-bde7ddc76f90"
-              alt="icon"
-            />
-            <NaN_0007>고민 나눔</NaN_0007>
-          </Group53>
-          <Group52>
-            <IconlyRegularTwoToneHome>
-              <Home>
-                <Home_0001
-                  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a81af511-3807-45f9-82ca-2f78daae3263"
-                  alt="image of Home"
-                />
-              </Home>
-            </IconlyRegularTwoToneHome>
-            <NaN_0008>홈</NaN_0008>
-          </Group52>
-          <Group51>
-            <IconsBasicStar
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/ce4e45de-0487-4284-b871-61aafa48d221"
-              alt="icon"
-            />
-            <NaN_0009>칭찬 일기</NaN_0009>
-          </Group51>
-          <Group50>
-            <NaN_0010>집중 기록</NaN_0010>
-            <IconsBasicTime
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/0364455f-e942-44c0-84e8-7a33cd28345e"
-              alt="icon"
-            />
-          </Group50>
-        </Frame1>
-      </Frame50>
+
+      <Footer />
     </RootWrapperNaN>
   );
 }
+
+const EmotionImage = styled.div`
+  width: 48px;
+  height: 48px;
+  background-image: url(${(props) => getEmotionImageUrl(props.emotion)});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 262px;
+  top: 26px;
+`;
+
+const CustomDiv = styled.div`
+  /* Common styles */
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px; /* 기존 20px 에서 30px 로 변경 */
+  margin-top: 30px; /* 새로 추가된 margin-top */
+
+  /* Dynamic styles based on index */
+  top: ${(props) => props.index * 200}px;
+`;
 
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
@@ -166,7 +196,7 @@ const NaN_0002 = styled.span`
 `;
 
 const Rectangle34 = styled.div`
-  width: 401px;
+  width: 360px;
   height: 41px;
   background: rgb(216, 196, 182);
   background-repeat: no-repeat;
@@ -174,7 +204,7 @@ const Rectangle34 = styled.div`
   background-position: center;
   border: solid 0px black;
   position: absolute;
-  left: -20px;
+  left: 0px;
   top: 54px;
 `;
 

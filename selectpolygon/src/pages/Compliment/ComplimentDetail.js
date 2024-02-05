@@ -1,12 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { goBack } from "../../components/backNavigation";
 import { useParams } from "react-router-dom"; // custom hooks
+
+import { Footer } from "../../components/Footer";
+import { HeaderLogout } from "../../components/HeaderLogout";
+import { HeaderMypage } from "../../components/HeaderMypage";
+import { goBack } from "../../components/backNavigation";
+import axios from "axios";
+
+const getEmotionImageUrl = (emotion) => {
+  let imageUrl = "";
+  switch (emotion) {
+    case 5:
+      imageUrl = "/assets/emotion1.png";
+      break;
+    case 4:
+      imageUrl = "/assets/emotion2.png";
+      break;
+    case 3:
+      imageUrl = "/assets/emotion3.png";
+      break;
+    case 2:
+      imageUrl = "/assets/emotion4.png";
+      break;
+    case 1:
+      imageUrl = "/assets/emotion5.png";
+      break;
+    default:
+      // 기본값 설정
+      imageUrl = "/assets/default.png";
+      break;
+  }
+  return imageUrl;
+};
+
+const formatDate = (date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  let month = "" + (d.getMonth() + 1);
+  let day = "" + d.getDate();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+};
+
+const handleDelete = (id) => {
+  axios
+    .delete(`http://localhost:3001/api/compliment/delete/${id}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response.data);
+      window.location.href = "/compliment";
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      // 삭제 중 오류가 발생한 경우에 대한 처리
+    });
+};
 
 export function ComplimentDetail() {
   const { id } = useParams(); // pathVariable = id (경로의 변수 담아서 전달)
-  console.log(id); // id check (콘솔에 출력)
+  console.log(id);
+  const [complimentData, setComplimentData] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/compliment/read/${id}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setComplimentData(response.data.message);
+      })
+      .catch((error) => {
+        console.error("Error fetching compliment data:", error);
+      });
+  }, [id]);
 
   return (
     <RootWrapperNaN>
@@ -23,73 +96,20 @@ export function ComplimentDetail() {
         />
         <NaN_0002>칭찬 일기</NaN_0002>
       </Frame48>
-      <NaN_0003>1월 28일 일요일</NaN_0003>
-      <NaN_0004>20:43</NaN_0004>
+      <NaN_0003>{formatDate(complimentData.date)}</NaN_0003>
+      <NaN_0004>{complimentData.time}</NaN_0004>
       <Line3 />
-      <Emotion4 />
+      <EmotionImage emotion={complimentData.emotion} />
       <NaN_0005>오늘의 기분</NaN_0005>
       <Rectangle47 />
       <NaN_0006>
-        <p>이곳은 다이어리 상세 페이지 입니다.</p>
+        <p>{complimentData.content}</p>
       </NaN_0006>
-      <IconEdit>
-        <Link to="/ComplimentWrite">
-          <Vector_0001
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            alt="image of Vector"
-          />
-
-          <Vector_0002 xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill="rgb(79, 112, 156)"
-              d="M0 16.0326L0 19.4026C0 19.713 0.21379 19.9569 0.485887 19.9569L3.44008 19.9569C3.56641 19.9569 3.69274 19.9015 3.7802 19.7906L14.392 7.69621L10.7478 3.53909L0.145766 15.6335C0.0485888 15.7444 0 15.8774 0 16.0326ZM17.2101 4.48137C17.5891 4.04903 17.5891 3.35063 17.2101 2.91829L14.9362 0.324255C14.5572 -0.108085 13.945 -0.108085 13.566 0.324255L11.7876 2.35293L15.4318 6.51004L17.2101 4.48137Z"
-            />
-          </Vector_0002>
-        </Link>
+      <IconEdit onClick={() => handleDelete(complimentData.id)}>
+        삭제하기
       </IconEdit>
-      <Frame50>
-        <Frame1>
-          <Group54>
-            <IconsBasicProject
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/db3f3f0e-9642-46bb-8988-0a93e27587cb"
-              alt="icon"
-            />
-            <NaN_0007>나의 도형</NaN_0007>
-          </Group54>
-          <Group53>
-            <IconsBasicChat
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/9fa0d626-ae41-4cda-9055-4f2202f45818"
-              alt="icon"
-            />
-            <NaN_0008>고민 나눔</NaN_0008>
-          </Group53>
-          <Group52>
-            <IconlyRegularTwoToneHome>
-              <Home>
-                <Home_0001
-                  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/62387006-ef11-432d-a8bc-1dcdc6a135bf"
-                  alt="image of Home"
-                />
-              </Home>
-            </IconlyRegularTwoToneHome>
-            <NaN_0009>홈</NaN_0009>
-          </Group52>
-          <Group51>
-            <IconsBasicStar
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/23d42f2a-792b-4194-820b-06643c965a3a"
-              alt="icon"
-            />
-            <NaN_0010>칭찬 일기</NaN_0010>
-          </Group51>
-          <Group50>
-            <NaN_0011>집중 기록</NaN_0011>
-            <IconsBasicTime
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e8b62d01-a1ee-44d1-bd22-880375a62382"
-              alt="icon"
-            />
-          </Group50>
-        </Frame1>
-      </Frame50>
+
+      <Footer />
     </RootWrapperNaN>
   );
 }
@@ -181,10 +201,10 @@ const Line3 = styled.div`
   top: 106px;
 `;
 
-const Emotion4 = styled.div`
+const EmotionImage = styled.div`
   width: 80px;
   height: 81px;
-  background: url(https://s3-alpha-sig.figma.com/img/d2c0/bca7/68e1e2384b8898d15503b087999b3d85?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i2h5Pz6UsB9nLmRtgElik~47xkcUMZwhYGe8zt0xZHYxK-4sg1Z5DjVatyu4UX7LK7a0h8KlGj0Fcjp0RhQ18c03vz-eTlF5zsqSR2-4Bq2hI7TpikMmbJd8REMDlcELJS7Yiv9nKRgsDasOLfTTbVNNFX0gd7D9TSpAFEuPA1sr0yDvAZc8Zlmjg0Tct2vFvLCwgJjfL3zRaI1v~KIclqupUoqBJbapSBj7NjGZ~B96xcFpY95YiQJrLXJOdCSG1iT6AEfOa22JyamiKp5Vai6oZHq8L~s~9Wwi85zKAalZ~S94tPq8IBy3x9VdjXij9J9bQgg8vUZGqoitLGyw9A__);
+  background-image: url(${(props) => getEmotionImageUrl(props.emotion)});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -238,8 +258,9 @@ const IconEdit = styled.div`
   width: 187px;
   height: 393px;
   position: absolute;
-  left: 156px;
+  left: 220px;
   top: 73px;
+  cursor: pointer;
 `;
 
 const Vector_0001 = styled.img`

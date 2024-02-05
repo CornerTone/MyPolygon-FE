@@ -15,7 +15,7 @@ export function NewCommunity() {
   const navigate = useNavigate();
 
   /*
-	1 - 학업
+   1 - 학업
 2 - 여가
 3 - 건강
 4 - 인간관계
