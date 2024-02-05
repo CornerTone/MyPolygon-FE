@@ -23,13 +23,6 @@ export function PolygonChart({ elements }) {
         data: elements ? elements.map((item) => item.score) : [],
         backgroundColor: "rgba(255, 108, 61, 0.2)",
       },
-      {
-        label: "1",
-        data: elements ? elements.map((item) => item.score) : [],
-        borderColor: "#F5EFE7",
-        backgroundColor: "rgb(79, 112, 156)",
-        borderWidth: 3,
-      },
     ],
   };
 

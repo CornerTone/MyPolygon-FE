@@ -13,7 +13,6 @@ export function Mypage() {
   const [previousPolygon, setPreviousPolygon] = useState(null);
   const [nextPolygon, setNextPolygon] = useState(null);
 
-
   const [userInfo, setUserInfo] = useState({
     id: null,
     nickname: "",
@@ -67,48 +66,46 @@ export function Mypage() {
   const [polygonData, setPolygonData] = useState(null);
 
   // ArrowRightBoldOutline 클릭 핸들러
-const handlePreviousClick = async () => {
-  try {
-    if (!data.previousPolygon){
-      alert("가장 마지막 기록입니다");
-    }
-    else{
-    const previousPolygonId = data.previousPolygon.id;
-    const response = await axios.get(
-      `http://localhost:3001/api/polygon/read/${previousPolygonId}`,
-      {
-        withCredentials: true,
+  const handlePreviousClick = async () => {
+    try {
+      if (!data.previousPolygon) {
+        alert("가장 마지막 기록입니다");
+      } else {
+        const previousPolygonId = data.previousPolygon.id;
+        const response = await axios.get(
+          `http://localhost:3001/api/polygon/read/${previousPolygonId}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setData(response.data);
+        setPolygonData(response.data.polygon.elements);
       }
-    );
-    setData(response.data);
-    setPolygonData(response.data.polygon.elements);
+    } catch (error) {
+      console.error("Error fetching previous polygon data:", error);
     }
-  } catch (error) {
-    console.error("Error fetching previous polygon data:", error);
-  }
-};
+  };
 
-// ArrowRightBoldOutline_0001 클릭 핸들러
-const handleNextClick = async () => {
-  try {
-    if (!data.nextPolygon){
-      alert("가장 최근 기록입니다");
-    }
-    else{
-    const nextPolygonId = data.nextPolygon.id;
-    const response = await axios.get(
-      `http://localhost:3001/api/polygon/read/${nextPolygonId}`,
-      {
-        withCredentials: true,
+  // ArrowRightBoldOutline_0001 클릭 핸들러
+  const handleNextClick = async () => {
+    try {
+      if (!data.nextPolygon) {
+        alert("가장 최근 기록입니다");
+      } else {
+        const nextPolygonId = data.nextPolygon.id;
+        const response = await axios.get(
+          `http://localhost:3001/api/polygon/read/${nextPolygonId}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setData(response.data);
+        setPolygonData(response.data.polygon.elements);
       }
-    );
-    setData(response.data);
-    setPolygonData(response.data.polygon.elements);
+    } catch (error) {
+      console.error("Error fetching next polygon data:", error);
     }
-  } catch (error) {
-    console.error("Error fetching next polygon data:", error);
-  }
-};
+  };
 
   return (
     <RootWrapperNaN>
@@ -118,49 +115,49 @@ const handleNextClick = async () => {
         <HeaderLogout />
         <HeaderMypage />
       </Frame48>
-
-      <Group49>
-        <Group48>
-          <NaN_0008>
-            <Ellipse11 />
-          </NaN_0008>
-          <_21433051 />
-        </Group48>
-      </Group49>
-      <Group13>
-        <Rectangle23 />
-        <NaN_0009>아이디</NaN_0009>
-      </Group13>
-      <Group15>
-        <Rectangle22_0001 />
-        <NaN_0010>전화번호</NaN_0010>
-      </Group15>
-      <Group57>
-        <Group69>
-          <Rectangle23_0001 />
-          <NaN_0011>{userInfo?.nickname}</NaN_0011>
-        </Group69>
-      </Group57>
-      <Group59>
-        <Group69>
-          <Rectangle23_0001 />
-          <NaN_0011>{userInfo?.phone_number}</NaN_0011>
-        </Group69>
-      </Group59>
-
+      <Container>
+        <Group49>
+          <Group48>
+            <NaN_0008>
+              <Ellipse11 />
+            </NaN_0008>
+            <_21433051 />
+          </Group48>
+        </Group49>
+        <Group13>
+          <Rectangle23 />
+          <NaN_0009>아이디</NaN_0009>
+        </Group13>
+        <Group15>
+          <Rectangle22_0001 />
+          <NaN_0010>전화번호</NaN_0010>
+        </Group15>
+        <Group57>
+          <Group69>
+            <Rectangle23_0001 />
+            <NaN_0011>{userInfo?.nickname}</NaN_0011>
+          </Group69>
+        </Group57>
+        <Group59>
+          <Group69>
+            <Rectangle23_0001 />
+            <NaN_0011>{userInfo?.phone_number}</NaN_0011>
+          </Group69>
+        </Group59>
+      </Container>
       <MyHistory>My History</MyHistory>
       <ArrowRightBoldOutline
-  onClick={handleNextClick}
-  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e1a34c2a-d9be-4af0-94c3-ab0d0330e5d3"
-  alt="icon"
-/>
-<ArrowRightBoldOutline_0001
-  onClick={handlePreviousClick}
-  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/afeaba53-4030-4b02-804d-db8d554076e5"
-  alt="icon"
-/>
+        onClick={handleNextClick}
+        src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e1a34c2a-d9be-4af0-94c3-ab0d0330e5d3"
+        alt="icon"
+      />
+      <ArrowRightBoldOutline_0001
+        onClick={handlePreviousClick}
+        src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/afeaba53-4030-4b02-804d-db8d554076e5"
+        alt="icon"
+      />
       <Top>
-      <MyFigureChart data={polygonData} />
+        <MyFigureChart data={polygonData} />
       </Top>
       <Footer />
     </RootWrapperNaN>
@@ -169,8 +166,8 @@ const handleNextClick = async () => {
 
 const Top = styled.div`
   position: absolute; // position을 absolute로 설정
-  top: 140px;        // 기존에 설정된 위치
-  margin-top: 20px;   // top 속성 대신 margin-top 속성을 사용하여 추가적인 간격 조정
+  top: 140px; // 기존에 설정된 위치
+  margin-top: 20px; // top 속성 대신 margin-top 속성을 사용하여 추가적인 간격 조정
 `;
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
@@ -180,7 +177,9 @@ const RootWrapperNaN = styled.div`
   background-position: center;
   position: relative;
 `;
-
+const Container = styled.div`
+  top: 1000px;
+`;
 const Rectangle22 = styled.div`
   width: 287px;
   height: 187px;
@@ -719,5 +718,5 @@ const ArrowRightBoldOutline_0001 = styled.img`
   object-fit: cover;
   position: absolute;
   top: 320px;
-  right: 420px;
+  right: 500px;
 `;

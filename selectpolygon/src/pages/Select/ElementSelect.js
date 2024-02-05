@@ -201,7 +201,7 @@ const NaN_0002 = styled.span`
   /* hover 시와 선택된 상태의 스타일 변경 */
   &:hover,
   &[data-selected="true"] {
-    color: deeppink;
+    color: #85bbe2;
     cursor: pointer;
   }
 `;
@@ -278,7 +278,7 @@ const NaN_0005 = styled.span`
   /* hover 시와 선택된 상태의 스타일 변경 */
   &:hover,
   &[data-selected="true"] {
-    color: deeppink;
+    color: #85bbe2;
     cursor: pointer;
   }
 `;
@@ -309,6 +309,10 @@ const Frame24 = styled.div`
   left: 142px;
   top: 589px;
   height: 33px;
+  &:hover,
+  &:active {
+    background: #4f709c; /* 클릭 시 색상 변경 */
+  }
 `;
 
 const NaN_0007 = styled.span`
