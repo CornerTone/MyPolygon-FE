@@ -49,28 +49,28 @@ export function Main() {
         <WeekCalendar date={date} onChange={(newDate) => setDate(newDate)} />
       </NaN_0004>
 
-      <MyFigure>My figure</MyFigure>
+      <MyFigure>My Polygon</MyFigure>
       <MyFigureChart data={polygonData} />
-
-      <Group64>
-        {polygonData && polygonData.length > 0 ? (
-          polygonData.map((item, index) => (
-            <Group67 key={index}>
-              <div>
-                <Rectangle7 />
-                <_15>{`${item.name.substring(0, item.name.indexOf("_"))}  ${
-                  item.score
-                }%`}</_15>
-              </div>
-            </Group67>
-          ))
-        ) : (
-          <>
-            <_16> 검사를 진행해 주세요!</_16>
-          </>
-        )}
-      </Group64>
-
+      <Container>
+        <Group64>
+          {polygonData && polygonData.length > 0 ? (
+            polygonData.map((item, index) => (
+              <Group67 key={index}>
+                <div>
+                  <Rectangle7 />
+                  <_15>{`${item.name.substring(0, item.name.indexOf("_"))}  ${
+                    item.score * 20
+                  } %`}</_15>
+                </div>
+              </Group67>
+            ))
+          ) : (
+            <>
+              <_16> 검사를 진행해 주세요!</_16>
+            </>
+          )}
+        </Group64>
+      </Container>
       <Footer />
     </RootWrapperNaN>
   );
@@ -85,21 +85,28 @@ const RootWrapperNaN = styled.div`
   position: relative;
 `;
 
+// 부모 컨테이너 스타일
 const Group64 = styled.div`
-  width: 311px;
-  height: 160px;
-  position: absolute;
-  left: 24px;
-  top: 534px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
+  grid-template-rows: repeat(3, 1fr); /* 3행으로 설정 */
+  gap: 20px; /* 요소 간격 조정 */
+`;
+
+// 각각의 요소 스타일
+const Container = styled.div`
+  width: 50%;
+  height: 100%;
 `;
 
 const Group67 = styled.div`
-  width: 149px;
-  height: 46px;
-  position: relative; /* 상대 위치로 변경 */
+  top: 510px;
+  left: 10px;
+  width: 150px;
+  height: 47px;
+  position: relative;
   background-color: #213555;
   border-radius: 10px;
-  margin-bottom: 10px; /* 각 요소 사이의 간격을 조정할 수 있는 마진 추가 */
 `;
 
 const Rectangle7 = styled.div`
@@ -123,7 +130,7 @@ const Group66 = styled.div`
   left: 77px;
   top: 0px;
   background-color: #213555;
-  border-radius: 10px;
+  border-radius: 20px;
 `;
 
 const _15 = styled.span`
@@ -225,7 +232,7 @@ const MyFigure = styled.span`
   width: 97px;
   min-height: 17px;
   position: absolute;
-  left: 20px;
+  left: 135px;
   top: 170px;
   height: 17px;
 `;

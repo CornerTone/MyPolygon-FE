@@ -217,6 +217,10 @@ const NaN_0002 = styled.span`
   position: absolute;
   left: 7px;
   top: 4px;
+  &:hover,
+  &:active {
+    color: red; /* 클릭 시 색상 변경 */
+  }
 `;
 
 const Group10_0001 = styled.div`
@@ -252,6 +256,11 @@ const NaN_0003 = styled.span`
   position: absolute;
   left: 6px;
   top: 4px;
+
+  &:hover,
+  &:active {
+    color: red; /* 클릭 시 색상 변경 */
+  }
 `;
 
 const Group11 = styled.div`

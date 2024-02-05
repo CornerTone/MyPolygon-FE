@@ -4,6 +4,9 @@ import { DiaryStateContext } from "../../App";
 import DiaryList from "../../components/Diary/DiaryList";
 import MyButton from "../../components/Diary/MyButton";
 import MyHeader from "../../components/Diary/MyHeader";
+import { HeaderLogout } from "../../components/HeaderLogout";
+import { HeaderMypage } from "../../components/HeaderMypage";
+import { Footer } from "../../components/Footer";
 
 const DiaryHome = () => {
   const diaryList = useContext(DiaryStateContext);
@@ -63,6 +66,8 @@ const DiaryHome = () => {
         rightChild={<MyButton text={">"} onClick={increaseMonth} />}
       />
       <DiaryList diaryList={data} />
+
+      <Footer />
     </div>
   );
 };
