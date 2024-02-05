@@ -144,6 +144,9 @@ export const NaN_0002 = styled.span`
   position: absolute;
   left: 7px;
   top: 4px;
+  &:hover {
+    color: red;
+  }
 `;
 
 export const Group10_0001 = styled.div`
@@ -179,6 +182,9 @@ export const NaN_0003 = styled.span`
   position: absolute;
   left: 6px;
   top: 4px;
+  &:hover {
+    color: red;
+  }
 `;
 
 export const Group11 = styled.div`
