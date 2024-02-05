@@ -9,7 +9,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 // 감정에 따라 이미지 다르게 설정
-const getEmotionImageUrl = (emotion) => {
+export const getEmotionImageUrl = (emotion) => {
   let imageUrl = "";
   switch (emotion) {
     case 5:

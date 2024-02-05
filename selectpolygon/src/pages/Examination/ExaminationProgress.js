@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { goBack } from "../../components/backNavigation";
 
-// 서버로 테스트 결과 전달 
+// 서버로 테스트 결과 전달
 const sendResultsToBackend = async (results) => {
   try {
     const response = await axios.post(
@@ -22,18 +22,18 @@ const sendResultsToBackend = async (results) => {
 };
 
 export function ExaminationProgress() {
-  // 예를 선택한 버튼 저장 
+  // 예를 선택한 버튼 저장
   const [selectedYesButtonIds, setSelectedYesButtonIds] = useState({});
-  // 아니요를 선택한 버튼 저장 
+  // 아니요를 선택한 버튼 저장
   const [selectedNoButtonIds, setSelectedNoButtonIds] = useState({});
-  // 질문 데이터 저장 
+  // 질문 데이터 저장
   const [questionsData, setQuestionsData] = useState([]);
-  // 현재 질문하고 있는 질문 정보 저장 
+  // 현재 질문하고 있는 질문 정보 저장
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  // 응답 결과 저장 
+  // 응답 결과 저장
   const [results, setResults] = useState([]);
 
-  // 서버로부터 질문 내용 전달받음 
+  // 서버로부터 질문 내용 전달받음
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,16 +57,16 @@ export function ExaminationProgress() {
   useEffect(() => {
     setSelectedYesButtonIds({});
     setSelectedNoButtonIds({});
-  }, [currentQuestionIndex]); 
+  }, [currentQuestionIndex]);
 
-  // 예 버튼을 눌렀다면 매개변수로 전달받은 버튼 예 선택됨으로 처리, 아니오 해제 처리 
+  // 예 버튼을 눌렀다면 매개변수로 전달받은 버튼 예 선택됨으로 처리, 아니오 해제 처리
   const handleYesButtonClick = (buttonId) => {
     console.log(buttonId);
     setSelectedYesButtonIds((prevIds) => ({ ...prevIds, [buttonId]: true }));
     setSelectedNoButtonIds((prevIds) => ({ ...prevIds, [buttonId]: false }));
 
-  // 현재 질문의 id 값을 가져옴
-  const currentQuestionId = questionsData[currentQuestionIndex].id;
+    // 현재 질문의 id 값을 가져옴
+    const currentQuestionId = questionsData[currentQuestionIndex].id;
 
     // 현재 질문의 index를 찾음
     const questionIndex = questionsData.findIndex(
@@ -78,7 +78,7 @@ export function ExaminationProgress() {
       const updatedQuestionsData = [...questionsData];
       if (isNaN(updatedQuestionsData[questionIndex].score)) {
         // 초기화
-        updatedQuestionsData[questionIndex].score = 0; 
+        updatedQuestionsData[questionIndex].score = 0;
       }
       updatedQuestionsData[questionIndex].score += 1;
 
@@ -103,7 +103,7 @@ export function ExaminationProgress() {
     }
   };
 
-  // 예 버튼과 반대로 동작 
+  // 예 버튼과 반대로 동작
   const handleNoButtonClick = (buttonId) => {
     setSelectedYesButtonIds((prevIds) => ({ ...prevIds, [buttonId]: false }));
     setSelectedNoButtonIds((prevIds) => ({ ...prevIds, [buttonId]: true }));
@@ -114,9 +114,9 @@ export function ExaminationProgress() {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       try {
-        // 서버로 결과 전달 
+        // 서버로 결과 전달
         await sendResultsToBackend(results);
-        // 메인 페이지로 이동 
+        // 메인 페이지로 이동
         window.location.href = "/main";
       } catch (error) {
         console.error("Error while sending results:", error);
@@ -156,18 +156,14 @@ export function ExaminationProgress() {
                         {/* 버튼 고유 id 부여 */}
                         <E.YesButton
                           selected={selectedYesButtonIds[`${qIndex + 1}`]}
-                          onClick={() =>
-                            handleYesButtonClick(`${qIndex + 1}`)
-                          }
+                          onClick={() => handleYesButtonClick(`${qIndex + 1}`)}
                         >
                           예
                         </E.YesButton>
-                         {/* 버튼 고유 id 부여 */}
+                        {/* 버튼 고유 id 부여 */}
                         <E.NoButton
                           selected={selectedNoButtonIds[`${qIndex + 1}`]}
-                          onClick={() =>
-                            handleNoButtonClick(`${qIndex + 1}`)
-                          }
+                          onClick={() => handleNoButtonClick(`${qIndex + 1}`)}
                         >
                           아니오
                         </E.NoButton>
@@ -176,7 +172,9 @@ export function ExaminationProgress() {
                   )
                 )}
               </ul>
-              <E.SubmitButton onClick={handleSubmitButtonClick}>다음</E.SubmitButton>
+              <E.SubmitButton onClick={handleSubmitButtonClick}>
+                다음
+              </E.SubmitButton>
             </E.QuestionWrapper>
           )}
       </E.Group33>

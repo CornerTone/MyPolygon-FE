@@ -7,21 +7,20 @@ import { Footer } from "../../components/Footer";
 import MyFigureChart from "../Main/PolygonChart";
 import Cookies from "js-cookie";
 
-
 export function Mypage() {
-  // 다각형 생성 날짜 저장 
-  const [chartDate, setChartDate] = useState(null); 
-  // 유저 정보 저장 
+  // 다각형 생성 날짜 저장
+  const [chartDate, setChartDate] = useState(null);
+  // 유저 정보 저장
   const [userInfo, setUserInfo] = useState({
     id: null,
     nickname: "",
     phone_number: "",
   });
-  // 응답 저장 
+  // 응답 저장
   const [data, setData] = useState(null);
   const [polygonData, setPolygonData] = useState(null);
 
-  // 유저 정보 서버로부터 가져옴 
+  // 유저 정보 서버로부터 가져옴
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -40,7 +39,7 @@ export function Mypage() {
     fetchUserInfo();
   }, []);
 
-  // 다각형 정보 서버로부터 가져옴 
+  // 다각형 정보 서버로부터 가져옴
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -84,7 +83,7 @@ export function Mypage() {
     }
   };
 
-  // 오른쪽 화살표 클릭 시 호출 
+  // 오른쪽 화살표 클릭 시 호출
   const handleNextClick = async () => {
     try {
       if (!data.nextPolygon) {
@@ -105,7 +104,7 @@ export function Mypage() {
     }
   };
 
-  // 시간을 yyyy년 m월 d일 형식으로 변경 
+  // 시간을 yyyy년 m월 d일 형식으로 변경
   function getFormattedDate(chartDate) {
     const dateObj = new Date(chartDate);
     const year = dateObj.getFullYear();
@@ -168,7 +167,9 @@ export function Mypage() {
       <M.Top>
         {/* 다각형 그리기 */}
         <MyFigureChart data={polygonData} />
-        <M.DatePosition>{`📅 ${getFormattedDate(chartDate)} 📅`}</M.DatePosition>
+        <M.DatePosition>{`📅 ${getFormattedDate(
+          chartDate
+        )} 📅`}</M.DatePosition>
       </M.Top>
       <Footer />
     </M.RootWrapperNaN>

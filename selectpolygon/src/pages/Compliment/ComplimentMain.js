@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import * as N from "./ComplimentMainStyle";
 import { Link } from "react-router-dom";
 import axios from "axios";

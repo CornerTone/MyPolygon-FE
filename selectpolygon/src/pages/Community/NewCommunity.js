@@ -7,36 +7,35 @@ import { categoryNames } from "./Community";
 import axios from "axios";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
-import { Link, useHistory } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 export function NewCommunity() {
-	// 객체의 값들을 배열로 추출
+  // 객체의 값들을 배열로 추출
   const categories = Object.values(categoryNames);
   const navigate = useNavigate();
 
-  // 카테고리 저장 
+  // 카테고리 저장
   const [category, setCategory] = useState("");
-  // 작성 내용 저장 
+  // 작성 내용 저장
   const [content, setContent] = useState("");
 
-  // 드롭다운 박스에서 카테고리 선택 시 상태 업데이트 
+  // 드롭다운 박스에서 카테고리 선택 시 상태 업데이트
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value); 
-  };
-  
-  // 고민 내용 입력 시 상태 업데이트 
-  const handleContentChange = (e) => {
-    setContent(e.target.value); 
+    setCategory(e.target.value);
   };
 
-  // 입력한 내용을 서버로 전달 
+  // 고민 내용 입력 시 상태 업데이트
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
+  };
+
+  // 입력한 내용을 서버로 전달
   const handleSubmit = async () => {
     try {
       let categoryId = Object.keys(categoryNames).find(
         (key) => categoryNames[key] === category
       );
-	  categoryId = categoryId !== undefined ? categoryId : 1;
+      categoryId = categoryId !== undefined ? categoryId : 1;
 
       const response = await axios.post(
         "http://localhost:3001/api/community/create",

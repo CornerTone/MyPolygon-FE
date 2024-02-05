@@ -9,7 +9,7 @@ import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
 import axios from "axios";
 
-// 아이디, 요소 이름 연결 
+// 아이디, 요소 이름 연결
 export const categoryNames = {
   1: "건강",
   2: "경제",
@@ -18,7 +18,7 @@ export const categoryNames = {
   5: "인간관계",
 };
 
-// 아이디, 요소 색상 연결 
+// 아이디, 요소 색상 연결
 const categoryColors = {
   1: "#BCDC63", // 건강
   2: "#99E0DB", // 경제
@@ -29,24 +29,24 @@ const categoryColors = {
 
 export function Community() {
   const navigate = useNavigate();
-  // 글 저장 
+  // 글 저장
   const [posts, setPosts] = useState([]);
-  // 선택한 카테고리 저장 
+  // 선택한 카테고리 저장
   const [selectedCategory, setSelectedCategory] = useState(null);
-  // 에러 메세지 저장 
+  // 에러 메세지 저장
   const [errorMessage, setErrorMessage] = useState("");
 
-  // selectedCategory가 변할 경우, 서버에서 데이터 새로 가져옴 
+  // selectedCategory가 변할 경우, 서버에서 데이터 새로 가져옴
   useEffect(() => {
     fetchData();
   }, [selectedCategory]);
 
-  // 서버로부터 카테고리 정보 조회 
+  // 서버로부터 카테고리 정보 조회
   const fetchData = async () => {
     try {
       let url = "http://localhost:3001/api/community/read-category";
 
-	  // 선택한 카테고리가 있다면 해당 카테고리 글만 조회 
+      // 선택한 카테고리가 있다면 해당 카테고리 글만 조회
       if (selectedCategory) {
         url += `/${selectedCategory}`;
       }
@@ -71,17 +71,17 @@ export function Community() {
     }
   };
 
-  // 커뮤니티 상세 조회로 이동 
+  // 커뮤니티 상세 조회로 이동
   function handleClick(id) {
     window.location.href = `/communitydetail/${id}`;
   }
 
-  // 카테고리 선택 
+  // 카테고리 선택
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
 
-  // 새로운 커뮤니티 글 작성 
+  // 새로운 커뮤니티 글 작성
   const navigateToNewPost = () => {
     navigate("/communitynew");
   };
@@ -101,8 +101,8 @@ export function Community() {
       </C.Frame47>
 
       <C.CategoryWrapper>
-		{/* 카테고리 전체 출력 */}
-		{/* 카테고리 ID에 대해 반복 */}
+        {/* 카테고리 전체 출력 */}
+        {/* 카테고리 ID에 대해 반복 */}
         {Object.keys(categoryNames).map((categoryId) => (
           <React.Fragment key={categoryId}>
             <C.CategoriesContainer
@@ -125,7 +125,7 @@ export function Community() {
                   d="M0 14.5C0 6.49187 6.49187 0 14.5 0L37.5 0C45.5081 0 52 6.49187 52 14.5L52 14.5C52 22.5081 45.5081 29 37.5 29L14.5 29C6.49187 29 0 22.5081 0 14.5L0 14.5Z"
                 />
               </C.Rectangle34>
-			  {/* 카테고리를 클릭했을 때 해당 카테고리를 선택 */}
+              {/* 카테고리를 클릭했을 때 해당 카테고리를 선택 */}
               <C.CategoryName onClick={() => handleCategoryClick(categoryId)}>
                 {categoryNames[categoryId]}
               </C.CategoryName>
@@ -135,20 +135,22 @@ export function Community() {
       </C.CategoryWrapper>
 
       <C.Group3>
-		{/* 선택한 카테고리에 글이 없을 경우, 글이 있을 경우 분리 */}
+        {/* 선택한 카테고리에 글이 없을 경우, 글이 있을 경우 분리 */}
         {errorMessage ? (
           <C.ErrorMessage>{errorMessage}</C.ErrorMessage>
         ) : (
           <C.PostGrid>
             {posts.map((post, index) => (
               <C.PostItem key={index}>
-				{/* 글을 선택하면 상세 조회로 이동 */}
+                {/* 글을 선택하면 상세 조회로 이동 */}
                 <C.PostContent onClick={() => handleClick(post.id)}>
                   {post.content}
                 </C.PostContent>
                 <C.Group5>
-					{/* 카테고리 박스의 색, 텍스트 지정 */}
-                  <C.Rectangle22 color={categoryColors[post.categories[0].id]} />
+                  {/* 카테고리 박스의 색, 텍스트 지정 */}
+                  <C.Rectangle22
+                    color={categoryColors[post.categories[0].id]}
+                  />
                   <C.CategoryNameBox>
                     {categoryNames[post.categories[0].id]}
                   </C.CategoryNameBox>
@@ -175,4 +177,3 @@ export function Community() {
     </C.RootWrapperNaN>
   );
 }
-

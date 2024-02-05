@@ -47,7 +47,6 @@ export const Rectangle7 = styled.div`
     top: 0px;
 `;
 
-
 export const _15 = styled.span`
     color: white;
     text-overflow: ellipsis;

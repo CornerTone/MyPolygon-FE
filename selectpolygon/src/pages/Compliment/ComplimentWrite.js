@@ -102,23 +102,23 @@ export function ComplimentWrite() {
         <M.NaN_0003 onClick={handleSubmit}>완료</M.NaN_0003>
       </M.Group59>
       <M.NaN_0004>오늘 하루는 어땠나요?</M.NaN_0004>
-      <M.Emotion1
+      <Emotion1
         selected={selectedEmotion === 1}
         onClick={() => handleEmotionClick(1)}
       />
-      <M.Emotion2
+      <Emotion2
         selected={selectedEmotion === 2}
         onClick={() => handleEmotionClick(2)}
       />
-      <M.Emotion3
+      <Emotion3
         selected={selectedEmotion === 3}
         onClick={() => handleEmotionClick(3)}
       />
-      <M.Emotion4
+      <Emotion4
         selected={selectedEmotion === 4}
         onClick={() => handleEmotionClick(4)}
       />
-      <M.Emotion5
+      <Emotion5
         selected={selectedEmotion === 5}
         onClick={() => handleEmotionClick(5)}
       />

@@ -11,6 +11,7 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SiginPage } from "./pages/Signin/SiginPage";
 import { Record } from "./pages/Record/Record";
 import { Main } from "./pages/Main/Main";
+
 // 칭찬일기
 import { ComplimentMain } from "./pages/Compliment/ComplimentMain";
 import { ComplimentDetail } from "./pages/Compliment/ComplimentDetail";
@@ -21,6 +22,7 @@ import { Mypage } from "./pages/mypage/mypage";
 import { Community } from "./pages/Community/Community";
 import { NewCommunity } from "./pages/Community/NewCommunity";
 import { CommunityDetail } from "./pages/Community/CommunityDetail";
+
 
 const reducer = (state, action) => {
   let newState = [];

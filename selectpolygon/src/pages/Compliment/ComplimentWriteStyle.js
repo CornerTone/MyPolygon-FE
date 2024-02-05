@@ -462,3 +462,39 @@ export const IconsBasicTime = styled.img`
   left: 9px;
   top: 0px;
 `;
+
+export const ContentInput = styled.textarea`
+  width: 285px;
+  height: 200px;
+  font-family: "Pretendard", sans-serif;
+  background-color: transparent;
+  color: black;
+  border: none;
+  font-size: 13px;
+  position: absolute;
+  resize: none;
+  outline: none;
+
+  &::placeholder {
+    color: #a1a0a0;
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #595959;
+    border-radius: 5px;
+    backdrop-filter: blur(50px);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #acacac;
+    border-radius: 5px;
+  }
+`;
