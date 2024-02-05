@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-// styled-components에서 styled 가져오기
 import styled, { css } from "styled-components";
-// @emotion/styled에서 styled 가져오기
-import { styled as emotionStyled } from "@emotion/styled";
 import axios from "axios";
 
 import { goBack } from "../../components/backNavigation";
 
 export function ElementSelect() {
-  // 선택한 요소를 저장할 상태
+  // 선택한 요소를 저장
   const [selectedElements, setSelectedElements] = useState([]);
 
+  // 요소가 이미 선택되어 있다면 배열에서 제거, 선택되어 있지 않다면 배열에 추가
   const handleElementSelect = (elementId) => {
-    // 요소가 이미 선택되어 있는지 확인
+    // 요소가 이미 선택되어 있는지 여부 확인 
     const isSelected = selectedElements.includes(elementId);
 
-    // 요소가 이미 선택되어 있으면 선택 취소, 아니면 선택 추가
     if (isSelected) {
       const updatedElements = selectedElements.filter((id) => id !== elementId);
       setSelectedElements(updatedElements);
@@ -24,6 +21,7 @@ export function ElementSelect() {
     }
   };
 
+  // 요소 선택 후 백 서버로 전달 
   const handleSaveElements = async () => {
     console.log(selectedElements);
     try {
@@ -39,11 +37,8 @@ export function ElementSelect() {
 
       console.log("백엔드 응답:", response.data);
 
-      // 데이터 저장이 성공하면 리다이렉션 수행
+      // 데이터 저장이 성공하면 검사페이지로 이동
       if (response.data.success) {
-        // 리다이렉션 코드 추가 (예: React Router를 사용하는 경우)
-        // 아래 코드는 React Router v5를 기준으로 작성되었습니다.
-        // 최신 버전의 React Router를 사용하는 경우에는 useHistory 등을 이용해야 할 수 있습니다.
         window.location.href = "/examinationprogress";
       }
     } catch (error) {
