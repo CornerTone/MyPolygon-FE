@@ -9,10 +9,15 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export function Main() {
+  // 응답 저장 
   const [data, setData] = useState(null);
+  // 날짜 저장 
+  const [date, setDate] = useState(new Date());
+  // 다각형 정보 저장 
+  const [polygonData, setPolygonData] = useState(null);
 
+  // 서버로부터 다각형 정보 조회 
   useEffect(() => {
-    // Axios를 사용한 API 호출
     const fetchData = async () => {
       try {
         const polygonId = Cookies.get("polygon_id");
@@ -33,9 +38,6 @@ export function Main() {
     fetchData();
   }, []);
 
-  const [date, setDate] = useState(new Date());
-  const [polygonData, setPolygonData] = useState(null);
-
   return (
     <A.RootWrapperNaN>
       <A.Frame48>
@@ -50,9 +52,12 @@ export function Main() {
       </A.NaN_0004>
 
       <A.MyFigure>My Polygon</A.MyFigure>
+      {/* 다각형 정보 출력 */}
       <MyFigureChart data={polygonData} />
       <A.Container>
         <A.Group64>
+          {/* 검사 결과 %로 출력 */}
+          {/* 검사를 진행한 적이 없을 경우 문구 출력, 검사한 경우 가장 최근에 검사한 다각형 정보 수치화 */}
           {polygonData && polygonData.length > 0 ? (
             polygonData.map((item, index) => (
               <A.Group67 key={index}>
@@ -64,7 +69,7 @@ export function Main() {
                 </div>
               </A.Group67>
             ))
-          ) : (
+          ) : ( 
             <>
               <A._16> 검사를 진행해 주세요!</A._16>
             </>

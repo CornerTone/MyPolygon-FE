@@ -9,16 +9,19 @@ import Cookies from "js-cookie";
 
 
 export function Mypage() {
-  const [previousPolygon, setPreviousPolygon] = useState(null);
-  const [nextPolygon, setNextPolygon] = useState(null);
-  const [chartDate, setChartDate] = useState(null); // 추가된 부분
-
+  // 다각형 생성 날짜 저장 
+  const [chartDate, setChartDate] = useState(null); 
+  // 유저 정보 저장 
   const [userInfo, setUserInfo] = useState({
     id: null,
     nickname: "",
     phone_number: "",
   });
+  // 응답 저장 
+  const [data, setData] = useState(null);
+  const [polygonData, setPolygonData] = useState(null);
 
+  // 유저 정보 서버로부터 가져옴 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -29,7 +32,6 @@ export function Mypage() {
           }
         );
         setUserInfo(response.data.user);
-        console.log(response.data.elements);
       } catch (error) {
         console.error("사용자 정보를 불러오는 중 오류 발생:", error);
       }
@@ -38,10 +40,8 @@ export function Mypage() {
     fetchUserInfo();
   }, []);
 
-  const [data, setData] = useState(null);
-
+  // 다각형 정보 서버로부터 가져옴 
   useEffect(() => {
-    // Axios를 사용한 API 호출
     const fetchData = async () => {
       try {
         const polygonId = Cookies.get("polygon_id");
@@ -62,9 +62,6 @@ export function Mypage() {
 
     fetchData();
   }, []);
-
-  const [date, setDate] = useState(new Date());
-  const [polygonData, setPolygonData] = useState(null);
 
   // ArrowRightBoldOutline 클릭 핸들러
   const handlePreviousClick = async () => {
@@ -87,7 +84,7 @@ export function Mypage() {
     }
   };
 
-  // ArrowRightBoldOutline_0001 클릭 핸들러
+  // 오른쪽 화살표 클릭 시 호출 
   const handleNextClick = async () => {
     try {
       if (!data.nextPolygon) {
@@ -108,10 +105,11 @@ export function Mypage() {
     }
   };
 
+  // 시간을 yyyy년 m월 d일 형식으로 변경 
   function getFormattedDate(chartDate) {
     const dateObj = new Date(chartDate);
     const year = dateObj.getFullYear();
-    const month = dateObj.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더합니다.
+    const month = dateObj.getMonth() + 1;
     const day = dateObj.getDate();
     return `${year}년 ${month}월 ${day}일`;
   }
@@ -155,17 +153,20 @@ export function Mypage() {
         </M.Group59>
       </M.Container>
       <M.MyHistory>My History</M.MyHistory>
+      {/*오른쪽 화살표*/}
       <M.ArrowRightBoldOutline
         onClick={handleNextClick}
         src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e1a34c2a-d9be-4af0-94c3-ab0d0330e5d3"
         alt="icon"
       />
+      {/*왼쪽 화살표*/}
       <M.ArrowRightBoldOutline_0001
         onClick={handlePreviousClick}
         src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/afeaba53-4030-4b02-804d-db8d554076e5"
         alt="icon"
       />
       <M.Top>
+        {/* 다각형 그리기 */}
         <MyFigureChart data={polygonData} />
         <M.DatePosition>{`📅 ${getFormattedDate(chartDate)} 📅`}</M.DatePosition>
       </M.Top>
