@@ -219,3 +219,41 @@ export const Rectangle38 = styled.div`
   background-size: contain;
   background-position;
   `;
+
+export const Typography = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  left: 142px;
+  top: 18px;
+`;
+
+export const Typography_0001 = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  box-sizing: border-box;
+`;
+
+export const Typography_0002 = styled.span`
+  color: rgb(51, 51, 51);
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  font-weight: 800;
+  text-align: center;
+`;
+
+export const Vector = styled.svg`
+  width: 20px;
+  height: 15px;
+  position: absolute;
+  left: 16px;
+  top: 22px;
+  right: 324px;
+  bottom: 763px;
+`;
