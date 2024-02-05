@@ -27,8 +27,14 @@ const categoryNames = {
     경제: '경제'
 };
 
+const convertMinutesToTimeString = (totalMinutes) => {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours} h ${minutes} m`;
+};
 
-export function Record({ selectedDate }) {
+
+export function Record({ selectedDate, onDateChange }) {
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -60,6 +66,10 @@ export function Record({ selectedDate }) {
 
 	const categories = ["학업", "여가", "건강", "인간관계", "경제"];
 
+	const handleDateChange = (selectedDate) => {
+		onDateChange(selectedDate);
+	};
+
     useEffect(() => {
         fetchRecordedTimes();
     }, [formattedDate]);
@@ -69,6 +79,9 @@ export function Record({ selectedDate }) {
 			console.log("Selected Date:", selectedDate);
             const response = await axios.get("http://localhost:3001/api/dailyInvestment/daily",{
 				withCredentials: true,
+				params: {
+					selectedDate: selectedDate.toISOString() // 변경된 날짜를 ISO 형식으로 전달
+				}
 			});
             setRecordedTimes(response.data);
         } catch (error) {
@@ -78,14 +91,18 @@ export function Record({ selectedDate }) {
 
     const handleConfirm = async (timeRecorded) => {
         try {
-			
+			//const minutesRecorded = convertMinutesToTimeString(timeRecorded);
             const response = await axios.post("http://localhost:3001/api/dailyInvestment/save_daily", {
                 category: selectedCategory,
-                timeInvested: timeRecorded,
+                totalMinutes: timeRecorded,
                 activityDate: formattedDate,
+            },
+			{
 				withCredentials: true,
-            });
-            fetchRecordedTimes(selectedDate); // 저장 후 다시 투자 정보를 조회하여 업데이트
+			}
+			
+			);
+            fetchRecordedTimes(); // 저장 후 다시 투자 정보를 조회하여 업데이트
             closeModal();
         } catch (error) {
             console.error("Error saving recorded time:", error);
@@ -105,7 +122,7 @@ export function Record({ selectedDate }) {
 
 			<R.NaN_0003>
 				<R.Line3/>
-				<WeekCalendar date={selectedDate} />
+				<WeekCalendar date={formattedDate} onChange={handleDateChange} />
 			</R.NaN_0003>
 
 			<R.ContentContainer>
@@ -115,8 +132,9 @@ export function Record({ selectedDate }) {
 
 						<R.CategoryName>{categoryNames[category]}</R.CategoryName>
 						<R.TimeRecord>
-							{recordedTimes[category] || "00 h 00 m"}
+							{recordedTimes[category] ? convertMinutesToTimeString(recordedTimes[category]) : "00 h 00 m"}
 						</R.TimeRecord>
+
 						{categoryIcons[category] && (
 							<div>
 								<R.Ellipse11>

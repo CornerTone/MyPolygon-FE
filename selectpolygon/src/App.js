@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { useEffect, useReducer, useRef } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -56,6 +56,11 @@ export const DiaryDispatchContext = React.createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate);
+  };
 
   useEffect(() => {
     const localData = localStorage.getItem("diary");
@@ -122,7 +127,7 @@ function App() {
                 path="/ExaminationProgress"
                 element={<ExaminationProgress />}
               />
-              <Route path="/record" element={<Record />} />
+              <Route path="/record" element={<Record selectedDate={selectedDate} onDateChange={handleDateChange} />} />
 
               <Route path="/diaryhome" element={<DiaryHome />} />
               <Route path="/diarynew" element={<DiaryNew />} />
