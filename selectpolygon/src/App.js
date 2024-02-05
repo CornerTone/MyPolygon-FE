@@ -11,6 +11,10 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SiginPage } from "./pages/Signin/SiginPage";
 import { Record } from "./pages/Record/Record";
 import { Main } from "./pages/Main/Main";
+// 칭찬일기 
+import { ComplimentMain } from './pages/Compliment/ComplimentMain';
+import { ComplimentDetail } from './pages/Compliment/ComplimentDetail';
+import { ComplimentWrite } from './pages/Compliment/ComplimentWrite'
 
 import { Mypage } from "./pages/mypage/mypage";
 
@@ -140,6 +144,11 @@ function App() {
                 path="/communitydetail/:id"
                 element={<CommunityDetail />}
               />
+
+              <Route path="/compliment" element={<ComplimentMain />}/>
+              <Route path="/compliment/:id" element={<ComplimentDetail />}/>
+              <Route path="/complimentwrite" element={<ComplimentWrite />}/>
+              
             </Routes>
           </div>
         </BrowserRouter>

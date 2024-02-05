@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { goBack } from "../../components/backNavigation";
+import axios from "axios"; 
 
 /**
  * `<NaN>` ('칭찬일기-작성 (수정페이지 동일)')
@@ -39,7 +40,69 @@ import { goBack } from "../../components/backNavigation";
  * <!-- Info: Please do not remove this comment unless intended. removing this section will break grida integrations. -->
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/108:701 -->
  */
+
+const getEmotionImageUrl = (emotion) => {
+  let imageUrl = "";
+  switch (emotion) {
+    case 1:
+      imageUrl = "/assets/emotion1.png";
+      break;
+    case 2:
+      imageUrl = "/assets/emotion2.png";
+      break;
+    case 3:
+      imageUrl = "/assets/emotion3.png";
+      break;
+    case 4:
+      imageUrl = "/assets/emotion4.png";
+      break;
+    case 5:
+      imageUrl = "/assets/emotion5.png";
+      break;
+
+  }
+  return imageUrl;
+};
+
 export function ComplimentWrite() {
+  const [emotion, setEmotion] = useState(null);
+  const [content, setContent] = useState("");
+  const [compliments, setCompliments] = useState([]);
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
+
+  const handleEmotionClick = (value) => {
+    setEmotion(value);
+    console.log(value);
+    if (selectedEmotion === value){
+      setSelectedEmotion(null);
+    }else {
+      // 새로운 감정을 클릭하면 선택됨
+      setSelectedEmotion(value);
+    }
+  };
+
+
+  const handleSubmit = () => {
+    const data = {
+      content: content,
+      emotion: emotion
+    };
+
+    axios.post("http://localhost:3001/api/compliment/create", data,
+    {
+      withCredentials: true,
+  }
+  )
+      .then(response => {
+        console.log("글 등록 완료", response.data);
+        window.location.href = "/compliment";
+  })
+      .catch(error => {
+        console.error("Error:", error);
+        // Handle error
+      });
+  };
+
   return (
     <RootWrapperNaN>
       <Frame47>
@@ -57,18 +120,28 @@ export function ComplimentWrite() {
       <NaN_0002>1월 28일 일요일</NaN_0002>
       <Group59>
         <Rectangle46 />
-        <NaN_0003>완료</NaN_0003>
+        <NaN_0003 onClick={handleSubmit}>완료</NaN_0003>
       </Group59>
       <NaN_0004>오늘 하루는 어땠나요?</NaN_0004>
-      <Emotion1 />
-      <Emotion2 />
-      <Emotion3 />
-      <Emotion4 />
-      <Emotion5 />
+      <Emotion1 selected={selectedEmotion === 1} onClick={() => handleEmotionClick(1)} />
+      <Emotion2 selected={selectedEmotion === 2} onClick={() => handleEmotionClick(2)} />
+      <Emotion3 selected={selectedEmotion === 3} onClick={() => handleEmotionClick(3)} />
+      <Emotion4 selected={selectedEmotion === 4} onClick={() => handleEmotionClick(4)} />
+      <Emotion5 selected={selectedEmotion === 5} onClick={() => handleEmotionClick(5)} />
       <NaN_0005>오늘 나에게 해주고 싶은 한 마디는 무엇인가요?</NaN_0005>
       <Group60>
         <Rectangle39 />
-        <NaN_0006>여기에 작성하세요...</NaN_0006>
+        <NaN_0006>
+        <textarea
+Co  style={{ width: '285px', height: '200px' }}
+  value={content}
+  onChange={(e) => setContent(e.target.value)}
+  placeholder="내용을 입력하세요"
+/>
+
+
+
+      </NaN_0006>
       </Group60>
       <Frame50>
         <Frame1>
@@ -115,7 +188,7 @@ export function ComplimentWrite() {
       </Frame50>
     </RootWrapperNaN>
   );
-}
+};
 
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
@@ -218,61 +291,76 @@ const NaN_0004 = styled.span`
 const Emotion1 = styled.div`
   width: 64px;
   height: 64px;
-  background: url(https://s3-alpha-sig.figma.com/img/d2c0/bca7/68e1e2384b8898d15503b087999b3d85?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i2h5Pz6UsB9nLmRtgElik~47xkcUMZwhYGe8zt0xZHYxK-4sg1Z5DjVatyu4UX7LK7a0h8KlGj0Fcjp0RhQ18c03vz-eTlF5zsqSR2-4Bq2hI7TpikMmbJd8REMDlcELJS7Yiv9nKRgsDasOLfTTbVNNFX0gd7D9TSpAFEuPA1sr0yDvAZc8Zlmjg0Tct2vFvLCwgJjfL3zRaI1v~KIclqupUoqBJbapSBj7NjGZ~B96xcFpY95YiQJrLXJOdCSG1iT6AEfOa22JyamiKp5Vai6oZHq8L~s~9Wwi85zKAalZ~S94tPq8IBy3x9VdjXij9J9bQgg8vUZGqoitLGyw9A__);
+  background: url(/assets/emotion5.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
   left: 16px;
   top: 195px;
+  cursor: pointer;
+  box-shadow: ${props => props.selected ? '0px 2px 4px rgba(0, 0, 0, 0.2)' : 'none'};
+
 `;
 
 const Emotion2 = styled.div`
   width: 63px;
   height: 64px;
-  background: url(https://s3-alpha-sig.figma.com/img/d2c0/bca7/68e1e2384b8898d15503b087999b3d85?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i2h5Pz6UsB9nLmRtgElik~47xkcUMZwhYGe8zt0xZHYxK-4sg1Z5DjVatyu4UX7LK7a0h8KlGj0Fcjp0RhQ18c03vz-eTlF5zsqSR2-4Bq2hI7TpikMmbJd8REMDlcELJS7Yiv9nKRgsDasOLfTTbVNNFX0gd7D9TSpAFEuPA1sr0yDvAZc8Zlmjg0Tct2vFvLCwgJjfL3zRaI1v~KIclqupUoqBJbapSBj7NjGZ~B96xcFpY95YiQJrLXJOdCSG1iT6AEfOa22JyamiKp5Vai6oZHq8L~s~9Wwi85zKAalZ~S94tPq8IBy3x9VdjXij9J9bQgg8vUZGqoitLGyw9A__);
+  background: url(/assets/emotion4.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
   left: 80px;
   top: 195px;
+  cursor: pointer;
+  box-shadow: ${props => props.selected ? '0px 2px 4px rgba(0, 0, 0, 0.2)' : 'none'};
+
 `;
 
 const Emotion3 = styled.div`
   width: 64px;
   height: 64px;
-  background: url(https://s3-alpha-sig.figma.com/img/d2c0/bca7/68e1e2384b8898d15503b087999b3d85?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i2h5Pz6UsB9nLmRtgElik~47xkcUMZwhYGe8zt0xZHYxK-4sg1Z5DjVatyu4UX7LK7a0h8KlGj0Fcjp0RhQ18c03vz-eTlF5zsqSR2-4Bq2hI7TpikMmbJd8REMDlcELJS7Yiv9nKRgsDasOLfTTbVNNFX0gd7D9TSpAFEuPA1sr0yDvAZc8Zlmjg0Tct2vFvLCwgJjfL3zRaI1v~KIclqupUoqBJbapSBj7NjGZ~B96xcFpY95YiQJrLXJOdCSG1iT6AEfOa22JyamiKp5Vai6oZHq8L~s~9Wwi85zKAalZ~S94tPq8IBy3x9VdjXij9J9bQgg8vUZGqoitLGyw9A__);
+  background: url(/assets/emotion3.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
   left: 143px;
   top: 195px;
+  cursor: pointer;
+  box-shadow: ${props => props.selected ? '0px 2px 4px rgba(0, 0, 0, 0.2)' : 'none'};
+
 `;
 
 const Emotion4 = styled.div`
   width: 63px;
   height: 64px;
-  background: url(https://s3-alpha-sig.figma.com/img/d2c0/bca7/68e1e2384b8898d15503b087999b3d85?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i2h5Pz6UsB9nLmRtgElik~47xkcUMZwhYGe8zt0xZHYxK-4sg1Z5DjVatyu4UX7LK7a0h8KlGj0Fcjp0RhQ18c03vz-eTlF5zsqSR2-4Bq2hI7TpikMmbJd8REMDlcELJS7Yiv9nKRgsDasOLfTTbVNNFX0gd7D9TSpAFEuPA1sr0yDvAZc8Zlmjg0Tct2vFvLCwgJjfL3zRaI1v~KIclqupUoqBJbapSBj7NjGZ~B96xcFpY95YiQJrLXJOdCSG1iT6AEfOa22JyamiKp5Vai6oZHq8L~s~9Wwi85zKAalZ~S94tPq8IBy3x9VdjXij9J9bQgg8vUZGqoitLGyw9A__);
+  background: url(/assets/emotion2.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
   left: 207px;
   top: 195px;
+  cursor: pointer;
+  box-shadow: ${props => props.selected ? '0px 2px 4px rgba(0, 0, 0, 0.2)' : 'none'};
+
 `;
 
 const Emotion5 = styled.div`
   width: 65px;
   height: 64px;
-  background: url(https://s3-alpha-sig.figma.com/img/d2c0/bca7/68e1e2384b8898d15503b087999b3d85?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i2h5Pz6UsB9nLmRtgElik~47xkcUMZwhYGe8zt0xZHYxK-4sg1Z5DjVatyu4UX7LK7a0h8KlGj0Fcjp0RhQ18c03vz-eTlF5zsqSR2-4Bq2hI7TpikMmbJd8REMDlcELJS7Yiv9nKRgsDasOLfTTbVNNFX0gd7D9TSpAFEuPA1sr0yDvAZc8Zlmjg0Tct2vFvLCwgJjfL3zRaI1v~KIclqupUoqBJbapSBj7NjGZ~B96xcFpY95YiQJrLXJOdCSG1iT6AEfOa22JyamiKp5Vai6oZHq8L~s~9Wwi85zKAalZ~S94tPq8IBy3x9VdjXij9J9bQgg8vUZGqoitLGyw9A__);
+  background: url(/assets/emotion1.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
   left: 270px;
   top: 195px;
+  cursor: pointer;  const [isClicked, setIsClicked] = useState(false);
+  box-shadow: ${props => props.selected ? '0px 2px 4px rgba(0, 0, 0, 0.2)' : 'none'};
+
 `;
 
 const NaN_0005 = styled.span`
@@ -320,6 +408,8 @@ const NaN_0006 = styled.span`
   position: absolute;
   left: 14px;
   top: 23px;
+  cursor: pointer;  const [isClicked, setIsClicked] = useState(false);
+
 `;
 
 const Frame50 = styled.div`

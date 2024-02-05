@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { goBack } from "../../components/backNavigation";
-
+import axios from "axios";
 /**
  * `<NaN>` ('칭찬일기-목록')
  * - [Open in Figma](https://figma.com/file/NlD9D8mc0GTNdluwALGs8v?node-id=108:598)
@@ -40,7 +40,65 @@ import { goBack } from "../../components/backNavigation";
  * <!-- grida.meta.widget_declaration | engine : 0.0.1 | source : figma://NlD9D8mc0GTNdluwALGs8v/108:598 -->
  */
 
+const getEmotionImageUrl = (emotion) => {
+  let imageUrl = "";
+  switch (emotion) {
+    case 5:
+      imageUrl = "/assets/emotion1.png";
+      break;
+    case 4:
+      imageUrl = "/assets/emotion2.png";
+      break;
+    case 3:
+      imageUrl = "/assets/emotion3.png";
+      break;
+    case 2:
+      imageUrl = "/assets/emotion4.png";
+      break;
+    case 1:
+      imageUrl = "/assets/emotion5.png";
+      break;
+
+  }
+  return imageUrl;
+};
+
+const formatDate = (date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  let month = '' + (d.getMonth() + 1);
+  let day = '' + d.getDate();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
+};
+
 export function ComplimentMain() {
+  const [compliments, setCompliments] = useState([]);
+
+  // 컴포넌트가 마운트될 때 한 번만 실행되는 useEffect 사용
+  useEffect(() => {
+    // 서버로부터 데이터를 가져오는 비동기 함수 정의
+    const fetchData = async () => {
+      try {
+        // 서버로부터 데이터를 가져옴
+        const response = await axios.get("http://localhost:3001/api/compliment/read-all",
+        {
+          withCredentials: true,
+      });
+        // 가져온 데이터를 상태로 설정
+        setCompliments(response.data.message);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // fetchData 함수 호출
+    fetchData();
+  }, []);
+  
   return (
     <RootWrapperNaN>
       <Frame48>
@@ -56,36 +114,30 @@ export function ComplimentMain() {
         />
         <NaN_0002>칭찬 일기</NaN_0002>
       </Frame48>
+    
+
+
+      {compliments.map((compliment, index) => (
+          <Link key={compliment.id} to={`/compliment/${compliment.id}`}>
+
+        <CustomDiv key={compliment.id} index={index}>
       <Rectangle34 />
-      <NaN_0003>2023/12</NaN_0003>
-      <Rectangle35 />
-      <_31>31</_31>
-      <Sun>SUN</Sun>
-      <_20231>
-        2023년도 꽤 열심히 보낸 것 같다. 1년을 달려오느라 수고했다!
-      </_20231>
-      <NaN_0004>2024/1</NaN_0004>
-      <Link to="/ComplimentDetail">
+      <NaN_0003>{formatDate(compliment.date)}</NaN_0003>
+ 
+    
+
         <Group38>
           <Rectangle31 />
-          <_31_0001>31</_31_0001>
-          <Sun_0001>SUN</Sun_0001>
+          <_31_0001>{compliment.emotion}</_31_0001>
+          <Sun_0001>점</Sun_0001>
           <_20231_0001>
-            2023년도 꽤 열심히 보낸 것 같다. 1년을 달려오느라 수고했다!
+          {compliment.content}
           </_20231_0001>
-          <Emotion2 />
-        </Group38>
-      </Link>
-      <Group39>
-        <Rectangle31 />
-        <_28>28</_28>
-        <Sun_0001>SUN</Sun_0001>
-        <NaN_0005>
-          주말이라고 너무 누워만 있었다. 이미 지나간 시간 자책하지 말고 잘
-          쉬었다 생각하자. 내일부턴 다시 열심히
-        </NaN_0005>
-        <Emotion3 />
-      </Group39>
+          <EmotionImage emotion={compliment.emotion} />        </Group38>
+        </CustomDiv>
+        </Link>
+     
+))}
       <Ellipse9 />
       <Link to="/ComplimentWrite">
         <IconAdd>
@@ -147,6 +199,29 @@ export function ComplimentMain() {
     </RootWrapperNaN>
   );
 }
+
+const EmotionImage = styled.div`
+  width: 48px;
+  height: 48px;
+  background-image: url(${props => getEmotionImageUrl(props.emotion)});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 262px;
+  top: 26px;
+`;
+
+const CustomDiv = styled.div`
+  /* Common styles */
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px; /* 기존 20px 에서 30px 로 변경 */
+  margin-top: 30px; /* 새로 추가된 margin-top */
+
+  /* Dynamic styles based on index */
+  top: ${props => props.index * 200}px;
+`;
 
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
