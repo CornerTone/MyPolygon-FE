@@ -49,7 +49,7 @@ export function PolygonChart({ elements }) {
         },
         pointLabels: {
           font: {
-            size: 12,
+            size: 13,
             weight: "700",
             family: "Pretendard",
           },

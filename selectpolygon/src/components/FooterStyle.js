@@ -31,10 +31,6 @@ export const Group54 = styled.div`
   left: 297px;
   top: 16px;
   z-index: 1;
-  
-  &:hover {
-    color: #ebba71;
-  }
 `;
 
 export const IconsBasicProject = styled.div`
@@ -79,10 +75,6 @@ export const NaN_0014 = styled.span`
   left: 0px;
   top: 20px;
   z-index: 1;
-
-  &:hover {
-    color: #ebba71;
-  }
 `;
 
 export const Group53 = styled.div`
@@ -117,6 +109,14 @@ export const IconsBasicChat = styled.div`
   }
 `;
 
+export const Container = styled.div`
+  &:hover {
+    svg path {
+      fill: #ebba71;
+    }
+  }
+`;
+
 export const Chat = styled.svg`
   width: 16px;
   height: 16px;
@@ -140,10 +140,6 @@ export const NaN_0015 = styled.span`
   left: 0px;
   top: 22px;
   z-index: 1;
-
-  &:hover {
-    color: #ebba71;
-  }
 `;
 
 export const Group52 = styled.div`
@@ -209,10 +205,6 @@ export const NaN_0016 = styled.span`
   left: 3px;
   top: 18px;
   z-index: 1;
-
-  &:hover {
-    color: #ebba71;
-  }
 `;
 
 export const Group51 = styled.div`
@@ -270,10 +262,6 @@ export const NaN_0017 = styled.span`
   left: 0px;
   top: 20px;
   z-index: 1;
-
-  &:hover {
-    color: #ebba71;
-  }
 `;
 
 export const Group50 = styled.div`
@@ -301,10 +289,6 @@ export const NaN_0018 = styled.span`
   left: 0px;
   top: 20px;
   z-index: 1;
-
-  &:hover {
-    color: #ebba71;
-  }
 `;
 
 export const IconsBasicTime = styled.div`

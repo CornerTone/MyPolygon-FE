@@ -157,8 +157,8 @@ const _16 = styled.span`
   text-align: center;
   min-height: 23px;
   position: absolute;
-  left: 55px;
-  top: 11px;
+  left: 75px;
+  top: 550px;
   height: 23px;
 `;
 
