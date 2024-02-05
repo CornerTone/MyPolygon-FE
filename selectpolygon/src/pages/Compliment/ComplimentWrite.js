@@ -36,6 +36,18 @@ export function ComplimentWrite() {
   const [compliments, setCompliments] = useState([]);
   const [selectedEmotion, setSelectedEmotion] = useState(null);
 
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    // 페이지가 로드될 때 현재 날짜를 업데이트합니다.
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    setCurrentDate(`${year}년 ${month}월 ${day}일`);
+  }, []);
+
   const handleEmotionClick = (value) => {
     setEmotion(value);
     console.log(value);
@@ -70,18 +82,17 @@ export function ComplimentWrite() {
   return (
     <RootWrapperNaN>
       <Frame47>
-        <Vector xmlns="http://www.w3.org/2000/svg">
+        <Vector xmlns="http://www.w3.org/2000/svg" onClick={goBack}>
           <path
             fill="rgba(0, 0, 0, 0.64)"
             d="M0 7.50001C0 7.74737 0.118471 7.97494 0.333872 8.16294L7.4852 14.723C7.7006 14.911 7.92677 15 8.18525 15C8.71299 15 9.13302 14.6439 9.13302 14.1491C9.13302 13.9117 9.03609 13.6742 8.86377 13.5257L6.45127 11.2698L2.18633 7.6979L1.96015 8.18273L5.42811 8.38062L19.0523 8.38062C19.6123 8.38062 20 8.01452 20 7.50001C20 6.9855 19.6123 6.6194 19.0523 6.6194L5.42811 6.6194L1.96015 6.81729L2.18633 7.31202L6.45127 3.73022L8.86377 1.47427C9.03609 1.31596 9.13302 1.08839 9.13302 0.850923C9.13302 0.356201 8.71299 0 8.18525 0C7.92677 0 7.7006 0.0791558 7.46365 0.296834L0.333872 6.83708C0.118471 7.02507 0 7.25265 0 7.50001Z"
           />
         </Vector>
-        <IconsBasicUser
-          src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/c5a10b5d-c236-44c9-8164-3468a3a2de5e"
-          alt="icon"
-        />
+        <NaN_00001>칭찬 작성</NaN_00001>
+        <HeaderLogout />
+        <HeaderMypage />
       </Frame47>
-      <NaN_0002>1월 28일 일요일</NaN_0002>
+      <NaN_0002>📅 {currentDate} 📅</NaN_0002>
       <Group59>
         <Rectangle46 />
         <NaN_0003 onClick={handleSubmit}>완료</NaN_0003>
@@ -125,6 +136,18 @@ export function ComplimentWrite() {
     </RootWrapperNaN>
   );
 }
+const NaN_00001 = styled.span`
+  color: black;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  width: 85px;
+  position: absolute;
+  left: 138px;
+  top: 19px;
+`;
 
 const RootWrapperNaN = styled.div`
   min-height: 100vh;
@@ -175,8 +198,8 @@ const NaN_0002 = styled.span`
   font-weight: 700;
   text-align: left;
   position: absolute;
-  left: 16px;
-  top: 79px;
+  left: 85px;
+  top: 90px;
 `;
 
 const Group59 = styled.div`
@@ -198,6 +221,10 @@ const Rectangle46 = styled.div`
   position: absolute;
   left: 0px;
   top: 0px;
+
+  &:hover {
+    background-color: #213555; /* hover 시 배경색 변경 */
+  }
 `;
 
 const NaN_0003 = styled.span`
@@ -220,7 +247,7 @@ const NaN_0004 = styled.span`
   font-weight: 400;
   text-align: left;
   position: absolute;
-  left: 16px;
+  left: 100px;
   top: 165px;
 `;
 

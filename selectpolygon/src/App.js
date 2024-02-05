@@ -11,17 +11,12 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SiginPage } from "./pages/Signin/SiginPage";
 import { Record } from "./pages/Record/Record";
 import { Main } from "./pages/Main/Main";
-// 칭찬일기 
-import { ComplimentMain } from './pages/Compliment/ComplimentMain';
-import { ComplimentDetail } from './pages/Compliment/ComplimentDetail';
-import { ComplimentWrite } from './pages/Compliment/ComplimentWrite'
+// 칭찬일기
+import { ComplimentMain } from "./pages/Compliment/ComplimentMain";
+import { ComplimentDetail } from "./pages/Compliment/ComplimentDetail";
+import { ComplimentWrite } from "./pages/Compliment/ComplimentWrite";
 
 import { Mypage } from "./pages/mypage/mypage";
-
-import DiaryDetail from "./pages/Diary/Detail";
-import DiaryEdit from "./pages/Diary/Edit";
-import DiaryHome from "./pages/Diary/Home";
-import DiaryNew from "./pages/Diary/New";
 
 import { Community } from "./pages/Community/Community";
 import { NewCommunity } from "./pages/Community/NewCommunity";
@@ -141,11 +136,6 @@ function App() {
                 }
               />
 
-              <Route path="/diaryhome" element={<DiaryHome />} />
-              <Route path="/diarynew" element={<DiaryNew />} />
-              <Route path="/diaryedit/:id" element={<DiaryEdit />} />
-              <Route path="/diarydetail/:id" element={<DiaryDetail />} />
-
               <Route path="/community" element={<Community />} />
               <Route path="/communitynew" element={<NewCommunity />} />
               <Route
@@ -153,10 +143,9 @@ function App() {
                 element={<CommunityDetail />}
               />
 
-              <Route path="/compliment" element={<ComplimentMain />}/>
-              <Route path="/compliment/:id" element={<ComplimentDetail />}/>
-              <Route path="/complimentwrite" element={<ComplimentWrite />}/>
-              
+              <Route path="/compliment" element={<ComplimentMain />} />
+              <Route path="/compliment/:id" element={<ComplimentDetail />} />
+              <Route path="/complimentwrite" element={<ComplimentWrite />} />
             </Routes>
           </div>
         </BrowserRouter>
