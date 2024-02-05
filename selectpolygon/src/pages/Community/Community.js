@@ -26,22 +26,38 @@ const categoryColors = {
 };
 
 export function Community() {
+	
     const navigate = useNavigate(); 
     const [posts, setPosts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
+	const [errorMessage, setErrorMessage] = useState('');
+
 
     useEffect(() => {
         fetchData();
     }, [selectedCategory]); 
 
     const fetchData = async () => {
+
         try {
-            let url = "http://localhost:3001/api/community/read-category";
+
+			
+            	let url = "http://localhost:3001/api/community/read-category";
+			
             if (selectedCategory) {
                 url += `/${selectedCategory}`;
             }
             const response = await axios.get(url, { withCredentials: true });
+			console.log("response => "+response)
+			if(response.data.status===404){
+				console.log("err")
+				setErrorMessage('작성된 커뮤니티 글이 없습니다.');
+				console.log(errorMessage)
+			}
             if (response.data.success) {
+				setErrorMessage('');
+				console.log("in");
+				console.log(response.data);
                 const updatedPosts = response.data.communities.map(post => ({
                     ...post,
                     categoryName: categoryNames[post.categories[0].id] // Convert categoryId to categoryName
@@ -49,11 +65,15 @@ export function Community() {
                 setPosts(updatedPosts);
 				console.log(updatedPosts)
             } else {
+				console.log("err")
+				setErrorMessage('작성된 커뮤니티 글이 없습니다.');
+				console.log(errorMessage)
                 console.error("Failed to fetch posts");
             }
         } catch (error) {
-            console.error("Error fetching posts:", error);
-        }
+			setErrorMessage('작성된 커뮤니티 글이 없습니다.');
+		console.log(error.message)
+		}
     };
 
 	function handleClick(id) {
@@ -61,12 +81,16 @@ export function Community() {
 	}
     
     const handleCategoryClick = (category) => {
-        setSelectedCategory(category === selectedCategory ? null : category);
+		console.log(category)
+		setSelectedCategory(category);
+        // setSelectedCategory(category === selectedCategory ? null : category);
     };
 
     const navigateToNewPost = () => {
         navigate("/communitynew"); 
     }
+
+	
     
     return (
         <RootWrapperNaN>
@@ -86,25 +110,29 @@ export function Community() {
 							<Rectangle34 color={selectedCategory === categoryId ? categoryColors[categoryId] : 'white'}>
 								<path fill={selectedCategory === categoryId ? categoryColors[categoryId] : 'white'} d="M0 14.5C0 6.49187 6.49187 0 14.5 0L37.5 0C45.5081 0 52 6.49187 52 14.5L52 14.5C52 22.5081 45.5081 29 37.5 29L14.5 29C6.49187 29 0 22.5081 0 14.5L0 14.5Z"/>
 							</Rectangle34>
-							<CategoryName>{categoryNames[categoryId]}</CategoryName>
+							<CategoryName onClick={() => handleCategoryClick(categoryId)}>{categoryNames[categoryId]}</CategoryName>
 						</CategoriesContainer>
 					</React.Fragment>
 				))}
 			</CategoryWrapper>
             
-            <Group3>
-    <PostGrid>
-        {posts.map((post, index) => (
-            <PostItem key={index}>
-<PostContent onClick={() => handleClick(post.id)}>{post.content}</PostContent>
-                <Group5>
-                    <Rectangle22 color={categoryColors[post.categories[0].id]} />
-                    <CategoryNameBox>{categoryNames[post.categories[0].id]}</CategoryNameBox>
-                </Group5>
-            </PostItem>
-        ))}
-    </PostGrid>
-</Group3>
+			<Group3>
+                {errorMessage ? (
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
+                ) : (
+                    <PostGrid>
+                        {posts.map((post, index) => (
+                            <PostItem key={index}>
+                                <PostContent onClick={() => handleClick(post.id)}>{post.content}</PostContent>
+                                <Group5>
+                                    <Rectangle22 color={categoryColors[post.categories[0].id]} />
+                                    <CategoryNameBox>{categoryNames[post.categories[0].id]}</CategoryNameBox>
+                                </Group5>
+                            </PostItem>
+                        ))}
+                    </PostGrid>
+                )}
+            </Group3>
 
             <Ellipse9 onClick={navigateToNewPost}>
                 <FontAwesomeIcon 
@@ -122,6 +150,13 @@ export function Community() {
         </RootWrapperNaN>
     )
 }
+
+const ErrorMessage = styled.div`
+    color: "#EBBA71";
+    font-size: 16px;
+    text-align: center;
+	margin-top:50px;
+`;
 
 const RootWrapperNaN = styled.div`
     min-height: 100vh;
