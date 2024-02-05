@@ -7,12 +7,14 @@ import { goBack } from "../../components/backNavigation";
 export function SiginPage() {
   const navigate = useNavigate();
 
+  // 로그인 formData 상태변수 
   const [formData, setFormData] = useState({
     nickname: "",
     phone_number: "",
     password: "",
   });
 
+  // 폼에서 변경이벤트 처리 
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,6 +22,7 @@ export function SiginPage() {
     });
   };
 
+  // 전송 버튼 클릭 시 회원가입 진행 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,20 +31,11 @@ export function SiginPage() {
         "http://localhost:3001/api/auth/join",
         formData
       );
-
-      if (response.data.isDuplicate) {
-        // 기존에 있는 회원일 경우 알림창 띄우기
-        alert("기존에 있는 회원입니다.");
-      } else {
-        // 회원가입이 성공하면 홈페이지로 이동
-        navigate("/");
-        console.log(response.data.message); // 서버의 응답 메시지를 콘솔에 출력
-      }
+      // 페이지 이동 
+      navigate("/");
+      console.log(response.data); 
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
-
-      // 오류 발생 시 알림창 띄우기
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -84,6 +78,7 @@ export function SiginPage() {
         value={formData.phone_number}
         onChange={handleChange}
       />
+
       <S.Group16>
         <S.Rectangle22_0002 />
         <button type="submit" onClick={handleSubmit}>
