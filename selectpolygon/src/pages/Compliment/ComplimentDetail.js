@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom"; // custom hooks
-
+import { useParams } from "react-router-dom"; 
 import { Footer } from "../../components/Footer";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
 import { goBack } from "../../components/backNavigation";
 import axios from "axios";
 
+// 감정에 따라 이미지 다르게 설정 
 const getEmotionImageUrl = (emotion) => {
   let imageUrl = "";
   switch (emotion) {
@@ -27,14 +26,11 @@ const getEmotionImageUrl = (emotion) => {
     case 1:
       imageUrl = "/assets/emotion5.png";
       break;
-    default:
-      // 기본값 설정
-      imageUrl = "/assets/default.png";
-      break;
   }
   return imageUrl;
 };
 
+// yyyy-mm-dd 형식으로 출력 
 const formatDate = (date) => {
   const d = new Date(date);
   const year = d.getFullYear();
@@ -47,6 +43,7 @@ const formatDate = (date) => {
   return [year, month, day].join("-");
 };
 
+// id값에 해당하는 칭찬일기 삭제 
 const handleDelete = (id) => {
   axios
     .delete(`http://localhost:3001/api/compliment/delete/${id}`, {
@@ -54,19 +51,21 @@ const handleDelete = (id) => {
     })
     .then((response) => {
       console.log(response.data);
+      // 칭찬일기 페이지로 이동 
       window.location.href = "/compliment";
     })
     .catch((error) => {
       console.error("Error:", error);
-      // 삭제 중 오류가 발생한 경우에 대한 처리
     });
 };
 
 export function ComplimentDetail() {
-  const { id } = useParams(); // pathVariable = id (경로의 변수 담아서 전달)
-  console.log(id);
+  // 경로의 id파라미터 값 가져옴 
+  const { id } = useParams();
+  // 칭찬일기 데이터 저장 
   const [complimentData, setComplimentData] = useState({});
 
+  // 서버로부터 칭찬일기 상세 조회
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/compliment/read/${id}`, {
@@ -79,7 +78,7 @@ export function ComplimentDetail() {
       .catch((error) => {
         console.error("Error fetching compliment data:", error);
       });
-  }, [id]);
+  }, [id]); // id값 바뀔 때마다 실행 
 
   return (
     <RootWrapperNaN>
@@ -94,6 +93,7 @@ export function ComplimentDetail() {
         <HeaderMypage />
       </Frame48>
 
+      {/* yyyy-mm-dd 형식으로 출력 */}
       <NaN_0003>{formatDate(complimentData.date)}</NaN_0003>
       <NaN_0004>{complimentData.time}</NaN_0004>
       <Line3 />

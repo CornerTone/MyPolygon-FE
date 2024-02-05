@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 import { Footer } from "../../components/Footer";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
 import { goBack } from "../../components/backNavigation";
-
 import axios from "axios";
 
+// yyyy-mm-dd 형식으로 출력
 const getEmotionImageUrl = (emotion) => {
   let imageUrl = "";
   switch (emotion) {
@@ -31,15 +30,17 @@ const getEmotionImageUrl = (emotion) => {
 };
 
 export function ComplimentWrite() {
+  // 감정 저장 
   const [emotion, setEmotion] = useState(null);
+  // 칭찬일기 저장 
   const [content, setContent] = useState("");
-  const [compliments, setCompliments] = useState([]);
+  // 선택된 감정 저장 
   const [selectedEmotion, setSelectedEmotion] = useState(null);
-
+  // 현재 날짜 저장 
   const [currentDate, setCurrentDate] = useState("");
 
+  // 페이지가 로드될 때 현재 날짜를 업데이트
   useEffect(() => {
-    // 페이지가 로드될 때 현재 날짜를 업데이트합니다.
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
@@ -48,6 +49,7 @@ export function ComplimentWrite() {
     setCurrentDate(`${year}년 ${month}월 ${day}일`);
   }, []);
 
+  // 선택한 감정 설정 
   const handleEmotionClick = (value) => {
     setEmotion(value);
     console.log(value);
@@ -59,6 +61,7 @@ export function ComplimentWrite() {
     }
   };
 
+  // 서버로부터 칭찬일기 전달 
   const handleSubmit = () => {
     const data = {
       content: content,
@@ -71,11 +74,11 @@ export function ComplimentWrite() {
       })
       .then((response) => {
         console.log("글 등록 완료", response.data);
+        // 칭찬일기 페이지로 이동 
         window.location.href = "/compliment";
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle error
       });
   };
 
@@ -223,7 +226,7 @@ const Rectangle46 = styled.div`
   top: 0px;
 
   &:hover {
-    background-color: #213555; /* hover 시 배경색 변경 */
+    background-color: #213555; 
   }
 `;
 

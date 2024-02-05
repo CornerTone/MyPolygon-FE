@@ -7,6 +7,7 @@ import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
 import { goBack } from "../../components/backNavigation";
 
+// 감정에 따라 이미지 다르게 설정 
 const getEmotionImageUrl = (emotion) => {
   let imageUrl = "";
   switch (emotion) {
@@ -29,6 +30,7 @@ const getEmotionImageUrl = (emotion) => {
   return imageUrl;
 };
 
+// yyyy-mm-dd 형식으로 출력
 const formatDate = (date) => {
   const d = new Date(date);
   const year = d.getFullYear();
@@ -42,28 +44,24 @@ const formatDate = (date) => {
 };
 
 export function ComplimentMain() {
+  // 칭찬일기 정보 저장 
   const [compliments, setCompliments] = useState([]);
 
-  // 컴포넌트가 마운트될 때 한 번만 실행되는 useEffect 사용
+  // 서버로부터 칭찬일기 리스트 조회 
   useEffect(() => {
-    // 서버로부터 데이터를 가져오는 비동기 함수 정의
     const fetchData = async () => {
       try {
-        // 서버로부터 데이터를 가져옴
         const response = await axios.get(
           "http://localhost:3001/api/compliment/read-all",
           {
             withCredentials: true,
           }
         );
-        // 가져온 데이터를 상태로 설정
         setCompliments(response.data.message);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
-    // fetchData 함수 호출
     fetchData();
   }, []);
 
@@ -433,7 +431,7 @@ const Ellipse9 = styled.div`
   left: 149px;
   top: 671px;
   &:hover {
-    background-color: #213555; /* hover 시 배경색 변경 */
+    background-color: #213555; 
   }
 `;
 
