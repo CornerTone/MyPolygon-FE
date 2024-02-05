@@ -33,31 +33,14 @@ const convertMinutesToTimeString = (totalMinutes) => {
     return `${hours} h ${minutes} m`;
 };
 
-
 export function Record({ selectedDate, onDateChange }) {
 
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const openModal = (category) => {
-		setSelectedCategory(category);
-		setIsModalOpen(true);
-		document.body.style.overflow = "hidden"
-		const recentRecord = recordedTimes.find(item => item.category === category);
-        if (recentRecord) {
-            setRecentTime(recentRecord.hours * 60 + recentRecord.minutes);
-        } else {
-            setRecentTime(0);
-        }
-
-	};
-
-	const closeModal = () => {
-		setSelectedCategory(null);
-		setIsModalOpen(false);
-		document.body.style.overflow = "unset";
-	};
-
 	// const [date, setDate] = useState(new Date());
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedCategory, setSelectedCategory] = useState(null);
+    const [recordedTimes, setRecordedTimes] = useState(null);
+
+	const categories = ["학업", "여가", "건강", "인간관계", "경제"];
 
 	const formatDate = (date) => {
         const year = date.getFullYear();
@@ -68,50 +51,92 @@ export function Record({ selectedDate, onDateChange }) {
 
 	const formattedDate = formatDate(selectedDate);
 
-	const [selectedCategory, setSelectedCategory] = useState(null);
-    const [recordedTimes, setRecordedTimes] = useState([]);
-	const [recentTime, setRecentTime] = useState(0);
+	const openModal = (category) => {
+		setSelectedCategory(category);
+		setIsModalOpen(true);
+		document.body.style.overflow = "hidden"
+	};
 
-	const categories = ["학업", "여가", "건강", "인간관계", "경제"];
+	const closeModal = () => {
+		setSelectedCategory(null);
+		setIsModalOpen(false);
+		document.body.style.overflow = "unset";
+	};
+
 
 	const handleDateChange = (selectedDate) => {
 		onDateChange(selectedDate);
 	};
 
-    useEffect(() => {
-        fetchRecordedTimes();
-    }, [formattedDate]);
+	useEffect(() => {
+		fetchRecordedTimes();
+	}, [formattedDate]);
 
+	useEffect(() => {
+		console.log("recordedTimes", recordedTimes);
+	}, [recordedTimes]);
+
+	
 	const fetchRecordedTimes = async () => {
         try {
+			console.log("formattedDate in fetchRecordedTimes:", formattedDate);
 			console.log("Selected Date:", selectedDate);
-            const response = await axios.get("http://localhost:3001/api/dailyInvestment/daily",{
+            const response = await axios.get(`http://localhost:3001/api/dailyInvestment/daily/${formattedDate}`,{
 				withCredentials: true,
 				params: {
-					selectedDate: selectedDate.toISOString() // 변경된 날짜를 ISO 형식으로 전달
+					selectedDate: formattedDate, // 변경된 날짜를 ISO 형식으로 전달
 				}
 			});
             setRecordedTimes(response.data.data);
-			// console.log("response data", response.data);
+			console.log("recordedTimes", response.data.data); // 업데이트된 데이터를 출력
+			console.log("response data", response.data);
+			
         } catch (error) {
             console.error("Error fetching recorded times:", error);
         }
     };
 
     const handleConfirm = async (timeRecorded) => {
-        try {
-			//const minutesRecorded = convertMinutesToTimeString(timeRecorded);
-            const response = await axios.post("http://localhost:3001/api/dailyInvestment/save_daily", {
-                category: selectedCategory,
-                totalMinutes: timeRecorded,
-                activityDate: formattedDate,
-            },
-			{
-				withCredentials: true,
-			}
-			
+		try {
+			const existingRecord = recordedTimes.find(
+				(item) =>
+					item.category === selectedCategory &&
+					item.activityDate.slice(0, 10) === formattedDate
 			);
-            fetchRecordedTimes(); // 저장 후 다시 투자 정보를 조회하여 업데이트
+
+            if (existingRecord) {
+                const response = await axios.put("http://localhost:3001/api/dailyInvestment/rewrite_daily", 
+				{
+					category: selectedCategory,
+                    totalMinutes: timeRecorded,
+                    activityDate: formattedDate,
+                },
+				{
+					withCredentials: true,
+				});
+				console.log("response data", response.data);
+				const updatedRecordedTimes = recordedTimes.map(item => {
+					if (item.id === response.data.data.id) {
+						return response.data.data;
+					} else {
+						return item;
+					}
+				});
+				setRecordedTimes(updatedRecordedTimes);
+				console.log("recordedTimes", recordedTimes);
+            } else {
+                const response = await axios.post("http://localhost:3001/api/dailyInvestment/save_daily", 
+				{
+                    category: selectedCategory,
+                    totalMinutes: timeRecorded,
+                    activityDate: formattedDate
+                },
+				{
+					withCredentials: true,
+				});
+				console.log("response data", response.data);
+            }
+            await fetchRecordedTimes(); // 저장 후 다시 투자 정보를 조회하여 업데이트
             closeModal();
         } catch (error) {
             console.error("Error saving recorded time:", error);
@@ -131,19 +156,26 @@ export function Record({ selectedDate, onDateChange }) {
 
 			<R.NaN_0003>
 				<R.Line3/>
-				<WeekCalendar date={formattedDate} onChange={handleDateChange} />
+				<WeekCalendar date={selectedDate} onChange={handleDateChange} />
 			</R.NaN_0003>
 
 			<R.ContentWrapper>
 				<R.ContentContainer>
-					{categories.map((category, index) => {
+					{recordedTimes && categories.map((category, index) => {
+						// 선택한 날짜의 해당 카테고리에 해당하는 활동들을 필터링하여 가져옴
+						const activities = recordedTimes.filter(item => item.category === category);
+						// 해당 카테고리의 총 시간을 계산
+						const totalMinutes = activities.reduce((total, activity) => total + activity.hours * 60 + activity.minutes, 0);
+						
 						return (
 							<R.CategoryContainer key={index} onClick={() => openModal(category)}>
 								<R.Rectangle34/>
 								<R.CategoryName>{categoryNames[category]}</R.CategoryName>
+								
 								<R.TimeRecord>
-									{convertMinutesToTimeString(recentTime)} {/* 최근 입력한 시간으로 표시 */}
+									{convertMinutesToTimeString(totalMinutes)}
 								</R.TimeRecord>
+
 								{categoryIcons[category] && (
 									<div>
 										<R.Ellipse11>
@@ -161,21 +193,23 @@ export function Record({ selectedDate, onDateChange }) {
 										</R.Ellipse11>
 									</div>
 								)}
+
 							</R.CategoryContainer>
 						);
 					})}
-					
-				</R.ContentContainer>
-				
-			</R.ContentWrapper>
-			<Footer />
-			{isModalOpen && (
+					{isModalOpen && (
 						<RecordModal
 							selectedCategory={selectedCategory}
 							handleConfirm={handleConfirm}
 							closeModal={closeModal}
 						/>
 					)}
+					
+				</R.ContentContainer>
+				
+			</R.ContentWrapper>
+			<Footer />
+
         </R.RootWrapperNaN>
 		
     )
