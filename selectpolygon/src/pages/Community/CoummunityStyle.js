@@ -54,8 +54,8 @@ export const NaN_0002 = styled.span`
 
 export const CategoryWrapper = styled.div`
     display: flex;
-    justify-content: left; // 수평 가운데 정렬
-    align-items: center; // 수직 가운데 정렬
+    justify-content: left; 
+    align-items: center; 
     gap: 70px;
     margin-left: 40px;
 `;
@@ -88,7 +88,7 @@ export const CategoryName = styled.span`
     font-weight: bold;
     text-align: center;
     margin-top: 5px;
-    position: absolute; /* 절대 위치로 배치 */
+    position: absolute; 
     top: 83px;
 `;
 
@@ -100,7 +100,7 @@ export const CategoryNameBox = styled.span`
     font-weight: bold;
     text-align: center;
     margin-top: 5px;
-    position: absolute; /* 절대 위치로 배치 */
+    position: absolute; 
     bottom: 13px;
     margin-left: 10px;
 `;
@@ -141,17 +141,17 @@ export const Rectangle22 = styled.div`
 
 export const Group3 = styled.div`
     width: 321px;
-    height: auto; /* 높이 자동 조정 */
+    height: auto;
     position: absolute;
     left: 19px;
     top: 133px;
-    bottom: 80px; /* 하단 여백 추가 */
-    overflow-y: auto; /* 세로 스크롤 추가 */
+    bottom: 80px; 
+    overflow-y: auto; 
 `;
 
 export const PostGrid = styled.div`
     display: grid;
-    grid-template-columns: 1fr; /* 한 열로 표시 */
+    grid-template-columns: 1fr;
 `;
 export const NaN_0009 = styled.span`
     color: white;
@@ -160,7 +160,7 @@ export const NaN_0009 = styled.span`
     font-family: Inter, sans-serif;
     font-weight: initial;
     text-align: left;
-    margin-left: 5px; /* 왼쪽 여백 추가 */
+    margin-left: 5px; 
 `;
 
 export const PostItem = styled.div`
@@ -169,7 +169,7 @@ export const PostItem = styled.div`
     border-bottom: 1px solid #ccc;
 
     &:hover {
-      background-color: #d9d9d9; /* 원하는 호버 색상을 여기에 추가하세요 */
+      background-color: #d9d9d9; 
     }
 `;
 

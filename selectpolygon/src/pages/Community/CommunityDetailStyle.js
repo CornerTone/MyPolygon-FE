@@ -11,19 +11,19 @@ export const Comment = styled.div`
     font-size: 15px;
     margin-bottom: 10px;
     background: #d8c4b6;
-    border-radius: 10px; /* 둥근 형태 조절 */
+    border-radius: 10px; 
     text-align: left;
-    min-width: 190px; /* 원하는 최소 너비 설정 */
-    max-width: 300px; /* 원하는 최대 너비 설정 */
-    word-wrap: break-word; /* 긴 단어가 너무 길면 자동으로 줄 바꿈 처리 */
+    min-width: 190px; 
+    max-width: 300px;
+    word-wrap: break-word;
     padding: 10px;
 `;
 
 export const CommentContainer = styled.div`
     position: relative;
-    top: 695px; /* 예시로 조절된 값, 필요에 따라 조절 가능 */
-    right: 140px; /* 예시로 조절된 값, 필요에 따라 조절 가능 */
-    z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index 설정 */
+    top: 695px; 
+    right: 140px; 
+    z-index: 1000;
 `;
 
 export const CommentInput = styled.input`
