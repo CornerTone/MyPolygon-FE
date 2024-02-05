@@ -23,9 +23,11 @@ export function NewCommunity() {
 
 	const handleSubmit = async () => {
         try {
+			const categoryId = Object.keys(categoryNames).find(key => categoryNames[key] === category);
+			
             const response = await axios.post("http://localhost:3001/api/community/create", {
                 categoryId: category,
-                content: content
+                content: content,
             },
 			{
 				withCredentials: true,

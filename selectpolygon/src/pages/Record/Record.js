@@ -42,6 +42,13 @@ export function Record({ selectedDate, onDateChange }) {
 		setSelectedCategory(category);
 		setIsModalOpen(true);
 		document.body.style.overflow = "hidden"
+		const recentRecord = recordedTimes.find(item => item.category === category);
+        if (recentRecord) {
+            setRecentTime(recentRecord.hours * 60 + recentRecord.minutes);
+        } else {
+            setRecentTime(0);
+        }
+
 	};
 
 	const closeModal = () => {
@@ -50,7 +57,7 @@ export function Record({ selectedDate, onDateChange }) {
 		document.body.style.overflow = "unset";
 	};
 
-	const [date, setDate] = useState(new Date());
+	// const [date, setDate] = useState(new Date());
 
 	const formatDate = (date) => {
         const year = date.getFullYear();
@@ -62,7 +69,8 @@ export function Record({ selectedDate, onDateChange }) {
 	const formattedDate = formatDate(selectedDate);
 
 	const [selectedCategory, setSelectedCategory] = useState(null);
-    const [recordedTimes, setRecordedTimes] = useState({});
+    const [recordedTimes, setRecordedTimes] = useState([]);
+	const [recentTime, setRecentTime] = useState(0);
 
 	const categories = ["학업", "여가", "건강", "인간관계", "경제"];
 
@@ -126,56 +134,50 @@ export function Record({ selectedDate, onDateChange }) {
 				<WeekCalendar date={formattedDate} onChange={handleDateChange} />
 			</R.NaN_0003>
 
-			<R.ContentContainer>
-				{categories.map((category, index) => {
-					// 누적 시간 계산
-					let accumulatedTime = 0;
-					recordedTimes.forEach(item => {
-						if (item.category === category) {
-							accumulatedTime += item.hours * 60 + item.minutes;
-						}
-					});
-					return (
-						<R.CategoryContainer key={index} onClick={() => openModal(category)}>
-							<R.Rectangle34/>
-
-							<R.CategoryName>{categoryNames[category]}</R.CategoryName>
-							<R.TimeRecord>
-								{convertMinutesToTimeString(accumulatedTime)}
-							</R.TimeRecord>
-
-							{categoryIcons[category] && (
-								<div>
-									<R.Ellipse11>
-										<R.IconContainer>
-											<FontAwesomeIcon 
-												icon={categoryIcons[category]} 
-												style={{ 
-													color: 'white',
-													fontSize: '30px',  
-													marginLeft: '0px', 
-													marginTop: '19px'   
-												}} 
-											/>
-										</R.IconContainer>
-									</R.Ellipse11>
-								</div>
-							)}
-							
-						</R.CategoryContainer>
-					);
-				})}
-				{isModalOpen && (
-					<RecordModal
-						selectedCategory={selectedCategory}
-						handleConfirm={handleConfirm}
-						closeModal={closeModal}
-					/>
-				)}
-			</R.ContentContainer>
-			
+			<R.ContentWrapper>
+				<R.ContentContainer>
+					{categories.map((category, index) => {
+						return (
+							<R.CategoryContainer key={index} onClick={() => openModal(category)}>
+								<R.Rectangle34/>
+								<R.CategoryName>{categoryNames[category]}</R.CategoryName>
+								<R.TimeRecord>
+									{convertMinutesToTimeString(recentTime)} {/* 최근 입력한 시간으로 표시 */}
+								</R.TimeRecord>
+								{categoryIcons[category] && (
+									<div>
+										<R.Ellipse11>
+											<R.IconContainer>
+												<FontAwesomeIcon 
+													icon={categoryIcons[category]} 
+													style={{ 
+														color: 'white',
+														fontSize: '30px',  
+														marginLeft: '0px', 
+														marginTop: '19px'   
+													}} 
+												/>
+											</R.IconContainer>
+										</R.Ellipse11>
+									</div>
+								)}
+							</R.CategoryContainer>
+						);
+					})}
+					
+				</R.ContentContainer>
+				
+			</R.ContentWrapper>
 			<Footer />
+			{isModalOpen && (
+						<RecordModal
+							selectedCategory={selectedCategory}
+							handleConfirm={handleConfirm}
+							closeModal={closeModal}
+						/>
+					)}
         </R.RootWrapperNaN>
+		
     )
 }
 

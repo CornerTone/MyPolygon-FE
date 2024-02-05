@@ -11,6 +11,7 @@ export const Frame50 = styled.div`
   position: absolute;
   left: 0px;
   top: 748px;
+  z-index: 1;
 `;
 
 export const Frame1 = styled.div`
@@ -20,6 +21,7 @@ export const Frame1 = styled.div`
   position: absolute;
   left: 0px;
   top: 0px;
+  z-index: 1;
 `;
 
 export const Group54 = styled.div`
@@ -28,6 +30,8 @@ export const Group54 = styled.div`
   position: absolute;
   left: 297px;
   top: 16px;
+  z-index: 1;
+  
   &:hover {
     color: #ebba71;
   }
@@ -39,6 +43,7 @@ export const IconsBasicProject = styled.div`
   top: 0px;
   right: 10px;
   bottom: 11px;
+  z-index: 1;
 
   svg path {
     fill: black;
@@ -59,6 +64,7 @@ export const Project = styled.svg`
   top: 2px;
   right: 3px;
   bottom: 2px;
+  z-index: 1;
 `;
 
 export const NaN_0014 = styled.span`
@@ -72,6 +78,7 @@ export const NaN_0014 = styled.span`
   position: absolute;
   left: 0px;
   top: 20px;
+  z-index: 1;
 
   &:hover {
     color: #ebba71;
@@ -84,6 +91,8 @@ export const Group53 = styled.div`
   position: absolute;
   left: 233px;
   top: 14px;
+  z-index: 1;
+
   &:hover {
     color: #ebba71;
   }
@@ -95,6 +104,7 @@ export const IconsBasicChat = styled.div`
   position: absolute;
   left: 8px;
   top: 0px;
+  z-index: 1;
 
   svg path {
     fill: black;
@@ -115,6 +125,7 @@ export const Chat = styled.svg`
   top: 4px;
   right: 2px;
   bottom: -0px;
+  z-index: 1;
 `;
 
 export const NaN_0015 = styled.span`
@@ -128,6 +139,7 @@ export const NaN_0015 = styled.span`
   position: absolute;
   left: 0px;
   top: 22px;
+  z-index: 1;
 
   &:hover {
     color: #ebba71;
@@ -140,6 +152,8 @@ export const Group52 = styled.div`
   position: absolute;
   left: 170px;
   top: 18px;
+  z-index: 1;
+
   &:hover {
     color: #ebba71;
   }
@@ -151,6 +165,7 @@ export const IconlyRegularTwoToneHome = styled.div`
   top: 0px;
   right: 0px;
   bottom: 11px;
+  z-index: 1;
 
   svg path {
     fill: black;
@@ -169,6 +184,7 @@ export const Home = styled.div`
   position: absolute;
   left: 2px;
   top: 1px;
+  z-index: 1;
 `;
 
 export const Home_0001 = styled.img`
@@ -178,6 +194,7 @@ export const Home_0001 = styled.img`
   top: 0px;
   right: 0px;
   bottom: 0px;
+  z-index: 1;
 `;
 
 export const NaN_0016 = styled.span`
@@ -191,6 +208,7 @@ export const NaN_0016 = styled.span`
   position: absolute;
   left: 3px;
   top: 18px;
+  z-index: 1;
 
   &:hover {
     color: #ebba71;
@@ -203,6 +221,8 @@ export const Group51 = styled.div`
   position: absolute;
   left: 92px;
   top: 16px;
+  z-index: 1;
+
   &:hover {
     color: #ebba71;
   }
@@ -214,6 +234,7 @@ export const IconsBasicStar = styled.div`
   position: absolute;
   left: 8px;
   top: 0px;
+  z-index: 1;
 
   svg path {
     fill: black;
@@ -234,6 +255,7 @@ export const Star = styled.svg`
   top: 2px;
   right: 2px;
   bottom: 2px;
+  z-index: 1;
 `;
 
 export const NaN_0017 = styled.span`
@@ -247,6 +269,7 @@ export const NaN_0017 = styled.span`
   position: absolute;
   left: 0px;
   top: 20px;
+  z-index: 1;
 
   &:hover {
     color: #ebba71;
@@ -259,6 +282,8 @@ export const Group50 = styled.div`
   position: absolute;
   left: 21px;
   top: 16px;
+  z-index: 1;
+
   &:hover {
     color: #ebba71;
   }
@@ -275,6 +300,7 @@ export const NaN_0018 = styled.span`
   position: absolute;
   left: 0px;
   top: 20px;
+  z-index: 1;
 
   &:hover {
     color: #ebba71;
@@ -287,6 +313,7 @@ export const IconsBasicTime = styled.div`
   position: absolute;
   left: 9px;
   top: 0px;
+  z-index: 1;
 
   svg path {
     fill: black; /* 아이콘 기본 색상 설정 */
@@ -307,4 +334,5 @@ export const Time = styled.svg`
   top: 2px;
   right: 2px;
   bottom: 2px;
+  z-index: 1;
 `;

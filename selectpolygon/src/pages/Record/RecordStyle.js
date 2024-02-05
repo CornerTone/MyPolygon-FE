@@ -7,6 +7,7 @@ export const RootWrapperNaN = styled.div`
 	background-size: contain;
 	background-position: center;
 	position: relative;
+	
 `;
 
 export const Frame48 = styled.div`
@@ -63,17 +64,23 @@ export const Line3 = styled.div`
 	top: 75px;
 `;
 
+export const ContentWrapper = styled.div`
+	display: flex;
+	justify-content: center; 
+	align-items: center; 
+	height: 100vh; 
+`
 
 export const ContentContainer = styled.div`
     position: absolute;
     left: 0;
-    top: 150px; /* 원하는 위치로 조정하세요 */
+    top: 150px; 
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 	margin-bottom: 20px;
-	margin-left: -135px;
+	max-width: 360px;
 `;
 
 export const CategoryContainer = styled.div`

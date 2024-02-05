@@ -49,8 +49,8 @@ export function RecordModal({ selectedCategory, closeModal, handleConfirm}) {
 	return (
 		<>
 			{selectedCategory && (
-				<M.ModalOverlay>
-						<M.RootWrapperNaN>
+				
+						<M.ModalOverlay>
 							<M.Rectangle35 />
 							<M.NaN_0002>오늘은 얼마나 노력했나요?</M.NaN_0002>
 								<M.NaN_0003 onClick={handleConfirmClick}>
@@ -84,8 +84,8 @@ export function RecordModal({ selectedCategory, closeModal, handleConfirm}) {
 								))}
 							</M.M_ScrollContainer>
 							<M.M>m</M.M>
-					</M.RootWrapperNaN>
-				</M.ModalOverlay>
+					</M.ModalOverlay>
+				
 			)}
 		</>
 		
