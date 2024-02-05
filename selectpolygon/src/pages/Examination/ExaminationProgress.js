@@ -22,9 +22,14 @@ const sendResultsToBackend = async (results) => {
 };
 
 export function ExaminationProgress() {
+  const [selectedYesButtonIds, setSelectedYesButtonIds] = useState({});
+  const [selectedNoButtonIds, setSelectedNoButtonIds] = useState({});
+
   const [questionsData, setQuestionsData] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState([]);
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,18 +42,28 @@ export function ExaminationProgress() {
         );
         const questionElements = response.data.elements;
         setQuestionsData(questionElements);
-        console.log(questionElements); // 업데이트된 데이터를 출력합니다.
+        console.log(questionElements); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
+    fetchData();
   }, []);
 
-  const handleYesButtonClick = () => {
-    // 현재 질문의 id 값을 가져옴
-    const currentQuestionId = questionsData[currentQuestionIndex].id;
+  useEffect(() => {
+    setSelectedYesButtonIds({});
+    setSelectedNoButtonIds({});
+  }, [currentQuestionIndex]); // 다음 질문으로 넘어가면 클릭되었던 것을 해제하기 위해 추가함 
+
+  const handleYesButtonClick = (buttonId) => {
+    console.log(buttonId);
+    setSelectedYesButtonIds((prevIds) => ({ ...prevIds, [buttonId]: true }));
+    setSelectedNoButtonIds((prevIds) => ({ ...prevIds, [buttonId]: false }));
+  
+
+  // 현재 질문의 id 값을 가져옴
+  const currentQuestionId = questionsData[currentQuestionIndex].id;
 
     // 현재 질문의 index를 찾음
     const questionIndex = questionsData.findIndex(
@@ -68,7 +83,6 @@ export function ExaminationProgress() {
         `Question ID: ${currentQuestionId}, Score: ${updatedQuestionsData[questionIndex].score}`
       );
 
-      // 여기에서 업데이트된 질문 데이터를 상태로 업데이트하는 함수가 필요합니다.
       setQuestionsData(updatedQuestionsData);
     }
     // 현재 질문에 대한 결과를 결과 배열에 추가
@@ -86,7 +100,10 @@ export function ExaminationProgress() {
     }
   };
 
-  const handleNoButtonClick = () => {};
+  const handleNoButtonClick = (buttonId) => {
+    setSelectedYesButtonIds((prevIds) => ({ ...prevIds, [buttonId]: false }));
+    setSelectedNoButtonIds((prevIds) => ({ ...prevIds, [buttonId]: true }));
+  };
 
   const SubmitButton = styled.button`
     background-color: #85bbe2;
@@ -95,7 +112,7 @@ export function ExaminationProgress() {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: relative; /* 이 부분을 추가합니다. */
+    position: relative; 
     margin-top: 20px;
 
     &:hover {
@@ -117,8 +134,6 @@ export function ExaminationProgress() {
         window.location.href = "/main";
       } catch (error) {
         console.error("Error while sending results:", error);
-        // 에러 메시지를 사용자에게 표시할 수도 있습니다.
-        // 예를 들어, 사용자에게 알림을 보여줄 수 있습니다.
         alert("결과를 전송하는 중에 오류가 발생했습니다. 다시 시도해주세요.");
       }
     }
@@ -139,32 +154,46 @@ export function ExaminationProgress() {
         </Typography_0003>
       </Typography_0002>
 
-      <Group33>
-        {questionsData.length > 0 &&
-          currentQuestionIndex < questionsData.length && (
-            <QuestionWrapper>
-              <h3>{questionsData[currentQuestionIndex].element_name}</h3>
+          <Group33>
+      {questionsData.length > 0 &&
+        currentQuestionIndex < questionsData.length && (
+          <QuestionWrapper>
+            <h3>{questionsData[currentQuestionIndex].element_name}</h3>
+            <ul>
+              <Line14 />
+              {questionsData[currentQuestionIndex].question_strings.map(
+                (question, qIndex) => (
+                  <li key={qIndex}>
+                    {`${qIndex + 1}번째 질문: ${question}`}
+                    <ButtonWrapper>
+                      <YesButton
+                        selected={selectedYesButtonIds[`${qIndex + 1}`]}
+                        onClick={() =>
+                          handleYesButtonClick(`${qIndex + 1}`)
+                        }
+                      >
+                        예
+                      </YesButton>
+                      <NoButton
+                        selected={selectedNoButtonIds[`${qIndex + 1}`]}
+                        onClick={() =>
+                          handleNoButtonClick(`${qIndex + 1}`)
+                        }
+                      >
+                        아니오
+                      </NoButton>
+                    </ButtonWrapper>
+                  </li>
+                )
+              )}
+            </ul>
+            <SubmitButton onClick={handleSubmitButtonClick}>
+              다음
+            </SubmitButton>
+          </QuestionWrapper>
+        )}
+    </Group33>
 
-              <ul>
-                <Line14 />
-                {questionsData[currentQuestionIndex].question_strings.map(
-                  (question, qIndex) => (
-                    <li key={qIndex}>
-                      {`${qIndex + 1}번째 질문: ${question}`}
-                      <ButtonWrapper>
-                        <Button onClick={handleYesButtonClick}>예</Button>
-                        <Button onClick={handleNoButtonClick}>아니오</Button>
-                      </ButtonWrapper>
-                    </li>
-                  )
-                )}
-              </ul>
-              <SubmitButton onClick={handleSubmitButtonClick}>
-                다음
-              </SubmitButton>
-            </QuestionWrapper>
-          )}
-      </Group33>
       <Vector xmlns="http://www.w3.org/2000/svg" onClick={goBack}>
         <path
           fill="rgba(0, 0, 0, 0.64)"
@@ -194,16 +223,6 @@ const Line15 = styled.div`
 const ButtonWrapper = styled.div`
   margin-top: 10px;
   margin-bottom: 25px;
-`;
-
-const Button = styled.button`
-  margin-right: 10px;
-  padding: 5px 10px;
-  background-color: #d8c4b6;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 
   /* hover 시와 선택된 상태의 스타일 변경 */
   &:hover,
@@ -212,6 +231,42 @@ const Button = styled.button`
     cursor: pointer;
   }
 `;
+
+const YesButton = styled.button`
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: ${(props) => (props.selected ? "#EBBA71" : "#d8c4b6")};
+  color: ${(props) => (props.selected ? "#fff" : "#000")};
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.selected ? "#EBBA71" : "#EBBA71"};
+    color: #fff;
+  }
+`;
+
+// 아니오 버튼 스타일
+const NoButton = styled.button`
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: ${(props) => (props.selected ? "#EBBA71" : "#d8c4b6")};
+  color: ${(props) => (props.selected ? "#fff" : "#000")};
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.selected ? "#EBBA71" : "#EBBA71"};
+    color: #fff;
+  }
+`;
+
+
+
 
 const QuestionWrapper = styled.div`
   margin-bottom: 20px;
