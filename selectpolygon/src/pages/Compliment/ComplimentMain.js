@@ -432,14 +432,21 @@ const Ellipse9 = styled.div`
   position: absolute;
   left: 149px;
   top: 671px;
+  &:hover {
+    background-color: #213555; /* hover 시 배경색 변경 */
+  }
 `;
 
 const IconAdd = styled.div`
-  width: 50px;
-  height: 40px;
+  width: 0px;
+  height: 0px;
   position: absolute;
   left: 139px;
   top: 681px;
+
+  &:hover {
+    background-color: #213555; /* hover 시 배경색 변경 */
+  }
 `;
 
 const Vector_0001 = styled.img`
@@ -459,8 +466,8 @@ const Vector_0002 = styled.svg`
   top: 8px;
   right: 0px;
   bottom: 9px;
+  }
 `;
-
 const Frame50 = styled.div`
   width: 360px;
   height: 52px;
