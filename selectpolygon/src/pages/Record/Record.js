@@ -83,7 +83,8 @@ export function Record({ selectedDate, onDateChange }) {
 					selectedDate: selectedDate.toISOString() // 변경된 날짜를 ISO 형식으로 전달
 				}
 			});
-            setRecordedTimes(response.data);
+            setRecordedTimes(response.data.data);
+			// console.log("response data", response.data);
         } catch (error) {
             console.error("Error fetching recorded times:", error);
         }
@@ -126,36 +127,44 @@ export function Record({ selectedDate, onDateChange }) {
 			</R.NaN_0003>
 
 			<R.ContentContainer>
-				{categories.map((category, index) => (
-					<R.CategoryContainer key={index} onClick={() => openModal(category)}>
-						<R.Rectangle34/>
+				{categories.map((category, index) => {
+					// 누적 시간 계산
+					let accumulatedTime = 0;
+					recordedTimes.forEach(item => {
+						if (item.category === category) {
+							accumulatedTime += item.hours * 60 + item.minutes;
+						}
+					});
+					return (
+						<R.CategoryContainer key={index} onClick={() => openModal(category)}>
+							<R.Rectangle34/>
 
-						<R.CategoryName>{categoryNames[category]}</R.CategoryName>
-						<R.TimeRecord>
-							{recordedTimes[category] ? convertMinutesToTimeString(recordedTimes[category]) : "00 h 00 m"}
-						</R.TimeRecord>
+							<R.CategoryName>{categoryNames[category]}</R.CategoryName>
+							<R.TimeRecord>
+								{convertMinutesToTimeString(accumulatedTime)}
+							</R.TimeRecord>
 
-						{categoryIcons[category] && (
-							<div>
-								<R.Ellipse11>
-									<R.IconContainer>
-										<FontAwesomeIcon 
-											icon={categoryIcons[category]} 
-											style={{ 
-												color: 'white',
-												fontSize: '30px',  
-												marginLeft: '0px', 
-												marginTop: '19px'   
-											}} 
-										/>
-									</R.IconContainer>
-								</R.Ellipse11>
-								
-							</div>
-						)}
-						
-					</R.CategoryContainer>
-				))}
+							{categoryIcons[category] && (
+								<div>
+									<R.Ellipse11>
+										<R.IconContainer>
+											<FontAwesomeIcon 
+												icon={categoryIcons[category]} 
+												style={{ 
+													color: 'white',
+													fontSize: '30px',  
+													marginLeft: '0px', 
+													marginTop: '19px'   
+												}} 
+											/>
+										</R.IconContainer>
+									</R.Ellipse11>
+								</div>
+							)}
+							
+						</R.CategoryContainer>
+					);
+				})}
 				{isModalOpen && (
 					<RecordModal
 						selectedCategory={selectedCategory}

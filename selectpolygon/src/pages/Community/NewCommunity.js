@@ -3,9 +3,13 @@ import styled from "@emotion/styled";
 import { Footer } from "../../components/Footer";
 import { goBack } from "../../components/backNavigation";
 import arrowImage from './dropdown.png';
+import { useNavigate } from "react-router";
+import { categoryNames } from './Community';
+import axios from "axios";
 
 export function NewCommunity() {
-    const categories = ["학업", "여가", "건강", "인간관계", "경제"];
+    const categories = Object.values(categoryNames);
+	const navigate = useNavigate();
 
     const [category, setCategory] = useState("");
     const handleCategoryChange = (e) => {
@@ -15,6 +19,27 @@ export function NewCommunity() {
 	const [content, setContent] = useState("");
 	const handleContentChange = (e) => {
         setContent(e.target.value); // 고민 내용 입력 시 state 업데이트
+    };
+
+	const handleSubmit = async () => {
+        try {
+            const response = await axios.post("http://localhost:3001/api/community/create", {
+                categoryId: category,
+                content: content
+            },
+			{
+				withCredentials: true,
+			}
+			);
+            if (response.data.success) {
+                console.log("글이 성공적으로 등록되었습니다.");
+				navigate("/community");
+            } else {
+                console.error("글 등록에 실패했습니다.");
+            }
+        } catch (error) {
+            console.error("글 등록 중 오류 발생:", error);
+        }
     };
 
     return (
@@ -52,7 +77,7 @@ export function NewCommunity() {
 
             <NaN_0005>등록하신 고민이 해결되길<br/>‘나만의 다각형’이 응원할게요!</NaN_0005>
 
-            <SubmitButton>등록하기</SubmitButton>
+            <SubmitButton onClick={handleSubmit}>등록하기</SubmitButton>
 
             <Footer />
         </RootWrapperNaN>
