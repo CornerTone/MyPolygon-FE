@@ -12,6 +12,7 @@ import { goBack } from "../../components/backNavigation";
 export function Mypage() {
   const [previousPolygon, setPreviousPolygon] = useState(null);
   const [nextPolygon, setNextPolygon] = useState(null);
+  const [chartDate, setChartDate] = useState(null); // 추가된 부분
 
   const [userInfo, setUserInfo] = useState({
     id: null,
@@ -38,6 +39,7 @@ export function Mypage() {
     fetchUserInfo();
   }, []);
 
+
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -53,6 +55,7 @@ export function Mypage() {
         );
         setData(response.data);
         setPolygonData(response.data.polygon.elements);
+        setChartDate(response.data.polygon.date);
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -107,6 +110,14 @@ export function Mypage() {
     }
   };
 
+  function getFormattedDate(chartDate){
+    const dateObj = new Date(chartDate);
+    const year = dateObj.getFullYear();
+    const month = dateObj.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더합니다.
+    const day = dateObj.getDate();
+    return `${year}년 ${month}월 ${day}일`;
+  }
+
   return (
     <RootWrapperNaN>
       <Rectangle22 />
@@ -158,12 +169,18 @@ export function Mypage() {
       />
       <Top>
         <MyFigureChart data={polygonData} />
+        <DatePosition>{getFormattedDate(chartDate)}</DatePosition>
       </Top>
       <Footer />
     </RootWrapperNaN>
   );
 }
-
+const DatePosition=styled.div`
+  position: absolute;
+  top:500px;
+  width: 200px;
+  left:55px;
+`
 const Top = styled.div`
   position: absolute; // position을 absolute로 설정
   top: 140px; // 기존에 설정된 위치
@@ -699,7 +716,7 @@ const MyHistory = styled.span`
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 121px;
   position: absolute;
-  left: 132px;
+  left: 110px;
   top: 323px;
 `;
 
