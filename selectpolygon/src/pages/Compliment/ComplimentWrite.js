@@ -126,9 +126,7 @@ export function ComplimentWrite() {
       <M.Group60>
         <M.Rectangle39 />
         <M.NaN_0006>
-          <textarea
-            Co
-            style={{ width: "285px", height: "200px" }}
+          <M.ContentInput
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="내용을 입력하세요"
