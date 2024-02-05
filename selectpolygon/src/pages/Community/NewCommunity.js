@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
+import * as N from "./NewCommunityStyle";
 import { Footer } from "../../components/Footer";
 import { goBack } from "../../components/backNavigation";
-import arrowImage from "./dropdown.png";
 import { useNavigate } from "react-router";
 // import { categoryNames } from "./Community";
 import axios from "axios";
@@ -22,8 +21,6 @@ export function NewCommunity() {
   const categories = Object.values(categoryNames);
   const navigate = useNavigate();
 
-
-  
   const [category, setCategory] = useState("");
   const handleCategoryChange = (e) => {
     setCategory(e.target.value); // 드롭다운 박스에서 카테고리 선택 시 state 업데이트
@@ -64,34 +61,34 @@ export function NewCommunity() {
   };
 
   return (
-    <RootWrapperNaN>
-      <Frame47>
-        <Vector xmlns="http://www.w3.org/2000/svg" onClick={goBack}>
+    <N.RootWrapperNaN>
+      <N.Frame47>
+        <N.Vector xmlns="http://www.w3.org/2000/svg" onClick={goBack}>
           <path
             fill="rgba(0, 0, 0, 0.64)"
             d="M0 7.50001C0 7.74737 0.118471 7.97494 0.333872 8.16294L7.4852 14.723C7.7006 14.911 7.92677 15 8.18525 15C8.71299 15 9.13302 14.6439 9.13302 14.1491C9.13302 13.9117 9.03609 13.6742 8.86377 13.5257L6.45127 11.2698L2.18633 7.6979L1.96015 8.18273L5.42811 8.38062L19.0523 8.38062C19.6123 8.38062 20 8.01452 20 7.50001C20 6.9855 19.6123 6.6194 19.0523 6.6194L5.42811 6.6194L1.96015 6.81729L2.18633 7.31202L6.45127 3.73022L8.86377 1.47427C9.03609 1.31596 9.13302 1.08839 9.13302 0.850923C9.13302 0.356201 8.71299 0 8.18525 0C7.92677 0 7.7006 0.0791558 7.46365 0.296834L0.333872 6.83708C0.118471 7.02507 0 7.25265 0 7.50001Z"
           />
-        </Vector>
+        </N.Vector>
         <HeaderLogout />
         <HeaderMypage />
-      </Frame47>
+      </N.Frame47>
 
-      <NaN_0007>글 등록하기</NaN_0007>
+      <N.NaN_0007>글 등록하기</N.NaN_0007>
 
-      <Rectangle34 />
-      <NaN_0002>요소</NaN_0002>
+      <N.Rectangle34 />
+      <N.NaN_0002>요소</N.NaN_0002>
 
-      <CategoryDropdown value={category} onChange={handleCategoryChange}>
+      <N.CategoryDropdown value={category} onChange={handleCategoryChange}>
         {categories.map((category, index) => (
           <option key={index} value={category}>
             {category}
           </option>
         ))}
-      </CategoryDropdown>
+      </N.CategoryDropdown>
 
-      <Rectangle38 />
-      <NaN_0003>고민</NaN_0003>
-      <ContentInput
+      <N.Rectangle38 />
+      <N.NaN_0003>고민</N.NaN_0003>
+      <N.ContentInput
         value={content}
         onChange={handleContentChange}
         placeholder={
@@ -99,232 +96,16 @@ export function NewCommunity() {
         }
       />
 
-      <NaN_0005>
+      <N.NaN_0005>
         등록하신 고민이 해결되길
         <br />
         ‘나만의 다각형’이 응원할게요!
-      </NaN_0005>
+      </N.NaN_0005>
 
       <Link to="/community">
-        <SubmitButton onClick={handleSubmit}>등록하기</SubmitButton>
+        <N.SubmitButton onClick={handleSubmit}>등록하기</N.SubmitButton>
       </Link>
       <Footer />
-    </RootWrapperNaN>
+    </N.RootWrapperNaN>
   );
 }
-
-const RootWrapperNaN = styled.div`
-  min-height: 100vh;
-  background: rgb(255, 255, 255);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  position: relative;
-`;
-
-const Frame47 = styled.div`
-  width: 360px;
-  height: 54px;
-  overflow: hidden;
-  background: rgb(245, 239, 231);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-`;
-
-const Vector = styled.svg`
-  width: 20px;
-  height: 15px;
-  position: absolute;
-  left: 16px;
-  top: 22px;
-  right: 324px;
-  bottom: 17px;
-`;
-
-const IconsBasicUser = styled.div`
-  width: 19px;
-  height: 18px;
-  position: absolute;
-  left: 323px;
-  top: 19px;
-`;
-
-const User = styled.svg`
-  width: 13px;
-  height: 14px;
-  position: absolute;
-  left: 1px;
-  top: 2px;
-  right: 5px;
-  bottom: 2px;
-`;
-
-const CategoryDropdown = styled.select`
-  width: 260px;
-  height: 34px;
-  position: absolute;
-  border: none;
-  border-radius: 10px;
-  left: 77px;
-  top: 145px;
-  padding-left: 10px;
-  font-weight: bold;
-  box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.25);
-
-  -webkit-appearance: none; /* 네이티브 스타일링 제거 */
-  -moz-appearance: none;
-  appearance: none;
-  background-color: white; /* 드롭다운 배경색 설정 */
-  background-image: url(${arrowImage});
-  background-repeat: no-repeat;
-  background-position: right 20px center; /* 화살표 이미지 위치 설정 */
-  background-size: 15px; /* 화살표 이미지 크기 설정 */
-`;
-
-const Rectangle34 = styled.div`
-  width: 368px;
-  height: 69px;
-  background: rgb(216, 196, 182);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border: solid 0px black;
-  border-radius: 20px;
-  position: absolute;
-  left: 0px;
-  top: 127px;
-`;
-
-const Rectangle38 = styled.div`
-  width: 368px;
-  height: 249px;
-  background: rgb(216, 196, 182);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border: solid 0px black;
-  border-radius: 20px;
-  position: relative;
-  left: 0px;
-  top: 211px;
-`;
-
-const ContentInput = styled.textarea`
-  width: 230px;
-  height: 200px;
-  font-family: "Pretendard", sans-serif;
-  background-color: transparent;
-  color: black;
-  border: none;
-  font-size: 13px;
-  position: absolute;
-  left: 90px;
-  top: 240px;
-  resize: none; /* 사용자 크기 조정 비활성화 */
-  outline: none; /* 포커스 효과 제거 */
-
-  &::placeholder {
-    color: #a1a0a0;
-  }
-  &:focus {
-    outline: none; /* 포커스 효과 제거 */
-  }
-  @media screen and (max-width: 412px) {
-    font-size: 15px; /* 작은 화면에서 폰트 크기 조절 */
-  }
-  &::-webkit-scrollbar {
-    width: 10px; /* 스크롤바의 두께 지정 */
-    border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #595959;
-    border-radius: 5px;
-    backdrop-filter: blur(50px);
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: #acacac; /* 스크롤바 트랙 색상 지정 */
-    border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
-  }
-`;
-
-const NaN_0002 = styled.span`
-  color: black;
-  text-overflow: ellipsis;
-  font-size: 15px;
-  font-family: Inter, sans-serif;
-  font-weight: bold;
-  text-align: left;
-  width: 256px;
-  position: absolute;
-  left: 26px;
-  top: 153px;
-`;
-
-const NaN_0003 = styled.span`
-  color: black;
-  text-overflow: ellipsis;
-  font-size: 15px;
-  font-family: Inter, sans-serif;
-  font-weight: bold;
-  text-align: left;
-  width: 256px;
-  position: absolute;
-  left: 26px;
-  top: 328px;
-`;
-
-const NaN_0005 = styled.span`
-  color: rgb(151, 145, 145);
-  text-overflow: ellipsis;
-  font-size: 14px;
-  font-family: Inter, sans-serif;
-  font-weight: initial;
-  text-align: center;
-  width: 256px;
-  position: absolute;
-  left: 52px;
-  top: 556px;
-`;
-
-const NaN_0007 = styled.span`
-  color: black;
-  text-overflow: ellipsis;
-  font-size: 18px;
-  font-family: Inter, sans-serif;
-  font-weight: bold;
-  text-align: left;
-  position: absolute;
-  left: 136px;
-  top: 80px;
-`;
-
-const SubmitButton = styled.button`
-  width: 135px;
-  height: 37px;
-  background: rgb(79, 112, 156);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border-radius: 20px;
-  position: absolute;
-  color: white;
-  text-overflow: ellipsis;
-  font-size: 18px;
-  font-family: Inter, sans-serif;
-  font-weight: initial;
-  text-align: center;
-  width: 101px;
-  position: absolute;
-  left: 129px;
-  top: 503px;
-
-  &:hover {
-    background: #213555;
-  }
-`;

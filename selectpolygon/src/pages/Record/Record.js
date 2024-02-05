@@ -46,7 +46,7 @@ export function Record({ selectedDate, onDateChange }) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
+        return `${year}-${month}-${day}T00:00:00.000Z`;
     };
 
 	const formattedDate = formatDate(selectedDate);
@@ -81,6 +81,7 @@ export function Record({ selectedDate, onDateChange }) {
         try {
 			console.log("formattedDate in fetchRecordedTimes:", formattedDate);
 			console.log("Selected Date:", selectedDate);
+			setRecordedTimes(null);
             const response = await axios.get(`http://localhost:3001/api/dailyInvestment/daily/${formattedDate}`,{
 				withCredentials: true,
 				params: {
@@ -165,7 +166,7 @@ export function Record({ selectedDate, onDateChange }) {
 						// 선택한 날짜의 해당 카테고리에 해당하는 활동들을 필터링하여 가져옴
 						const activities = recordedTimes.filter(item => item.category === category);
 						// 해당 카테고리의 총 시간을 계산
-						const totalMinutes = activities.reduce((total, activity) => total + activity.hours * 60 + activity.minutes, 0);
+						const totalMinutes = activities.reduce((total, activity) => activity.hours * 60 + activity.minutes, 0);
 						
 						return (
 							<R.CategoryContainer key={index} onClick={() => openModal(category)}>
