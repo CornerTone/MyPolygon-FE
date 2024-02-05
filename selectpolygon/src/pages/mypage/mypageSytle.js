@@ -7,9 +7,9 @@ export const DatePosition = styled.div`
     left: 80px;
 `;
 export const Top = styled.div`
-    position: absolute; // position을 absolute로 설정
-    top: 140px; // 기존에 설정된 위치
-    margin-top: 20px; // top 속성 대신 margin-top 속성을 사용하여 추가적인 간격 조정
+    position: absolute; 
+    top: 140px;
+    margin-top: 20px;
 `;
 export const RootWrapperNaN = styled.div`
     min-height: 100vh;

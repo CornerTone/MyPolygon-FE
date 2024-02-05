@@ -12,9 +12,9 @@ export const RootWrapperNaN = styled.div`
 // 부모 컨테이너 스타일
 export const Group64 = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
-    grid-template-rows: repeat(3, 1fr); /* 3행으로 설정 */
-    gap: 20px; /* 요소 간격 조정 */
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 20px; 
 `;
 
 // 각각의 요소 스타일
