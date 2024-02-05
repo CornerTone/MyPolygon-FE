@@ -129,13 +129,10 @@ const EmotionImage = styled.div`
 `;
 
 const CustomDiv = styled.div`
-  /* Common styles */
   width: 100%;
   position: relative;
-  margin-bottom: 30px; /* 기존 20px 에서 30px 로 변경 */
-  margin-top: 30px; /* 새로 추가된 margin-top */
-
-  /* Dynamic styles based on index */
+  margin-bottom: 30px; 
+  margin-top: 30px; 
   top: ${(props) => props.index * 200}px;
 `;
 
@@ -146,6 +143,7 @@ const RootWrapperNaN = styled.div`
   background-size: contain;
   background-position: center;
   position: relative;
+  bottom: 30px;
 `;
 
 const Frame48 = styled.div`
