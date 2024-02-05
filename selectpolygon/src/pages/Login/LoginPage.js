@@ -7,6 +7,7 @@ import * as S from "../Signin/SignPageStyle";
 import { goBack } from "../../components/backNavigation";
 
 export function LoginPage() {
+  // 사용자 폼 저장 
   const [formData, setFormData] = useState({
     nickname: "",
     password: "",
@@ -14,6 +15,7 @@ export function LoginPage() {
 
   const navigate = useNavigate();
 
+  // 폼 입력 시 변경 
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,6 +23,7 @@ export function LoginPage() {
     });
   };
 
+  // 서버로 사용자가 입력한 정보 전달 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,22 +35,20 @@ export function LoginPage() {
 
       if (response.data.success) {
         console.log("로그인 성공");
-        // 로그인 성공 시에 추가적인 작업 수행
-        // ...
-
-        // 페이지 이동
+        // 로그인 성공 시 메인페이지로 이동 
         navigate("/main");
       } else {
         console.log("로그인 실패");
-        // 실패 시에 알림 창 띄우기
+        // 실패 시에 알림 창 띄움 
         alert("로그인에 실패했습니다. 다시 시도하세요.");
       }
 
       const token = response.data.userId;
-      Cookies.set("mypolygon_auth", token); // 'mypolygon_auth'라는 이름의 쿠키에 토큰을 저장
+      // mypolygon_auth라는 이름의 쿠키에 토큰 저장
+      Cookies.set("mypolygon_auth", token); 
     } catch (error) {
       console.error("데이터 전송 중 오류 발생:", error);
-      // 실패 시에 알림 창 띄우기
+      // 실패 시에 알림 창 띄움 
       alert("로그인에 실패했습니다. 다시 시도하세요.");
     }
   };

@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { goBack } from "../../components/backNavigation";
 
-// 백엔드로 결과를 전송하는 함수
+// 서버로 테스트 결과 전달 
 const sendResultsToBackend = async (results) => {
   try {
     const response = await axios.post(
@@ -22,14 +22,18 @@ const sendResultsToBackend = async (results) => {
 };
 
 export function ExaminationProgress() {
+  // 예를 선택한 버튼 저장 
   const [selectedYesButtonIds, setSelectedYesButtonIds] = useState({});
+  // 아니요를 선택한 버튼 저장 
   const [selectedNoButtonIds, setSelectedNoButtonIds] = useState({});
-
+  // 질문 데이터 저장 
   const [questionsData, setQuestionsData] = useState([]);
+  // 현재 질문하고 있는 질문 정보 저장 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  // 응답 결과 저장 
   const [results, setResults] = useState([]);
 
-
+  // 서버로부터 질문 내용 전달받음 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,7 +45,6 @@ export function ExaminationProgress() {
         );
         const questionElements = response.data.elements;
         setQuestionsData(questionElements);
-        console.log(questionElements); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -50,16 +53,17 @@ export function ExaminationProgress() {
     fetchData();
   }, []);
 
+  // 다음 질문으로 넘어가면 클릭되었던 것을 해제하기 위해 추가
   useEffect(() => {
     setSelectedYesButtonIds({});
     setSelectedNoButtonIds({});
-  }, [currentQuestionIndex]); // 다음 질문으로 넘어가면 클릭되었던 것을 해제하기 위해 추가함 
+  }, [currentQuestionIndex]); 
 
+  // 예 버튼을 눌렀다면 매개변수로 전달받은 버튼 예 선택됨으로 처리, 아니오 해제 처리 
   const handleYesButtonClick = (buttonId) => {
     console.log(buttonId);
     setSelectedYesButtonIds((prevIds) => ({ ...prevIds, [buttonId]: true }));
     setSelectedNoButtonIds((prevIds) => ({ ...prevIds, [buttonId]: false }));
-  
 
   // 현재 질문의 id 값을 가져옴
   const currentQuestionId = questionsData[currentQuestionIndex].id;
@@ -69,22 +73,22 @@ export function ExaminationProgress() {
       (question) => question.id === currentQuestionId
     );
 
-    // 현재 질문의 score를 1 증가시킴
+    // 현재 질문의 score를 1 증가
     if (questionIndex !== -1) {
       const updatedQuestionsData = [...questionsData];
       if (isNaN(updatedQuestionsData[questionIndex].score)) {
-        updatedQuestionsData[questionIndex].score = 0; // 초기화
+        // 초기화
+        updatedQuestionsData[questionIndex].score = 0; 
       }
       updatedQuestionsData[questionIndex].score += 1;
 
-      // 콘솔에 id와 score의 변화를 출력
       console.log(
         `Question ID: ${currentQuestionId}, Score: ${updatedQuestionsData[questionIndex].score}`
       );
 
       setQuestionsData(updatedQuestionsData);
     }
-    // 현재 질문에 대한 결과를 결과 배열에 추가
+    // 현재 질문에 대한 결과를 result에 추가
     if (questionIndex !== -1) {
       const updatedResults = [...results];
       const existingResultIndex = updatedResults.findIndex(
@@ -99,6 +103,7 @@ export function ExaminationProgress() {
     }
   };
 
+  // 예 버튼과 반대로 동작 
   const handleNoButtonClick = (buttonId) => {
     setSelectedYesButtonIds((prevIds) => ({ ...prevIds, [buttonId]: false }));
     setSelectedNoButtonIds((prevIds) => ({ ...prevIds, [buttonId]: true }));
@@ -109,9 +114,9 @@ export function ExaminationProgress() {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       try {
-        console.log(results);
+        // 서버로 결과 전달 
         await sendResultsToBackend(results);
-
+        // 메인 페이지로 이동 
         window.location.href = "/main";
       } catch (error) {
         console.error("Error while sending results:", error);
@@ -148,6 +153,7 @@ export function ExaminationProgress() {
                     <li key={qIndex}>
                       {`${qIndex + 1}번째 질문: ${question}`}
                       <E.ButtonWrapper>
+                        {/* 버튼 고유 id 부여 */}
                         <E.YesButton
                           selected={selectedYesButtonIds[`${qIndex + 1}`]}
                           onClick={() =>
@@ -156,6 +162,7 @@ export function ExaminationProgress() {
                         >
                           예
                         </E.YesButton>
+                         {/* 버튼 고유 id 부여 */}
                         <E.NoButton
                           selected={selectedNoButtonIds[`${qIndex + 1}`]}
                           onClick={() =>
