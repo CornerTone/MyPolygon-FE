@@ -10,7 +10,7 @@ import { HeaderLogout } from "../../components/HeaderLogout";
 import axios from "axios";
 import { HeaderMypage } from "../../components/HeaderMypage";
 
-
+// 카테고리별 아이콘 정의
 const categoryIcons = {
     학업: faBookOpen,
     여가: faFootball,
@@ -27,6 +27,7 @@ const categoryNames = {
     경제: '경제'
 };
 
+// 분을 시간 형식의 문자열로 변환
 const convertMinutesToTimeString = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
@@ -39,9 +40,9 @@ export function Record({ selectedDate, onDateChange }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState(null);
     const [recordedTimes, setRecordedTimes] = useState(null);
-
 	const categories = ["학업", "여가", "건강", "인간관계", "경제"];
-
+	
+	// 날짜 형식을 ISO 문자열로 변환하는 함수
 	const formatDate = (date) => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -63,11 +64,12 @@ export function Record({ selectedDate, onDateChange }) {
 		document.body.style.overflow = "unset";
 	};
 
-
+	// 날짜 변경 핸들러
 	const handleDateChange = (selectedDate) => {
 		onDateChange(selectedDate);
 	};
 
+	// 선택된 날짜가 변경될 때마다 기록된 시간을 가져오기
 	useEffect(() => {
 		fetchRecordedTimes();
 	}, [formattedDate]);
@@ -76,7 +78,7 @@ export function Record({ selectedDate, onDateChange }) {
 		console.log("recordedTimes", recordedTimes);
 	}, [recordedTimes]);
 
-	
+	// 기록된 시간 조회
 	const fetchRecordedTimes = async () => {
         try {
 			console.log("formattedDate in fetchRecordedTimes:", formattedDate);
@@ -97,6 +99,7 @@ export function Record({ selectedDate, onDateChange }) {
         }
     };
 
+	// 기록 저장 핸들러
     const handleConfirm = async (timeRecorded) => {
 		try {
 			const existingRecord = recordedTimes.find(
@@ -173,10 +176,12 @@ export function Record({ selectedDate, onDateChange }) {
 								<R.Rectangle34/>
 								<R.CategoryName>{categoryNames[category]}</R.CategoryName>
 								
+								{/* 시간기록 */}
 								<R.TimeRecord>
 									{convertMinutesToTimeString(totalMinutes)}
 								</R.TimeRecord>
 
+								{/* 카테고리별 저장된 아이콘 */}
 								{categoryIcons[category] && (
 									<div>
 										<R.Ellipse11>
@@ -207,10 +212,8 @@ export function Record({ selectedDate, onDateChange }) {
 					)}
 					
 				</R.ContentContainer>
-				
 			</R.ContentWrapper>
 			<Footer />
-
         </R.RootWrapperNaN>
 		
     )

@@ -43,12 +43,12 @@ const WeekCalendar = ({ date, onChange }) => {
 };
 
 const getWeekDays = (date) => {
-  const start = startOfWeek(date, { weekStartsOn: 1 });
+  const start = startOfWeek(date, { weekStartsOn: 1 }); // 주의 시작일 계산 (월요일부터 시작)
 
   const final = [];
 
   for (let i = 0; i < 7; i++) {
-    const currentDate = addDays(start, i);
+    const currentDate = addDays(start, i); // 시작일로부터 i일째 날 계산
     final.push({
       formatted: format(currentDate, "EEE"),
       date: currentDate,
