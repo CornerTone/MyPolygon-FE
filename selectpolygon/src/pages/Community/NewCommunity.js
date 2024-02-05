@@ -4,24 +4,26 @@ import { Footer } from "../../components/Footer";
 import { goBack } from "../../components/backNavigation";
 import arrowImage from "./dropdown.png";
 import { useNavigate } from "react-router";
-import { categoryNames } from "./Community";
+// import { categoryNames } from "./Community";
 import axios from "axios";
 import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
 import { Link, useHistory } from "react-router-dom";
 
+const categoryNames = {
+	1: "건강",
+	2: "경제",
+	3: "학업",
+	4: "여가",
+	5: "인간관계",
+  };
+
 export function NewCommunity() {
   const categories = Object.values(categoryNames);
   const navigate = useNavigate();
 
-  /*
-   1 - 학업
-2 - 여가
-3 - 건강
-4 - 인간관계
-5 - 경제
-*/
 
+  
   const [category, setCategory] = useState("");
   const handleCategoryChange = (e) => {
     setCategory(e.target.value); // 드롭다운 박스에서 카테고리 선택 시 state 업데이트
@@ -34,10 +36,12 @@ export function NewCommunity() {
 
   const handleSubmit = async () => {
     try {
-      const categoryId = Object.keys(categoryNames).find(
+      let categoryId = Object.keys(categoryNames).find(
         (key) => categoryNames[key] === category
       );
       console.log(categoryId);
+	  categoryId = categoryId !== undefined ? categoryId : 1;
+
       const response = await axios.post(
         "http://localhost:3001/api/community/create",
         {
