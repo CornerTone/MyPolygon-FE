@@ -127,7 +127,15 @@ function App() {
                 path="/ExaminationProgress"
                 element={<ExaminationProgress />}
               />
-              <Route path="/record" element={<Record selectedDate={selectedDate} onDateChange={handleDateChange} />} />
+              <Route
+                path="/record"
+                element={
+                  <Record
+                    selectedDate={selectedDate}
+                    onDateChange={handleDateChange}
+                  />
+                }
+              />
 
               <Route path="/diaryhome" element={<DiaryHome />} />
               <Route path="/diarynew" element={<DiaryNew />} />
