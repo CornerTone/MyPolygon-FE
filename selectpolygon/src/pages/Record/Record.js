@@ -81,6 +81,7 @@ export function Record({ selectedDate, onDateChange }) {
         try {
 			console.log("formattedDate in fetchRecordedTimes:", formattedDate);
 			console.log("Selected Date:", selectedDate);
+			setRecordedTimes(null);
             const response = await axios.get(`http://localhost:3001/api/dailyInvestment/daily/${formattedDate}`,{
 				withCredentials: true,
 				params: {
