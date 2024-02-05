@@ -9,7 +9,7 @@ import { HeaderLogout } from "../../components/HeaderLogout";
 import { HeaderMypage } from "../../components/HeaderMypage";
 import axios from 'axios';
 
-const categoryNames = {
+export const categoryNames = {
     1: '건강',
     2: '경제',
     3: '학업',
@@ -76,16 +76,11 @@ export function Community() {
 				{Object.keys(categoryNames).map((categoryId) => (
 					<React.Fragment key={categoryId}>
 						<CategoriesContainer active={selectedCategory === categoryId} onClick={() => handleCategoryClick(categoryId)}>
-							<Rectangle34 color={categoryColors[categoryId]}>
-								<path fill="white" d="M0 14.5C0 6.49187 6.49187 0 14.5 0L37.5 0C45.5081 0 52 6.49187 52 14.5L52 14.5C52 22.5081 45.5081 29 37.5 29L14.5 29C6.49187 29 0 22.5081 0 14.5L0 14.5Z"/>
+							<Rectangle34 color={selectedCategory === categoryId ? categoryColors[categoryId] : 'white'}>
+								<path fill={selectedCategory === categoryId ? categoryColors[categoryId] : 'white'} d="M0 14.5C0 6.49187 6.49187 0 14.5 0L37.5 0C45.5081 0 52 6.49187 52 14.5L52 14.5C52 22.5081 45.5081 29 37.5 29L14.5 29C6.49187 29 0 22.5081 0 14.5L0 14.5Z"/>
 							</Rectangle34>
 							<CategoryName>{categoryNames[categoryId]}</CategoryName>
 						</CategoriesContainer>
-
-						<Group5>
-							<Rectangle22 color={categoryColors[categoryId]}/>
-							<NaN_0009>{categoryNames[categoryId]}</NaN_0009>
-						</Group5>
 					</React.Fragment>
 				))}
 			</CategoryWrapper>
@@ -95,6 +90,10 @@ export function Community() {
                     <PostItem key={index}>
                         <Rectangle14 />
                         <PostContent>{post.content}</PostContent>
+						<Group5>
+							<Rectangle22 color={categoryColors[post.categoryId]}/>
+							<NaN_0009>{categoryNames[post.categoryId]}</NaN_0009>
+						</Group5>
                     </PostItem>
                 ))}
             </Group3>
@@ -182,11 +181,10 @@ const CategoriesContainer = styled.div`
 `;
 
 const Rectangle34 = styled.svg`
-	width: 55px;
+	width: 52px;
 	height: 29px;
 	position: absolute;
 	box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);
-	background: ${({ color }) => color};
 	corlor: white;
 	background-repeat: no-repeat;
 	background-size: contain;
