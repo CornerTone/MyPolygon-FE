@@ -278,7 +278,7 @@ const NaN_0002 = styled.span`
 `;
 
 const Rectangle34 = styled.div`
-  width: 401px;
+  width: 360px;
   height: 41px;
   background: rgb(216, 196, 182);
   background-repeat: no-repeat;
@@ -286,7 +286,7 @@ const Rectangle34 = styled.div`
   background-position: center;
   border: solid 0px black;
   position: absolute;
-  left: -20px;
+  left: 0px;
   top: 54px;
 `;
 
