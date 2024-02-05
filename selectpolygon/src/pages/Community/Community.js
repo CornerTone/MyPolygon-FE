@@ -55,6 +55,10 @@ export function Community() {
             console.error("Error fetching posts:", error);
         }
     };
+
+	function handleClick(id) {
+		window.location.href = `/communitydetail/${id}`
+	}
     
     const handleCategoryClick = (category) => {
         setSelectedCategory(category === selectedCategory ? null : category);
@@ -92,7 +96,7 @@ export function Community() {
     <PostGrid>
         {posts.map((post, index) => (
             <PostItem key={index}>
-                <PostContent>{post.content}</PostContent>
+<PostContent onClick={() => handleClick(post.id)}>{post.content}</PostContent>
                 <Group5>
                     <Rectangle22 color={categoryColors[post.categories[0].id]} />
                     <CategoryNameBox>{categoryNames[post.categories[0].id]}</CategoryNameBox>

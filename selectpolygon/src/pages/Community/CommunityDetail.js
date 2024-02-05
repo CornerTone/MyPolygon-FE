@@ -1,8 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import styled from "@emotion/styled";
 import { Footer } from "../../components/Footer";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+export const categoryNames = {
+    1: '건강',
+    2: '경제',
+    3: '학업',
+    4: '여가',
+    5: '인간관계'
+};
 
 export function CommunityDetail() {
+	const { id } = useParams();
+	const [comment, setComment] = useState(""); // 댓글 상태 변수
+	const handleCommentChange = (event) => {
+        setComment(event.target.value); // 댓글 내용 변경 시 상태 업데이트
+    };
+	const [communityDetail, setCommunityDetail] = useState({});
+
+	useEffect(() => {
+		const fetchCommunityDetail = async () => {
+			try {
+				const response = await axios.get(`http://localhost:3001/api/community/read-detail/${id}`, {
+					withCredentials: true,
+				});
+				setCommunityDetail(response.data.community); // 응답 데이터 설정
+				console.log(response.data.community);
+			} catch (error) {
+				console.error('Error fetching community detail:', error);
+			}
+		};
+		
+		fetchCommunityDetail(); // useEffect 내에서 직접 호출
+	
+	}, [id]); // id가 변경될 때마다 useEffect가 다시 실행됨
+	
+	const handleSubmitComment = async () => {
+        try {
+            const response = await axios.post(`http://localhost:3001/api/comment/create/${communityDetail.id}`, {
+                content: comment
+            }, {
+                withCredentials: true,
+            });
+            console.log("댓글 작성 성공:", response.data);
+			// 댓글 작성 후 댓글 상태를 업데이트하여 렌더링이 자동으로 발생하도록 함
+			setComment(""); // 댓글 입력 창을 비움
+			setCommunityDetail(prevState => ({
+				...prevState,
+				community_comments: [...prevState.community_comments, response.data.comment] // 새로운 댓글 추가
+			}));
+		} catch (error) {
+            console.error("댓글 작성 실패:", error);
+            // 댓글 작성 실패 시 필요한 작업 수행
+        }
+    };
+
   return (
     <RootWrapperNaN>
       <Frame47>
@@ -15,67 +70,87 @@ export function CommunityDetail() {
           </User>
         </IconsBasicUser>
         <NaN_0002>
-          학업
+		{communityDetail.categories && communityDetail.categories.length > 0 && categoryNames[communityDetail.categories[0].id]}
         </NaN_0002>
+		
       </Frame47>
       <Rectangle32/>
       <Rectangle32/>
       <Rectangle32/>
-      <Rectangle28/>
+  
       <NaN_0003>
-        왜 이번에 열심히 공부했는데 공무원 시험에 또 떨어졌습니다..<br/>
-이유를 모르겠어요 항상 한두문제로 갈리고..
+		{communityDetail.content}
       </NaN_0003>
-      <Rectangle28_0001/>
-      <_1>
-        익명의 다각형 1
-      </_1>
-      <_5>
-        저도 이 일때문에 정말 고민입니다.. 그만두기에<br/>
-는 너무 아깝게 떨어지고 계속 하자니 5년째이고<br/>
-..
-      </_5>
-      <Rectangle31/>
-      <_2>
-        익명의 다각형 2
-      </_2>
-      <Group1>
-        <Rectangle29/>
-        <NaN_0004>
-          글쓴이
-        </NaN_0004>
-        <_53>
-          헉 5년차이신가요 전 3년차긴 하지만 정말<br/>
-고민돼요..
-        </_53>
-      </Group1>
-      <Rectangle30/>
-      <_1_0001>
-        익명의 다각형 1
-      </_1_0001>
-      <_3>
-        3년차이시면 조금만 쉬다가 다시 준비해봐<br/>
-도 늦지 않은 시기라고 생각해요!
-      </_3>
-      <_634>
-        6년동안 준비했고 붙은 사람으로서 이 글을 그<br/>
-냥 지나칠 수가 없네요.. 저도 같은 고민을 했었<br/>
-는데 저는 3~4개월정도 푹 쉬고 다시 공부했어<br/>
-요.<br/>
-쉬면서 기운차리고 못했던 취미 생활도 충분히<br/>
-했고 덕분 에 다시 공부할 힘이 생기더라구요
-      </_634>
-      <Image3/>
+
+	  <Comments>
+                {communityDetail.community_comments && communityDetail.community_comments.map(comment => (
+                    <Comment key={comment.id}>{comment.content}</Comment>
+                ))}
+            </Comments>
+
+  
+	  <CommentContainer>
+            <CommentInput
+                type="text"
+                placeholder="댓글을 입력하세요"
+                value={comment}
+                onChange={handleCommentChange}
+            />
+            <SubmitButton onClick={handleSubmitComment}>댓글 작성</SubmitButton>
+        </CommentContainer>
+		 <Image3/>
       <Group2>
         <Line1/>
         <Line2/>
       </Group2>
-      <Rectangle33/>
+
+   
+
 
         <Footer />
     </RootWrapperNaN>
   )
 }
+const Comments = styled.div`
+    margin-top: 20px;
+    position: absolute;
+    top: 250px; 
+`;
+
+const Comment = styled.div`
+    color: black;
+    font-size: 14px;
+    margin-bottom: 10px;
+`;
+
+
+const CommentContainer = styled.div`
+    position: relative;
+    margin-top: 0px; /* 댓글 작성 칸과 다른 컨텐츠 간의 간격 조절 */
+`;
+
+const CommentInput = styled.input`
+    width: 250px;
+    height: 30px;
+    margin-top: 700px;
+    padding: 5px;
+    font-size: 16px;
+`;
+
+const SubmitButton = styled.button`
+    width: 100px;
+    height: 40px;
+    background-color: #EBBA71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+`;
 
 const RootWrapperNaN = styled.div`
 	min-height: 100vh;
@@ -168,16 +243,20 @@ const Rectangle28 = styled.div`
 `;
 
 const NaN_0003 = styled.span`
-	color: black;
-	text-overflow: ellipsis;
-	font-size: 14px;
-	font-family: Inter, sans-serif;
-	font-weight: initial;
-	text-align: left;
-	width: 256px;
-	position: absolute;
-	left: 50px;
-	top: 95px;
+color: black;
+    font-size: 14px;
+    font-family: Inter, sans-serif;
+    font-weight: initial;
+    text-align: left;
+    width: 256px;
+    position: absolute;
+    left: 45px;
+    top: 95px;
+    min-height: 100px; 
+    background: rgb(245, 239, 231);
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const Rectangle28_0001 = styled.div`
