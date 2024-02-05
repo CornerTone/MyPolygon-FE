@@ -134,10 +134,10 @@ const Comment = styled.div`
 `;
 
 const CommentContainer = styled.div`
-  position: relative;
+  position: absolute;
   margin-top: 0px; /* 댓글 작성 칸과 다른 컨텐츠 간의 간격 조절 */
-  right: 140px;
-  bottom: 5px;
+  right: 300px;
+  bottom: 80px;
 `;
 
 const CommentInput = styled.input`
@@ -149,7 +149,7 @@ const CommentInput = styled.input`
 `;
 
 const SubmitButton = styled.button`
-  width: 100px;
+  width: 90px;
   height: 40px;
   background-color: #ebba71;
   color: white;
@@ -169,7 +169,7 @@ const RootWrapperNaN = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  position: relative;
+  position: absolute;
 `;
 
 const Frame47 = styled.div`
@@ -181,7 +181,7 @@ const Frame47 = styled.div`
   background-size: contain;
   background-position: center;
   position: absolute;
-  right: 300px;
+  right: 0px;
   top: 0px;
 `;
 

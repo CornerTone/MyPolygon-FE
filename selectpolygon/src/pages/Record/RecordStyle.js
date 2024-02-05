@@ -7,7 +7,7 @@ export const RootWrapperNaN = styled.div`
 	background-size: contain;
 	background-position: center;
 	position: relative;
-	
+	justify-content: center;
 `;
 
 export const Frame48 = styled.div`
