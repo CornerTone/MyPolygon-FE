@@ -166,7 +166,7 @@ export function Record({ selectedDate, onDateChange }) {
 						// 선택한 날짜의 해당 카테고리에 해당하는 활동들을 필터링하여 가져옴
 						const activities = recordedTimes.filter(item => item.category === category);
 						// 해당 카테고리의 총 시간을 계산
-						const totalMinutes = activities.reduce((total, activity) => total + activity.hours * 60 + activity.minutes, 0);
+						const totalMinutes = activities.reduce((total, activity) => activity.hours * 60 + activity.minutes, 0);
 						
 						return (
 							<R.CategoryContainer key={index} onClick={() => openModal(category)}>
