@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { goBack } from "../../components/backNavigation";
 import { useParams } from "react-router-dom"; // custom hooks
+
+import { Footer } from "../../components/Footer";
+import { HeaderLogout } from "../../components/HeaderLogout";
+import { HeaderMypage } from "../../components/HeaderMypage";
+import { goBack } from "../../components/backNavigation";
 import axios from "axios";
 
 const getEmotionImageUrl = (emotion) => {
@@ -34,32 +38,29 @@ const getEmotionImageUrl = (emotion) => {
 const formatDate = (date) => {
   const d = new Date(date);
   const year = d.getFullYear();
-  let month = '' + (d.getMonth() + 1);
-  let day = '' + d.getDate();
+  let month = "" + (d.getMonth() + 1);
+  let day = "" + d.getDate();
 
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
 
-  return [year, month, day].join('-');
+  return [year, month, day].join("-");
 };
 
 const handleDelete = (id) => {
-  axios.delete(`http://localhost:3001/api/compliment/delete/${id}`,
-  {
-    withCredentials: true,
-}
-)
-    .then(response => {
+  axios
+    .delete(`http://localhost:3001/api/compliment/delete/${id}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
       console.log(response.data);
       window.location.href = "/compliment";
-
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error:", error);
       // 삭제 중 오류가 발생한 경우에 대한 처리
     });
 };
-
 
 export function ComplimentDetail() {
   const { id } = useParams(); // pathVariable = id (경로의 변수 담아서 전달)
@@ -67,15 +68,15 @@ export function ComplimentDetail() {
   const [complimentData, setComplimentData] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/compliment/read/${id}`,
-    {
-      withCredentials: true,
-  })
-      .then(response => {
-        console.log(response.data)
+    axios
+      .get(`http://localhost:3001/api/compliment/read/${id}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
         setComplimentData(response.data.message);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching compliment data:", error);
       });
   }, [id]);
@@ -102,55 +103,13 @@ export function ComplimentDetail() {
       <NaN_0005>오늘의 기분</NaN_0005>
       <Rectangle47 />
       <NaN_0006>
-            <p>{complimentData.content}</p>
-          </NaN_0006>
-          <IconEdit onClick={() => handleDelete(complimentData.id)}>
-            삭제하기
-  
+        <p>{complimentData.content}</p>
+      </NaN_0006>
+      <IconEdit onClick={() => handleDelete(complimentData.id)}>
+        삭제하기
       </IconEdit>
-      <Frame50>
-        <Frame1>
-          <Group54>
-            <IconsBasicProject
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/db3f3f0e-9642-46bb-8988-0a93e27587cb"
-              alt="icon"
-            />
-            <NaN_0007>나의 도형</NaN_0007>
-          </Group54>
-          <Group53>
-            <IconsBasicChat
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/9fa0d626-ae41-4cda-9055-4f2202f45818"
-              alt="icon"
-            />
-            <NaN_0008>고민 나눔</NaN_0008>
-          </Group53>
-          <Group52>
-            <IconlyRegularTwoToneHome>
-              <Home>
-                <Home_0001
-                  src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/62387006-ef11-432d-a8bc-1dcdc6a135bf"
-                  alt="image of Home"
-                />
-              </Home>
-            </IconlyRegularTwoToneHome>
-            <NaN_0009>홈</NaN_0009>
-          </Group52>
-          <Group51>
-            <IconsBasicStar
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/23d42f2a-792b-4194-820b-06643c965a3a"
-              alt="icon"
-            />
-            <NaN_0010>칭찬 일기</NaN_0010>
-          </Group51>
-          <Group50>
-            <NaN_0011>집중 기록</NaN_0011>
-            <IconsBasicTime
-              src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/e8b62d01-a1ee-44d1-bd22-880375a62382"
-              alt="icon"
-            />
-          </Group50>
-        </Frame1>
-      </Frame50>
+
+      <Footer />
     </RootWrapperNaN>
   );
 }
@@ -245,7 +204,8 @@ const Line3 = styled.div`
 const EmotionImage = styled.div`
   width: 80px;
   height: 81px;
-  background-image: url(${props => getEmotionImageUrl(props.emotion)});  background-repeat: no-repeat;
+  background-image: url(${(props) => getEmotionImageUrl(props.emotion)});
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -301,7 +261,6 @@ const IconEdit = styled.div`
   left: 220px;
   top: 73px;
   cursor: pointer;
-
 `;
 
 const Vector_0001 = styled.img`
